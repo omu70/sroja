@@ -115,9 +115,14 @@ export default function CollectionsPage() {
                           {piece.hours} hrs · Ed. {piece.edition.of}
                         </span>
                       </div>
-                      <p className="display mt-3 text-xl text-charcoal transition-colors duration-500 group-hover:text-brass">
-                        {piece.name}
-                      </p>
+                      <div className="mt-3 flex items-baseline justify-between gap-3">
+                        <p className="display text-xl text-charcoal transition-colors duration-500 group-hover:text-brass">
+                          {piece.name}
+                        </p>
+                        <p className="eyebrow shrink-0 text-brass">
+                          ₹{piece.price.toLocaleString("en-IN")}
+                        </p>
+                      </div>
                     </Link>
                   </Reveal>
                 ))}

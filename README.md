@@ -33,10 +33,10 @@ Plus: SEO metadata per page, JSON-LD (Organization + Product), `sitemap.xml`, `r
 
 Copy `.env.example` → `.env`:
 
-- **Resend** — set `RESEND_API_KEY` (+ `INQUIRY_TO_EMAIL`) and the consultation form emails the maison. Without it, inquiries log to the server console and still succeed.
-- **PostgreSQL/Prisma** — `npm run db:push && npm run db:seed` persists the archive and inquiries. The site itself reads from `src/data/` (fast, static, CDN-friendly); swap queries to Prisma when a CMS workflow is needed.
-- **Stripe** — intentionally absent from the UI (consultation-driven sales). Add a deposit flow later if desired.
-- **Vercel** — `vercel deploy`. Set `NEXT_PUBLIC_SITE_URL` to the production domain.
+- **Razorpay (online payments)** — set `RAZORPAY_KEY_ID` + `RAZORPAY_KEY_SECRET` (Dashboard → Settings → API Keys) and every piece page gets a working "Acquire & Pay Online" flow: UPI, cards, netbanking. Orders are created server-side at the server's price, signatures are verified with HMAC, and buyer + delivery details are stored on the Razorpay order notes. **Without keys, the buy button gracefully falls back to the enquiry flow** — the site never breaks.
+- **Resend** — set `RESEND_API_KEY` (+ `INQUIRY_TO_EMAIL`) and (a) enquiries email the maison, (b) successful payments notify both the maison and the buyer. Without it, everything logs to the server console and still succeeds.
+- **PostgreSQL/Prisma** — `npm run db:push && npm run db:seed` persists the archive and inquiries. The site itself reads from `src/data/` (fast, static, CDN-friendly).
+- **Vercel** — `vercel deploy`. Set `NEXT_PUBLIC_SITE_URL` to the production domain, and add the Razorpay/Resend env vars in Project Settings.
 
 ## Editorial content — review before launch
 

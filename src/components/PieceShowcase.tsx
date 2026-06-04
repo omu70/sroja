@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Piece } from "@/data/types";
 import { COLLECTIONS } from "@/data/site";
+import { formatINR } from "@/data/pieces";
 import Reveal from "./Reveal";
 import ParallaxImage from "./ParallaxImage";
 import { IconArrow, IconClock, IconHand, IconHash } from "./icons";
@@ -76,12 +77,21 @@ export default function PieceShowcase({ piece, index }: PieceShowcaseProps) {
               ))}
             </div>
 
-            <Link
-              href={`/piece/${piece.slug}`}
-              className="link-line eyebrow mt-9 inline-flex items-center gap-3 text-brass"
-            >
-              The Full Story <IconArrow size={15} />
-            </Link>
+            <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
+              <span className="display text-4xl text-brass">{formatINR(piece.price)}</span>
+              <Link
+                href={`/piece/${piece.slug}#acquire`}
+                className="eyebrow border border-brass bg-charcoal px-7 py-4 text-gold transition-all duration-700 hover:bg-charcoal-deep"
+              >
+                Acquire
+              </Link>
+              <Link
+                href={`/piece/${piece.slug}`}
+                className="link-line eyebrow inline-flex items-center gap-3 text-brass"
+              >
+                Full Story <IconArrow size={15} />
+              </Link>
+            </div>
           </Reveal>
         </div>
       </div>

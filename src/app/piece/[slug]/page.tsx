@@ -6,7 +6,7 @@ import Reveal from "@/components/Reveal";
 import ParallaxImage from "@/components/ParallaxImage";
 import ZoomImage from "@/components/ZoomImage";
 import CountUp from "@/components/CountUp";
-import InquiryForm from "@/components/InquiryForm";
+import AcquisitionPanel from "@/components/AcquisitionPanel";
 import ValueLedger from "@/components/ValueLedger";
 import HoursBars from "@/components/HoursBars";
 import DimensionDrawing from "@/components/DimensionDrawing";
@@ -124,9 +124,12 @@ export default async function PieceDossier({
                     {label}
                   </span>
                 ))}
-                <span className="eyebrow flex items-center gap-2.5 border border-gold/50 bg-charcoal-deep/40 px-4 py-2.5 text-gold backdrop-blur-sm">
-                  {formatINR(piece.price)}
-                </span>
+                <a
+                  href="#acquire"
+                  className="eyebrow flex items-center gap-2.5 border border-gold bg-gold px-5 py-2.5 text-charcoal-deep transition-all duration-500 hover:bg-ivory hover:border-ivory"
+                >
+                  Acquire — {formatINR(piece.price)}
+                </a>
               </div>
             </Reveal>
           </div>
@@ -374,35 +377,34 @@ export default async function PieceDossier({
             <Reveal>
               <p className="eyebrow text-brass">Acquisition</p>
               <h2 className="display mt-4 text-5xl text-charcoal md:text-6xl">
-                Begin the
-                <span className="italic text-stone-dark"> conversation.</span>
+                Make it
+                <span className="italic text-stone-dark"> yours.</span>
               </h2>
-              <p className="mt-8 text-base leading-[1.9] text-charcoal/80">
-                {editionLabel} · <span className="display text-2xl text-brass">{formatINR(piece.price)}</span>
-                <span className="mt-2 block text-sm text-stone-dark">
-                  No checkout — an advisor reserves your number and arranges insured
-                  delivery, worldwide.
+              <p className="mt-8 flex flex-wrap items-baseline gap-x-4 gap-y-2">
+                <span className="display text-5xl text-brass md:text-6xl">
+                  {formatINR(piece.price)}
                 </span>
+                <span className="eyebrow text-stone-dark">{editionLabel}</span>
               </p>
               <ul className="mt-10 space-y-4 text-sm text-stone-dark">
                 <li className="flex items-center gap-3">
                   <IconHash size={16} className="shrink-0 text-brass" />
-                  Request Acquisition · reserve this numbered edition
+                  Your edition number is reserved on payment
                 </li>
                 <li className="flex items-center gap-3">
-                  <IconClock size={16} className="shrink-0 text-brass" />
-                  Enquire About This Piece · ask anything first
+                  <IconShield size={16} className="shrink-0 text-brass" />
+                  Certificate of authenticity enclosed
                 </li>
                 <li className="flex items-center gap-3">
                   <IconLotus size={16} className="shrink-0 text-brass" />
-                  Schedule Private Consultation · compose a whole room
+                  Insured, archival-packed delivery — worldwide
                 </li>
               </ul>
             </Reveal>
           </div>
           <div className="md:col-span-6 md:col-start-7">
             <Reveal delay={0.12}>
-              <InquiryForm defaultPiece={piece.slug} defaultType="Request Acquisition" compact />
+              <AcquisitionPanel piece={piece} />
             </Reveal>
           </div>
         </div>
