@@ -2,70 +2,70 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import ParallaxImage from "@/components/ParallaxImage";
 import { img } from "@/data/site";
+import { IconArrow, IconHand, IconPencil, IconShield } from "@/components/icons";
 
-/** The Vision of Archit — the designer, presented as a designer. */
+const MARKS = [
+  { Icon: IconPencil, k: "Every motif", v: "drawn by one hand" },
+  { Icon: IconHand, k: "Every piece", v: "made by master artisans" },
+  { Icon: IconShield, k: "Every design", v: "protected as original IP" },
+] as const;
+
+/** The Vision of Archit — fewer words, stronger marks. */
 export default function VisionSection() {
   return (
-    <section className="relative bg-charcoal py-28 md:py-44">
-      <div className="mx-auto grid max-w-[1700px] gap-14 px-6 md:grid-cols-12 md:px-12">
+    <section className="relative bg-ivory-bright py-24 md:py-40">
+      <div className="mx-auto grid max-w-[1700px] items-center gap-14 px-6 md:grid-cols-12 md:px-12">
         {/* Portrait / atelier study */}
         <div className="md:col-span-5">
           <Reveal>
-            <ParallaxImage
-              src={img("1778764935406_iwtxps5smha.png")}
-              alt="The hand of the atelier — handspun kala cotton under study"
-              className="aspect-[3/4] w-full"
-              sizes="(max-width: 768px) 100vw, 40vw"
-            />
-            <p className="eyebrow mt-4 text-stone">
-              The atelier, Gurugram — material study for the Reva weave
-            </p>
+            <div className="relative">
+              <ParallaxImage
+                src={img("1778764935406_iwtxps5smha.png")}
+                alt="The hand of the atelier — handspun kala cotton under study"
+                className="aspect-[3/4] w-full"
+                sizes="(max-width: 768px) 100vw, 40vw"
+              />
+              <div className="absolute -bottom-5 -right-5 hidden border border-brass/40 bg-ivory-bright px-6 py-4 md:block">
+                <p className="display text-2xl text-charcoal">Archit</p>
+                <p className="eyebrow mt-1 text-stone-dark">Founder & Creative Director</p>
+              </div>
+            </div>
           </Reveal>
         </div>
 
-        {/* The text */}
+        {/* The text — reduced to its essence */}
         <div className="md:col-span-6 md:col-start-7">
           <Reveal>
-            <p className="eyebrow text-gold">The Vision</p>
-            <h2 className="display mt-4 text-5xl leading-[1.02] text-ivory md:text-7xl">
+            <p className="eyebrow text-brass">The Vision</p>
+            <h2 className="display mt-4 text-5xl leading-[1.02] text-charcoal md:text-7xl">
               Archit draws first.
-              <span className="block italic text-stone">Everything else follows.</span>
+              <span className="block italic text-stone-dark">Everything else follows.</span>
             </h2>
           </Reveal>
 
           <Reveal delay={0.15}>
-            <div className="mt-12 space-y-7 text-base leading-[1.9] text-ivory/80 md:text-lg">
-              <p>
-                SROJA exists because its founder could not find the thing he wanted to
-                live with. Trained in fashion, obsessed with the drawn line, Archit
-                kept meeting the same wall: objects made to be sold, never objects
-                made to be kept.
-              </p>
-              <p>
-                So the house begins where fashion houses begin — at the sketchbook.
-                Every motif in the archive is an original drawing, redrawn until the
-                repeat breathes, then entrusted to master artisans in Rajasthan,
-                Kutch and Tamil Nadu who translate it into cloth the slow way: carved
-                teak, handspun kala cotton, looms older than nations.
-              </p>
-              <p className="lede text-xl text-ivory md:text-2xl">
-                “I am not decorating homes. I am making the heirlooms their
-                grandchildren will argue over.”
-              </p>
-            </div>
+            <p className="lede mt-10 max-w-xl text-2xl leading-snug text-charcoal/85 md:text-3xl">
+              “I am not decorating homes. I am making the heirlooms their
+              grandchildren will argue over.”
+            </p>
           </Reveal>
 
-          <Reveal delay={0.25}>
-            <div className="mt-12 flex items-center gap-6">
-              <div>
-                <p className="display text-2xl text-ivory">Archit</p>
-                <p className="eyebrow mt-1 text-stone">Founder & Creative Director</p>
-              </div>
-              <div className="rule-solid h-px flex-1" />
-              <Link href="/maison" className="link-line eyebrow shrink-0 text-gold">
-                The Maison →
-              </Link>
+          <Reveal delay={0.22}>
+            <div className="mt-12 grid gap-px overflow-hidden border border-ivory-mute bg-ivory-mute sm:grid-cols-3">
+              {MARKS.map(({ Icon, k, v }) => (
+                <div key={v} className="group bg-ivory-bright p-6">
+                  <span className="icon-chip">
+                    <Icon size={20} />
+                  </span>
+                  <p className="eyebrow mt-5 text-stone-dark">{k}</p>
+                  <p className="display mt-1 text-xl text-charcoal">{v}</p>
+                </div>
+              ))}
             </div>
+
+            <Link href="/maison" className="link-line eyebrow mt-10 inline-flex items-center gap-3 text-brass">
+              The Maison <IconArrow size={15} />
+            </Link>
           </Reveal>
         </div>
       </div>

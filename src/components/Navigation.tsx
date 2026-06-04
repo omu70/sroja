@@ -5,6 +5,13 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { NAV } from "@/data/site";
+import { IconCalendar, IconEnvelope, IconLotus, IconSearch } from "./icons";
+
+const ICON_LINKS = [
+  { href: "/collections", label: "Search the archive", Icon: IconSearch },
+  { href: "/consultation", label: "Write to the maison", Icon: IconEnvelope },
+  { href: "/consultation", label: "Book a consultation", Icon: IconCalendar },
+] as const;
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
@@ -29,64 +36,99 @@ export default function Navigation() {
     };
   }, [open]);
 
+  const onHero = pathname === "/" || pathname?.startsWith("/piece/");
+  const lightText = onHero && !scrolled && !open;
+
   return (
     <>
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-700 ease-editorial ${
           scrolled && !open
-            ? "bg-charcoal-deep/85 backdrop-blur-md border-b border-charcoal-line/60"
-            : "bg-transparent border-b border-transparent"
+            ? "border-b border-ivory-mute/80 bg-ivory-bright/85 backdrop-blur-md"
+            : "border-b border-transparent bg-transparent"
         }`}
       >
         <div className="mx-auto flex h-20 max-w-[1700px] items-center justify-between px-6 md:px-12">
-          {/* Wordmark */}
+          {/* Wordmark with house mark */}
           <Link href="/" aria-label="SROJA — home" className="group relative z-50">
-            <span className="display text-[1.55rem] tracking-[0.42em] text-ivory transition-colors duration-500 group-hover:text-gold">
-              SROJA
-            </span>
-            <span className="mt-0.5 hidden text-[0.52rem] uppercase tracking-luxe text-stone md:block">
-              Design House · India
+            <span className="flex flex-col items-center">
+              <IconLotus
+                size={13}
+                className={`mb-1 transition-colors duration-500 group-hover:text-gold ${
+                  lightText ? "text-gold" : "text-brass"
+                }`}
+              />
+              <span
+                className={`display text-[1.45rem] leading-none tracking-[0.42em] transition-colors duration-500 group-hover:text-brass ${
+                  lightText ? "text-ivory" : "text-charcoal"
+                }`}
+              >
+                SROJA
+              </span>
             </span>
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden items-center gap-10 lg:flex">
+          <nav className="hidden items-center gap-9 lg:flex">
             {NAV.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 className={`link-line eyebrow transition-colors duration-500 ${
-                  pathname?.startsWith(item.href) ? "text-gold" : "text-ivory/80 hover:text-ivory"
+                  pathname?.startsWith(item.href)
+                    ? "text-brass"
+                    : lightText
+                      ? "text-ivory/85 hover:text-ivory"
+                      : "text-charcoal/75 hover:text-charcoal"
                 }`}
               >
                 {item.label}
               </Link>
             ))}
-            <Link
-              href="/consultation"
-              className="eyebrow border border-brass/60 px-6 py-3 text-gold transition-all duration-500 hover:border-gold hover:bg-gold hover:text-charcoal-deep"
-            >
-              Private Enquiries
-            </Link>
           </nav>
 
-          {/* Menu trigger (mobile / tablet) */}
-          <button
-            onClick={() => setOpen((v) => !v)}
-            aria-label={open ? "Close menu" : "Open menu"}
-            className="relative z-50 flex h-10 w-12 flex-col items-end justify-center gap-[7px] lg:hidden"
-          >
-            <span
-              className={`h-px bg-ivory transition-all duration-500 ${
-                open ? "w-7 translate-y-[4px] rotate-45" : "w-7"
+          {/* Icon cluster */}
+          <div className="relative z-50 flex items-center gap-2 md:gap-3">
+            {ICON_LINKS.map(({ href, label, Icon }, i) => (
+              <Link
+                key={label}
+                href={href}
+                aria-label={label}
+                title={label}
+                className={`hidden h-10 w-10 items-center justify-center rounded-full border transition-all duration-500 hover:-translate-y-0.5 hover:border-gold hover:bg-gold hover:text-charcoal-deep md:flex ${
+                  lightText
+                    ? "border-ivory/30 text-ivory"
+                    : "border-brass/30 text-brass"
+                } ${i === 2 ? "hidden xl:flex" : ""}`}
+              >
+                <Icon size={17} />
+              </Link>
+            ))}
+
+            {/* Menu trigger */}
+            <button
+              onClick={() => setOpen((v) => !v)}
+              aria-label={open ? "Close menu" : "Open menu"}
+              className={`flex h-10 w-10 flex-col items-center justify-center gap-[6px] rounded-full border transition-colors duration-500 lg:hidden ${
+                lightText && !open ? "border-ivory/30" : "border-brass/30"
               }`}
-            />
-            <span
-              className={`h-px bg-ivory transition-all duration-500 ${
-                open ? "w-7 -translate-y-[4px] -rotate-45" : "w-5"
-              }`}
-            />
-          </button>
+            >
+              <span
+                className={`h-px transition-all duration-500 ${
+                  open
+                    ? "w-5 translate-y-[3.5px] rotate-45 bg-charcoal"
+                    : `w-5 ${lightText ? "bg-ivory" : "bg-charcoal"}`
+                }`}
+              />
+              <span
+                className={`h-px transition-all duration-500 ${
+                  open
+                    ? "w-5 -translate-y-[3.5px] -rotate-45 bg-charcoal"
+                    : `w-3.5 ${lightText ? "bg-ivory" : "bg-charcoal"}`
+                }`}
+              />
+            </button>
+          </div>
         </div>
       </header>
 
@@ -97,20 +139,24 @@ export default function Navigation() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 z-40 flex flex-col justify-center bg-charcoal-deep px-8 md:px-16"
+            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-0 z-40 flex flex-col justify-center bg-ivory-bright px-8 md:px-16"
           >
+            <IconLotus
+              size={120}
+              className="pointer-events-none absolute right-[-1.5rem] top-16 text-ivory-mute animate-spin-slow"
+            />
             <nav className="flex flex-col gap-2">
               {NAV.map((item, i) => (
                 <motion.div
                   key={item.href}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 26 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.15 + i * 0.07, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ delay: 0.12 + i * 0.06, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <Link
                     href={item.href}
-                    className="display block py-2 text-5xl text-ivory transition-colors duration-500 hover:text-gold md:text-7xl"
+                    className="display block py-2 text-5xl text-charcoal transition-colors duration-500 hover:text-brass md:text-7xl"
                   >
                     {item.label}
                   </Link>
@@ -120,8 +166,8 @@ export default function Navigation() {
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-              className="eyebrow mt-12 text-stone"
+              transition={{ delay: 0.55, duration: 0.7 }}
+              className="eyebrow mt-12 text-stone-dark"
             >
               Designed to be collected — Gurugram, India
             </motion.p>

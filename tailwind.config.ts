@@ -12,18 +12,18 @@ const config: Config = {
           line: "#383228",
         },
         ivory: {
-          DEFAULT: "#F2EDE2",
-          bright: "#F9F5EB",
-          soft: "#EAE3D3",
-          mute: "#DDD4C0",
+          DEFAULT: "#F4EFE5",
+          bright: "#FAF7EF",
+          soft: "#EFE8D9",
+          mute: "#E2DAC7",
         },
         stone: {
           DEFAULT: "#A89F90",
-          dark: "#7C7466",
+          dark: "#766E60",
           light: "#C5BDAE",
         },
         brass: {
-          DEFAULT: "#A0804A",
+          DEFAULT: "#9A7A42",
           bright: "#C2A35F",
           dim: "#6E5832",
         },
@@ -48,15 +48,17 @@ const config: Config = {
         editorial: "cubic-bezier(0.22, 1, 0.36, 1)",
       },
       animation: {
-        "slow-zoom": "slowZoom 14s ease-out forwards",
-        marquee: "marquee 48s linear infinite",
+        marquee: "marquee 44s linear infinite",
         "fade-up": "fadeUp 1.1s cubic-bezier(0.22,1,0.36,1) both",
+        float: "float 7s ease-in-out infinite",
+        "float-late": "float 8.5s ease-in-out 1.2s infinite",
+        "spin-slow": "spin 28s linear infinite",
+        kenburns: "kenburns 16s ease-in-out infinite alternate",
+        shimmer: "shimmer 3.4s ease-in-out infinite",
+        "pulse-soft": "pulseSoft 4.5s ease-in-out infinite",
+        scrollcue: "scrollcue 2.2s ease-in-out infinite",
       },
       keyframes: {
-        slowZoom: {
-          "0%": { transform: "scale(1.08)" },
-          "100%": { transform: "scale(1)" },
-        },
         marquee: {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-50%)" },
@@ -64,6 +66,26 @@ const config: Config = {
         fadeUp: {
           "0%": { opacity: "0", transform: "translateY(28px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-9px)" },
+        },
+        kenburns: {
+          "0%": { transform: "scale(1.02)" },
+          "100%": { transform: "scale(1.1)" },
+        },
+        shimmer: {
+          "0%": { backgroundPosition: "-150% 0" },
+          "60%, 100%": { backgroundPosition: "250% 0" },
+        },
+        pulseSoft: {
+          "0%, 100%": { opacity: "0.45" },
+          "50%": { opacity: "1" },
+        },
+        scrollcue: {
+          "0%": { transform: "translateY(-120%)" },
+          "100%": { transform: "translateY(220%)" },
         },
       },
     },

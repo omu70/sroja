@@ -1,6 +1,7 @@
 import Link from "next/link";
 import HeroFilm from "@/components/HeroFilm";
 import Marquee from "@/components/Marquee";
+import ImageBand from "@/components/ImageBand";
 import VisionSection from "@/components/home/VisionSection";
 import CraftTimeline from "@/components/CraftTimeline";
 import ManifestoSection from "@/components/home/ManifestoSection";
@@ -12,6 +13,7 @@ import AtelierStrip from "@/components/home/AtelierStrip";
 import ConsultationSection from "@/components/home/ConsultationSection";
 import PieceShowcase from "@/components/PieceShowcase";
 import Reveal from "@/components/Reveal";
+import { IconArrow } from "@/components/icons";
 import { getFeatured } from "@/data/pieces";
 import { img } from "@/data/site";
 
@@ -43,43 +45,56 @@ export default function HomePage() {
       <Marquee />
       <VisionSection />
       <CraftTimeline />
+
+      <ImageBand
+        src={img("1778664354807_msia342n03.webp")}
+        alt="The printed field — Neel Gul Bagh under north light"
+        line="A machine repeats. A hand remembers."
+      />
+
       <ManifestoSection />
 
-      {/* Signature Collections — pieces hung like works */}
-      <section className="relative border-t border-charcoal-line bg-charcoal pt-28 md:pt-40">
+      {/* Signature Works — pieces hung like works */}
+      <section className="relative border-t border-ivory-mute bg-ivory-bright pt-24 md:pt-36">
         <div className="mx-auto max-w-[1700px] px-6 md:px-12">
           <Reveal>
-            <p className="eyebrow text-gold">Signature Works</p>
-            <h2 className="display mt-4 max-w-4xl text-5xl text-ivory md:text-7xl">
+            <p className="eyebrow text-brass">Signature Works</p>
+            <h2 className="display mt-4 max-w-4xl text-5xl text-charcoal md:text-7xl">
               The current editions,
-              <span className="italic text-stone"> hung for viewing.</span>
+              <span className="italic text-stone-dark"> hung for viewing.</span>
             </h2>
           </Reveal>
         </div>
-        <div className="mt-10">
+        <div className="mt-8">
           {featured.map((piece, i) => (
             <PieceShowcase key={piece.slug} piece={piece} index={i} />
           ))}
         </div>
-        <div className="border-t border-charcoal-line py-16 text-center">
+        <div className="border-t border-ivory-mute py-14 text-center">
           <Link
             href="/collections"
-            className="eyebrow group inline-flex items-center gap-4 text-gold"
+            className="eyebrow group inline-flex items-center gap-4 text-brass"
           >
             <span className="link-line">View The Complete Archive</span>
-            <span aria-hidden className="transition-transform duration-700 group-hover:translate-x-2">
-              →
-            </span>
+            <IconArrow size={16} className="transition-transform duration-700 group-hover:translate-x-2" />
           </Link>
         </div>
       </section>
 
       <MaterialLibrary />
+
+      <ImageBand
+        src={img("1778737274664_pn4aiafoyzm.webp")}
+        alt="The quilting frame — Genda Baagh in progress"
+        line="Twenty-eight works. Five rooms. One hand."
+      />
+
       <GlobalSection />
       <ProvenanceSection />
       <CollectorNotes />
       <AtelierStrip />
       <ConsultationSection />
+      <Marquee dark />
     </>
   );
 }

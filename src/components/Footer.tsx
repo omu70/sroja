@@ -1,29 +1,34 @@
 import Link from "next/link";
 import { NAV, SITE, COLLECTIONS } from "@/data/site";
+import { IconEnvelope, IconLotus, IconPin, IconCalendar } from "./icons";
 
+/** The footer stays charcoal — the page's signature in ink. */
 export default function Footer() {
   return (
-    <footer className="relative border-t border-charcoal-line bg-charcoal-deep">
-      <div className="mx-auto max-w-[1700px] px-6 py-20 md:px-12 md:py-28">
+    <footer className="relative border-t border-ivory-mute bg-charcoal-deep">
+      <div className="mx-auto max-w-[1700px] px-6 py-16 md:px-12 md:py-24">
         {/* Statement */}
-        <p className="display max-w-4xl text-4xl text-ivory md:text-6xl">
-          Designed to be collected.
-          <span className="text-stone"> Crafted to be inherited.</span>
-        </p>
+        <div className="flex flex-wrap items-start justify-between gap-8">
+          <p className="display max-w-3xl text-4xl text-ivory md:text-6xl">
+            Designed to be collected.
+            <span className="text-stone"> Crafted to be inherited.</span>
+          </p>
+          <IconLotus size={54} className="shrink-0 text-brass/60 animate-spin-slow" />
+        </div>
 
-        <div className="rule mt-16 mb-14" />
+        <div className="rule mt-14 mb-12" />
 
         <div className="grid gap-12 md:grid-cols-4">
           <div>
             <p className="display text-xl tracking-[0.42em] text-ivory">SROJA</p>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-stone">
               A luxury design house from India. Original works by {SITE.founder},
-              handcrafted by master artisans in deliberately small editions.
+              handcrafted in deliberately small editions.
             </p>
           </div>
 
           <div>
-            <p className="eyebrow mb-5 text-brass">The House</p>
+            <p className="eyebrow mb-5 text-brass-bright">The House</p>
             <ul className="space-y-3">
               {NAV.map((n) => (
                 <li key={n.href}>
@@ -36,7 +41,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="eyebrow mb-5 text-brass">The Archive</p>
+            <p className="eyebrow mb-5 text-brass-bright">The Archive</p>
             <ul className="space-y-3">
               {COLLECTIONS.map((c) => (
                 <li key={c.slug}>
@@ -52,24 +57,33 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="eyebrow mb-5 text-brass">Private Enquiries</p>
-            <p className="text-sm leading-relaxed text-ivory/75">
-              <a href={`mailto:${SITE.email}`} className="link-line hover:text-ivory">
-                {SITE.email}
-              </a>
-            </p>
-            <address className="mt-4 text-sm not-italic leading-relaxed text-stone">
-              {SITE.address.map((line) => (
-                <span key={line} className="block">
-                  {line}
-                </span>
-              ))}
-            </address>
-            <p className="mt-4 text-sm text-stone">By appointment.</p>
+            <p className="eyebrow mb-5 text-brass-bright">Private Enquiries</p>
+            <ul className="space-y-4 text-sm text-ivory/75">
+              <li className="flex items-start gap-3">
+                <IconEnvelope size={16} className="mt-0.5 shrink-0 text-brass-bright" />
+                <a href={`mailto:${SITE.email}`} className="link-line hover:text-ivory">
+                  {SITE.email}
+                </a>
+              </li>
+              <li className="flex items-start gap-3">
+                <IconPin size={16} className="mt-0.5 shrink-0 text-brass-bright" />
+                <address className="not-italic leading-relaxed text-stone">
+                  {SITE.address.map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
+                  ))}
+                </address>
+              </li>
+              <li className="flex items-start gap-3">
+                <IconCalendar size={16} className="mt-0.5 shrink-0 text-brass-bright" />
+                <span className="text-stone">By appointment</span>
+              </li>
+            </ul>
           </div>
         </div>
 
-        <div className="rule-solid mt-16 mb-8" />
+        <div className="rule-solid mt-14 mb-8 opacity-30" />
 
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <p className="text-xs leading-relaxed text-stone-dark">

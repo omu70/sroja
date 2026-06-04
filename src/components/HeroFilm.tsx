@@ -3,133 +3,120 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { IconArrow, IconHand, IconHash, IconShield, IconLotus } from "./icons";
 
 interface HeroFilmProps {
   frames: { src: string; alt: string }[];
 }
 
+const PROOFS = [
+  { icon: IconHand, label: "Entirely By Hand" },
+  { icon: IconHash, label: "Numbered Editions" },
+  { icon: IconShield, label: "IPR Protected" },
+] as const;
+
 /**
- * Cinematic hero — a slow film of craft close-ups (Ken Burns crossfade).
- * Swap `frames` for a <video> of hands at the block table when footage exists.
+ * Cinematic hero — CSS-only crossfade + Ken Burns (no layout animation),
+ * deliberately simple so it can never stall hydration.
+ * Swap the frames for a <video> of hands at the block table when footage exists.
  */
 export default function HeroFilm({ frames }: HeroFilmProps) {
   const [index, setIndex] = useState(0);
-  const reduce = useReducedMotion();
 
   useEffect(() => {
-    if (reduce) return;
-    const id = setInterval(() => setIndex((i) => (i + 1) % frames.length), 6400);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = setInterval(() => setIndex((i) => (i + 1) % frames.length), 6500);
     return () => clearInterval(id);
-  }, [frames.length, reduce]);
+  }, [frames.length]);
 
   return (
     <section className="grain relative h-[100svh] min-h-[640px] w-full overflow-hidden bg-charcoal-deep">
-      {/* The film */}
-      <AnimatePresence mode="popLayout">
-        <motion.div
-          key={index}
-          className="absolute inset-0"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 2.4, ease: "easeInOut" }}
+      {/* The film — stacked frames, opacity crossfade, perpetual Ken Burns */}
+      {frames.map((frame, i) => (
+        <div
+          key={frame.src}
+          className="absolute inset-0 transition-opacity duration-[2400ms] ease-in-out"
+          style={{ opacity: i === index ? 1 : 0 }}
         >
-          <motion.div
-            className="absolute inset-0"
-            initial={reduce ? undefined : { scale: 1.12 }}
-            animate={reduce ? undefined : { scale: 1.0 }}
-            transition={{ duration: 9, ease: "linear" }}
-          >
+          <div className="absolute inset-0 animate-kenburns">
             <Image
-              src={frames[index].src}
-              alt={frames[index].alt}
+              src={frame.src}
+              alt={frame.alt}
               fill
-              priority={index === 0}
+              priority={i === 0}
               sizes="100vw"
               className="img-luxe object-cover"
             />
-          </motion.div>
-        </motion.div>
-      </AnimatePresence>
+          </div>
+        </div>
+      ))}
 
-      {/* Cinematic grade */}
-      <div className="absolute inset-0 bg-gradient-to-b from-charcoal-deep/70 via-charcoal-deep/30 to-charcoal-deep" />
-      <div className="absolute inset-0 bg-charcoal-deep/25" />
+      {/* Cinematic grade — fades into the light page below */}
+      <div className="absolute inset-0 bg-charcoal-deep/30" />
+      <div className="absolute inset-0 bg-gradient-to-b from-charcoal-deep/60 via-transparent to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-b from-transparent to-[#FAF7EF]" />
+
+      {/* Floating house marks — quiet, perpetual */}
+      <IconLotus
+        size={26}
+        className="absolute left-[12%] top-[30%] z-10 hidden text-gold/50 animate-float md:block"
+      />
+      <IconLotus
+        size={16}
+        className="absolute right-[14%] top-[22%] z-10 hidden text-ivory/40 animate-float-late md:block"
+      />
+      <IconLotus
+        size={20}
+        className="absolute right-[22%] bottom-[30%] z-10 hidden text-gold/40 animate-float md:block"
+      />
 
       {/* Copy */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4, duration: 1.4 }}
-          className="eyebrow mb-8 text-gold"
-        >
+        <IconLotus size={30} className="mb-7 animate-[spin_28s_linear_infinite] text-gold" />
+        <p className="eyebrow mb-8 text-gold animate-fade-up">
           A Luxury Design House from India
-        </motion.p>
+        </p>
 
         <h1 className="display text-[13vw] leading-[0.95] text-ivory md:text-[7.5vw]">
-          <motion.span
-            className="block"
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
-          >
+          <span className="block animate-fade-up [animation-delay:150ms]">
             Designed To Be
-          </motion.span>
-          <motion.span
-            className="block italic text-gold"
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.85, duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
-          >
+          </span>
+          <span className="block italic text-gold animate-fade-up [animation-delay:350ms]">
             Collected.
-          </motion.span>
+          </span>
         </h1>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 1.4 }}
-          className="lede mt-10 text-xl text-ivory/85 md:text-2xl"
-        >
+        <p className="lede mt-9 text-xl text-ivory/90 md:text-2xl animate-fade-up [animation-delay:600ms]">
           Not manufactured. Crafted.
-        </motion.p>
+        </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.9, duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-14"
-        >
+        <div className="mt-12 animate-fade-up [animation-delay:800ms]">
           <Link
             href="/collections"
-            className="eyebrow group inline-flex items-center gap-4 border border-ivory/30 px-10 py-5 text-ivory transition-all duration-700 hover:border-gold hover:bg-gold hover:text-charcoal-deep"
+            className="eyebrow group inline-flex items-center gap-4 border border-ivory/35 bg-charcoal-deep/20 px-10 py-5 text-ivory backdrop-blur-sm transition-all duration-700 hover:border-gold hover:bg-gold hover:text-charcoal-deep"
           >
             Explore The Collection
-            <span aria-hidden className="transition-transform duration-700 group-hover:translate-x-2">
-              →
-            </span>
+            <IconArrow size={16} className="transition-transform duration-700 group-hover:translate-x-2" />
           </Link>
-        </motion.div>
+        </div>
+
+        {/* Icon proofs */}
+        <div className="mt-14 flex items-center gap-8 animate-fade-up [animation-delay:1000ms] md:gap-12">
+          {PROOFS.map(({ icon: Icon, label }) => (
+            <div key={label} className="flex flex-col items-center gap-3">
+              <Icon size={22} className="text-gold" />
+              <span className="eyebrow text-[0.5rem] text-ivory/80">{label}</span>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Scroll cue */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2.6, duration: 1.2 }}
-        className="absolute bottom-10 left-1/2 z-10 -translate-x-1/2"
-      >
-        <div className="mx-auto h-14 w-px overflow-hidden bg-ivory/15">
-          <motion.div
-            className="h-1/2 w-px bg-gold"
-            animate={{ y: [-30, 60] }}
-            transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
-          />
+      <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2">
+        <div className="mx-auto h-12 w-px overflow-hidden bg-charcoal/20">
+          <div className="h-1/2 w-px bg-brass animate-scrollcue" />
         </div>
-        <p className="eyebrow mt-4 text-[0.55rem] text-stone">Scroll</p>
-      </motion.div>
+      </div>
     </section>
   );
 }

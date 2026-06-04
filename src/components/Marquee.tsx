@@ -1,3 +1,5 @@
+import { IconLotus } from "./icons";
+
 const WORDS = [
   "Hand Block Printing",
   "Bhujodi Handweaving",
@@ -9,18 +11,22 @@ const WORDS = [
   "Original Drawings",
 ];
 
-/** A slow brass filmstrip of the house's vocabulary. */
-export default function Marquee() {
+/** A slow filmstrip of the house's vocabulary — perpetual, hypnotic. */
+export default function Marquee({ dark = false }: { dark?: boolean }) {
   const row = [...WORDS, ...WORDS];
   return (
-    <div className="overflow-hidden border-y border-charcoal-line bg-charcoal py-5">
+    <div
+      className={`overflow-hidden border-y py-5 ${
+        dark ? "border-charcoal-line bg-charcoal" : "border-ivory-mute bg-ivory"
+      }`}
+    >
       <div className="flex w-max animate-marquee items-center">
         {row.map((w, i) => (
           <span key={i} className="flex items-center">
-            <span className="eyebrow whitespace-nowrap text-stone">{w}</span>
-            <span aria-hidden className="mx-8 text-brass">
-              ✦
+            <span className={`eyebrow whitespace-nowrap ${dark ? "text-stone" : "text-stone-dark"}`}>
+              {w}
             </span>
+            <IconLotus size={13} className="mx-8 shrink-0 text-brass/70" />
           </span>
         ))}
       </div>

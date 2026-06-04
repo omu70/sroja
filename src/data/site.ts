@@ -115,37 +115,37 @@ export const TIMELINE = [
   {
     phase: "01 — The Drawing",
     title: "Design",
-    text: "Every piece begins as a pencil study in Archit's sketchbook — a motif redrawn ten, twenty times until the repeat breathes. Nothing is licensed, nothing is borrowed. The drawing is the DNA.",
+    text: "Every piece begins in Archit's sketchbook — a motif redrawn until the repeat breathes. Nothing borrowed.",
     stat: "20+",
     statLabel: "studies per motif",
   },
   {
     phase: "02 — The Sourcing",
     title: "Material",
-    text: "Rain-fed kala cotton from Kutch. Fine cambric and suiting cottons certified to the thread. Dyes mastered against the original drawing under north light before a single metre is committed.",
+    text: "Rain-fed kala cotton, fine cambric, dyes mastered by eye under north light.",
     stat: "3",
     statLabel: "craft regions",
   },
   {
     phase: "03 — The Making",
     title: "Craft",
-    text: "Blocks are carved in teak; looms are dressed by hand. A printer strikes a block once every few seconds for days. A Bhujodi weaver lifts each motif thread by thread. There is no fast version of this.",
+    text: "Teak blocks struck by hand; motifs lifted thread by thread. There is no fast version of this.",
     stat: "24–186",
     statLabel: "artisan-hours per piece",
   },
   {
     phase: "04 — The Examination",
     title: "Inspection",
-    text: "Each length is examined against light, edge to edge — registration, hand-feel, colour depth. Pieces that pass are numbered. Pieces that do not are never sold under the name.",
+    text: "Examined against light, edge to edge. What fails is never sold under the name.",
     stat: "100%",
     statLabel: "examined by hand",
   },
   {
     phase: "05 — The Signature",
     title: "Finishing",
-    text: "Washing, sun-curing, pressing, final stitch. Every piece leaves the atelier with its edition number and certificate of authenticity — a design protected as original intellectual property.",
+    text: "Washed, sun-cured, pressed — numbered and certified before it leaves.",
     stat: "1 of few",
-    statLabel: "small, numbered editions",
+    statLabel: "numbered editions",
   },
 ] as const;
 

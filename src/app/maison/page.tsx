@@ -33,20 +33,20 @@ export default function MaisonPage() {
   return (
     <>
       {/* Portrait hall */}
-      <section className="relative bg-charcoal-deep pb-24 pt-44 md:pb-32 md:pt-56">
+      <section className="relative bg-ivory-bright pb-24 pt-44 md:pb-32 md:pt-56">
         <div className="mx-auto max-w-[1700px] px-6 md:px-12">
           <Reveal>
-            <p className="eyebrow text-gold">The Maison</p>
-            <h1 className="display mt-6 max-w-5xl text-6xl leading-[0.98] text-ivory md:text-[7rem]">
+            <p className="eyebrow text-brass">The Maison</p>
+            <h1 className="display mt-6 max-w-5xl text-6xl leading-[0.98] text-charcoal md:text-[7rem]">
               A fashion designer&apos;s eye,
-              <span className="block italic text-stone">loaned to the home.</span>
+              <span className="block italic text-stone-dark">loaned to the home.</span>
             </h1>
           </Reveal>
         </div>
       </section>
 
       {/* The founder */}
-      <section className="border-t border-charcoal-line bg-charcoal py-24 md:py-36">
+      <section className="border-t border-ivory-mute bg-ivory py-24 md:py-36">
         <div className="mx-auto grid max-w-[1700px] gap-14 px-6 md:grid-cols-12 md:px-12">
           <div className="md:col-span-5">
             <Reveal>
@@ -56,7 +56,7 @@ export default function MaisonPage() {
                 className="aspect-[3/4] w-full"
                 sizes="(max-width: 768px) 100vw, 40vw"
               />
-              <p className="eyebrow mt-4 text-stone">
+              <p className="eyebrow mt-4 text-stone-dark">
                 Portrait of the work — the founder prefers the pieces photographed in his place
               </p>
             </Reveal>
@@ -64,8 +64,8 @@ export default function MaisonPage() {
           <div className="md:col-span-6 md:col-start-7">
             <Reveal>
               <p className="eyebrow text-brass">Founder & Creative Director</p>
-              <h2 className="display mt-4 text-5xl text-ivory md:text-7xl">{SITE.founder}</h2>
-              <div className="mt-10 space-y-7 text-base leading-[1.95] text-ivory/80 md:text-lg">
+              <h2 className="display mt-4 text-5xl text-charcoal md:text-7xl">{SITE.founder}</h2>
+              <div className="mt-10 space-y-7 text-base leading-[1.95] text-charcoal/80 md:text-lg">
                 <p>
                   Archit trained as a fashion designer — a discipline where a
                   collection lives or dies by the originality of its drawing and the
@@ -86,7 +86,7 @@ export default function MaisonPage() {
                   indigo exhausts itself. The work is designed to reward the second
                   decade of looking, not the second glance.
                 </p>
-                <p className="lede text-xl text-ivory md:text-2xl">
+                <p className="lede text-xl text-charcoal md:text-2xl">
                   “Luxury is not the price. Luxury is the refusal to hurry.”
                 </p>
               </div>
@@ -96,21 +96,21 @@ export default function MaisonPage() {
       </section>
 
       {/* Principles */}
-      <section className="border-t border-charcoal-line bg-charcoal-deep py-24 md:py-36">
+      <section className="border-t border-ivory-mute bg-ivory-bright py-24 md:py-36">
         <div className="mx-auto max-w-[1700px] px-6 md:px-12">
           <Reveal>
-            <p className="eyebrow text-gold">The Principles</p>
-            <h2 className="display mt-4 text-5xl text-ivory md:text-7xl">
+            <p className="eyebrow text-brass">The Principles</p>
+            <h2 className="display mt-4 text-5xl text-charcoal md:text-7xl">
               Four laws of the house.
             </h2>
           </Reveal>
-          <div className="mt-16 grid gap-px overflow-hidden border border-charcoal-line bg-charcoal-line md:grid-cols-2">
+          <div className="mt-16 grid gap-px overflow-hidden border border-ivory-mute bg-ivory-mute md:grid-cols-2">
             {PRINCIPLES.map((p, i) => (
               <Reveal key={p.title} delay={0.08 * i} className="h-full">
-                <div className="h-full bg-charcoal-deep p-10 md:p-14">
+                <div className="h-full bg-ivory-bright p-10 md:p-14">
                   <p className="display text-5xl text-brass/50">0{i + 1}</p>
-                  <p className="display mt-6 text-3xl text-ivory md:text-4xl">{p.title}</p>
-                  <p className="mt-5 text-sm leading-[1.9] text-stone md:text-base">{p.text}</p>
+                  <p className="display mt-6 text-3xl text-charcoal md:text-4xl">{p.title}</p>
+                  <p className="mt-5 text-sm leading-[1.9] text-stone-dark md:text-base">{p.text}</p>
                 </div>
               </Reveal>
             ))}
@@ -119,14 +119,14 @@ export default function MaisonPage() {
       </section>
 
       {/* Onward */}
-      <section className="border-t border-charcoal-line bg-charcoal py-24 text-center md:py-32">
+      <section className="border-t border-ivory-mute bg-ivory py-24 text-center md:py-32">
         <Reveal>
-          <p className="lede mx-auto max-w-2xl px-6 text-xl text-stone md:text-2xl">
+          <p className="lede mx-auto max-w-2xl px-6 text-xl text-stone-dark md:text-2xl">
             The vision is only half the house. The other half has calluses.
           </p>
           <Link
             href="/atelier"
-            className="eyebrow group mt-10 inline-flex items-center gap-4 border border-brass/60 px-10 py-5 text-gold transition-all duration-700 hover:border-gold hover:bg-gold hover:text-charcoal-deep"
+            className="eyebrow group mt-10 inline-flex items-center gap-4 border border-brass/60 px-10 py-5 text-brass transition-all duration-700 hover:border-charcoal hover:bg-charcoal hover:text-gold"
           >
             Meet The Atelier
             <span aria-hidden className="transition-transform duration-700 group-hover:translate-x-2">→</span>

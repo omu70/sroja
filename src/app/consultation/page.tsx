@@ -27,15 +27,15 @@ const EXPECT = [
 export default function ConsultationPage() {
   return (
     <>
-      <section className="relative bg-charcoal-deep pb-20 pt-44 md:pb-28 md:pt-56">
+      <section className="relative bg-ivory-bright pb-20 pt-44 md:pb-28 md:pt-56">
         <div className="mx-auto max-w-[1700px] px-6 md:px-12">
           <Reveal>
-            <p className="eyebrow text-gold">Private Consultation</p>
-            <h1 className="display mt-6 max-w-5xl text-6xl leading-[0.98] text-ivory md:text-[7rem]">
+            <p className="eyebrow text-brass">Private Consultation</p>
+            <h1 className="display mt-6 max-w-5xl text-6xl leading-[0.98] text-charcoal md:text-[7rem]">
               No cart.
-              <span className="italic text-stone"> A correspondence.</span>
+              <span className="italic text-stone-dark"> A correspondence.</span>
             </h1>
-            <p className="lede mt-10 max-w-2xl text-lg text-stone md:text-xl">
+            <p className="lede mt-10 max-w-2xl text-lg text-stone-dark md:text-xl">
               Every acquisition at {SITE.name} begins with a conversation — about the
               piece, the room it will live in, and the years it is expected to serve.
             </p>
@@ -43,7 +43,7 @@ export default function ConsultationPage() {
         </div>
       </section>
 
-      <section className="border-t border-charcoal-line bg-charcoal py-24 md:py-32">
+      <section className="border-t border-ivory-mute bg-ivory py-24 md:py-32">
         <div className="mx-auto grid max-w-[1700px] gap-16 px-6 lg:grid-cols-12 lg:px-12">
           {/* What to expect */}
           <div className="lg:col-span-4">
@@ -53,16 +53,16 @@ export default function ConsultationPage() {
                 {EXPECT.map((e, i) => (
                   <li key={e.step} className="border-l border-brass/40 pl-6">
                     <p className="display text-3xl text-brass/60">0{i + 1}</p>
-                    <p className="display mt-2 text-2xl text-ivory">{e.step}</p>
-                    <p className="mt-3 text-sm leading-relaxed text-stone">{e.text}</p>
+                    <p className="display mt-2 text-2xl text-charcoal">{e.step}</p>
+                    <p className="mt-3 text-sm leading-relaxed text-stone-dark">{e.text}</p>
                   </li>
                 ))}
               </ol>
 
-              <div className="mt-14 border-t border-charcoal-line pt-8 text-sm leading-relaxed text-stone">
+              <div className="mt-14 border-t border-ivory-mute pt-8 text-sm leading-relaxed text-stone-dark">
                 <p className="eyebrow mb-4 text-brass">The Maison</p>
                 <p>
-                  <a href={`mailto:${SITE.email}`} className="link-line text-ivory">
+                  <a href={`mailto:${SITE.email}`} className="link-line text-charcoal">
                     {SITE.email}
                   </a>
                 </p>

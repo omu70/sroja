@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PIECES } from "@/data/pieces";
+import { IconLotus } from "./icons";
 
 const TYPES = [
   "Request Acquisition",
@@ -52,8 +53,8 @@ export default function InquiryForm({
   }
 
   const field =
-    "w-full border-b border-charcoal-line bg-transparent py-4 text-ivory placeholder:text-stone-dark focus:border-gold focus:outline-none transition-colors duration-500";
-  const label = "eyebrow mb-2 block text-stone";
+    "w-full border-b border-ivory-mute bg-transparent py-4 text-charcoal placeholder:text-stone focus:border-brass focus:outline-none transition-colors duration-500";
+  const label = "eyebrow mb-2 block text-stone-dark";
 
   return (
     <div>
@@ -63,12 +64,12 @@ export default function InquiryForm({
             key="sent"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="border border-brass/40 px-8 py-12 text-center"
+            className="border border-brass/40 bg-ivory-bright px-8 py-12 text-center"
           >
-            <p className="display text-3xl text-gold">Received with thanks.</p>
-            <p className="mt-4 text-sm leading-relaxed text-stone">
-              A design advisor will write to you within one working day to begin the
-              conversation. Significant pieces deserve unhurried correspondence.
+            <IconLotus size={28} className="mx-auto text-brass animate-pulse-soft" />
+            <p className="display mt-6 text-3xl text-brass">Received with thanks.</p>
+            <p className="mt-4 text-sm leading-relaxed text-stone-dark">
+              A design advisor will write to you within one working day.
             </p>
           </motion.div>
         ) : (
@@ -84,7 +85,7 @@ export default function InquiryForm({
               </label>
               <select id="inq-type" value={form.type} onChange={set("type")} className={`${field} appearance-none`}>
                 {TYPES.map((t) => (
-                  <option key={t} value={t} className="bg-charcoal text-ivory">
+                  <option key={t} value={t}>
                     {t}
                   </option>
                 ))}
@@ -125,11 +126,9 @@ export default function InquiryForm({
                 Piece of Interest
               </label>
               <select id="inq-piece" value={form.piece} onChange={set("piece")} className={`${field} appearance-none`}>
-                <option value="" className="bg-charcoal text-ivory">
-                  — General / undecided —
-                </option>
+                <option value="">— General / undecided —</option>
                 {PIECES.map((p) => (
-                  <option key={p.slug} value={p.slug} className="bg-charcoal text-ivory">
+                  <option key={p.slug} value={p.slug}>
                     {p.name} · {p.dimensions}
                   </option>
                 ))}
@@ -155,7 +154,7 @@ export default function InquiryForm({
               <button
                 type="submit"
                 disabled={state === "sending"}
-                className="eyebrow w-full border border-brass/60 px-10 py-5 text-gold transition-all duration-700 hover:border-gold hover:bg-gold hover:text-charcoal-deep disabled:opacity-50 md:w-auto"
+                className="eyebrow w-full border border-brass/60 px-10 py-5 text-brass transition-all duration-700 hover:border-charcoal hover:bg-charcoal hover:text-gold disabled:opacity-50 md:w-auto"
               >
                 {state === "sending" ? "Sending…" : "Begin The Conversation"}
               </button>

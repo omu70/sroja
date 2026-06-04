@@ -19,7 +19,7 @@ export default function ZoomImage({ src, alt, className = "", sizes }: ZoomImage
     <>
       <button
         onClick={() => setOpen(true)}
-        className={`group relative block w-full cursor-zoom-in overflow-hidden bg-charcoal-soft ${className}`}
+        className={`group relative block w-full cursor-zoom-in overflow-hidden bg-ivory-soft ${className}`}
         aria-label={`Study ${alt} in detail`}
       >
         <Image
@@ -29,7 +29,7 @@ export default function ZoomImage({ src, alt, className = "", sizes }: ZoomImage
           sizes={sizes ?? "(max-width: 768px) 100vw, 50vw"}
           className="img-luxe object-cover transition-transform duration-[1.6s] ease-editorial group-hover:scale-[1.04]"
         />
-        <span className="eyebrow absolute bottom-4 right-4 bg-charcoal-deep/70 px-3 py-2 text-[0.55rem] text-ivory opacity-0 backdrop-blur-sm transition-opacity duration-500 group-hover:opacity-100">
+        <span className="eyebrow absolute bottom-4 right-4 bg-ivory-bright/90 px-3 py-2 text-[0.55rem] text-charcoal opacity-0 backdrop-blur-sm transition-opacity duration-500 group-hover:opacity-100">
           Study +
         </span>
       </button>
@@ -53,7 +53,7 @@ export default function ZoomImage({ src, alt, className = "", sizes }: ZoomImage
             >
               <Image src={src} alt={alt} fill sizes="100vw" className="object-contain" />
             </motion.div>
-            <p className="eyebrow absolute bottom-6 left-1/2 -translate-x-1/2 text-stone">
+            <p className="eyebrow absolute bottom-6 left-1/2 -translate-x-1/2 text-stone-dark">
               {alt} — click anywhere to close
             </p>
           </motion.div>

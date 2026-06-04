@@ -5,8 +5,9 @@
 :root {
   --charcoal: #1b1813;
   --charcoal-deep: #141210;
-  --ivory: #f2ede2;
-  --brass: #a0804a;
+  --ivory: #f4efe5;
+  --ivory-bright: #faf7ef;
+  --brass: #9a7a42;
   --gold: #c6a75e;
 }
 
@@ -28,25 +29,25 @@ html.lenis body {
 }
 
 body {
-  background-color: var(--charcoal);
-  color: var(--ivory);
+  background-color: var(--ivory-bright);
+  color: var(--charcoal);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  background: var(--brass);
+  background: var(--gold);
   color: var(--charcoal-deep);
 }
 
-/* ── Filmic grain ─────────────────────────────────────────── */
+/* ── Filmic grain (over imagery only) ─────────────────────── */
 .grain::after {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.06;
+  opacity: 0.05;
   z-index: 5;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 220px 220px;
@@ -76,12 +77,26 @@ body {
 /* Hairline rules */
 .rule {
   height: 1px;
-  background: linear-gradient(to right, transparent, rgba(192, 163, 95, 0.45), transparent);
+  background: linear-gradient(to right, transparent, rgba(154, 122, 66, 0.5), transparent);
 }
 
 .rule-solid {
   height: 1px;
-  background: rgba(242, 237, 226, 0.14);
+  background: rgba(27, 24, 19, 0.12);
+}
+
+/* A living hairline — brass light travelling a rule (repeatable element) */
+.rule-live {
+  height: 1px;
+  background-image: linear-gradient(
+    90deg,
+    rgba(154, 122, 66, 0.15) 0%,
+    rgba(198, 167, 94, 0.9) 50%,
+    rgba(154, 122, 66, 0.15) 100%
+  );
+  background-size: 40% 100%;
+  background-repeat: no-repeat;
+  animation: shimmer 3.4s ease-in-out infinite;
 }
 
 /* Discreet scrollbar */
@@ -89,12 +104,12 @@ body {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--charcoal-deep);
+  background: var(--ivory-bright);
 }
 ::-webkit-scrollbar-thumb {
-  background: #3a342a;
+  background: #d4cab2;
   border-radius: 8px;
-  border: 2px solid var(--charcoal-deep);
+  border: 2px solid var(--ivory-bright);
 }
 
 /* Underline link animation */
@@ -120,7 +135,28 @@ body {
 
 /* Image treatment */
 .img-luxe {
-  filter: saturate(0.92) contrast(1.02);
+  filter: saturate(0.94) contrast(1.02);
+}
+
+/* Icon chip — the recurring icon presentation */
+.icon-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(154, 122, 66, 0.35);
+  color: var(--brass);
+  background: rgba(250, 247, 239, 0.65);
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.group:hover .icon-chip,
+.icon-chip:hover {
+  border-color: rgba(154, 122, 66, 0.8);
+  background: var(--charcoal);
+  color: var(--gold);
+  transform: translateY(-3px);
 }
 
 /* Reduced motion */

@@ -16,15 +16,15 @@ export default function CollectionsPage() {
   return (
     <>
       {/* Hall */}
-      <section className="relative bg-charcoal-deep pb-20 pt-44 md:pb-28 md:pt-56">
+      <section className="relative bg-ivory-bright pb-20 pt-44 md:pb-28 md:pt-56">
         <div className="mx-auto max-w-[1700px] px-6 md:px-12">
           <Reveal>
-            <p className="eyebrow text-gold">The Archive</p>
-            <h1 className="display mt-6 max-w-5xl text-6xl leading-[0.98] text-ivory md:text-8xl">
+            <p className="eyebrow text-brass">The Archive</p>
+            <h1 className="display mt-6 max-w-5xl text-6xl leading-[0.98] text-charcoal md:text-8xl">
               Twenty-eight works.
-              <span className="block italic text-stone">Five rooms. One hand.</span>
+              <span className="block italic text-stone-dark">Five rooms. One hand.</span>
             </h1>
-            <p className="lede mt-10 max-w-2xl text-lg text-stone md:text-xl">
+            <p className="lede mt-10 max-w-2xl text-lg text-stone-dark md:text-xl">
               Every piece in the archive is an original design by Archit, handcrafted
               in a numbered edition. Browse it as you would a private collection —
               slowly.
@@ -40,7 +40,7 @@ export default function CollectionsPage() {
         return (
           <section
             key={collection.slug}
-            className="border-t border-charcoal-line bg-charcoal py-24 md:py-32"
+            className="border-t border-ivory-mute bg-ivory py-24 md:py-32"
           >
             <div className="mx-auto max-w-[1700px] px-6 md:px-12">
               {/* Collection masthead */}
@@ -50,14 +50,14 @@ export default function CollectionsPage() {
                     <p className="eyebrow text-brass">
                       Room {String(ci + 1).padStart(2, "0")} — {pieces.length} works
                     </p>
-                    <h2 className="display mt-4 text-5xl text-ivory md:text-7xl">
+                    <h2 className="display mt-4 text-5xl text-charcoal md:text-7xl">
                       {collection.title}
                     </h2>
-                    <p className="lede mt-3 text-lg text-stone">{collection.subtitle}</p>
+                    <p className="lede mt-3 text-lg text-stone-dark">{collection.subtitle}</p>
                   </div>
                   <Link
                     href={`/collections/${collection.slug}`}
-                    className="link-line eyebrow text-gold"
+                    className="link-line eyebrow text-brass"
                   >
                     Enter The Room →
                   </Link>
@@ -67,7 +67,7 @@ export default function CollectionsPage() {
               {/* Editorial spread: manifesto + asymmetric gallery */}
               <div className="mt-14 grid gap-10 lg:grid-cols-12">
                 <Reveal className="lg:col-span-4">
-                  <div className="space-y-5 border-l border-brass/40 pl-6 text-base leading-[1.85] text-ivory/75">
+                  <div className="space-y-5 border-l border-brass/40 pl-6 text-base leading-[1.85] text-charcoal/75">
                     {collection.manifesto.map((p) => (
                       <p key={p}>{p}</p>
                     ))}
@@ -83,7 +83,7 @@ export default function CollectionsPage() {
                         className={i === 0 ? "col-span-2 md:col-span-1 md:mt-10" : i === 2 ? "md:mt-20" : ""}
                       >
                         <Link href={`/piece/${piece.slug}`} className="group block">
-                          <div className="relative aspect-[3/4] w-full overflow-hidden bg-charcoal-soft">
+                          <div className="relative aspect-[3/4] w-full overflow-hidden bg-ivory-soft">
                             <Image
                               src={piece.images[0]}
                               alt={piece.name}
@@ -92,10 +92,10 @@ export default function CollectionsPage() {
                               className="img-luxe object-cover transition-transform duration-[1.4s] ease-editorial group-hover:scale-[1.04]"
                             />
                           </div>
-                          <p className="display mt-4 text-xl text-ivory transition-colors duration-500 group-hover:text-gold md:text-2xl">
+                          <p className="display mt-4 text-xl text-charcoal transition-colors duration-500 group-hover:text-brass md:text-2xl">
                             {piece.name}
                           </p>
-                          <p className="eyebrow mt-1 text-stone">
+                          <p className="eyebrow mt-1 text-stone-dark">
                             Edition {String(piece.edition.number).padStart(2, "0")} /{" "}
                             {piece.edition.of} · {piece.hours} hrs
                           </p>
@@ -105,7 +105,7 @@ export default function CollectionsPage() {
                   </div>
                   {hero && pieces.length > 3 && (
                     <Reveal delay={0.2}>
-                      <p className="eyebrow mt-8 text-stone">
+                      <p className="eyebrow mt-8 text-stone-dark">
                         + {pieces.length - 3} further works in this room
                       </p>
                     </Reveal>

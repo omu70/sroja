@@ -44,15 +44,15 @@ export default async function CollectionRoom({
   return (
     <>
       {/* Manifesto wall */}
-      <section className="relative bg-charcoal-deep pb-24 pt-44 md:pb-32 md:pt-56">
+      <section className="relative bg-ivory-bright pb-24 pt-44 md:pb-32 md:pt-56">
         <div className="mx-auto max-w-[1700px] px-6 md:px-12">
           <Reveal>
-            <p className="eyebrow text-gold">
+            <p className="eyebrow text-brass">
               The Archive — {pieces.length} numbered works
             </p>
-            <h1 className="display mt-6 text-6xl leading-[0.98] text-ivory md:text-[7rem]">
+            <h1 className="display mt-6 text-6xl leading-[0.98] text-charcoal md:text-[7rem]">
               {collection.name}
-              <span className="block text-4xl italic text-stone md:text-5xl">
+              <span className="block text-4xl italic text-stone-dark md:text-5xl">
                 {collection.subtitle}
               </span>
             </h1>
@@ -60,33 +60,33 @@ export default async function CollectionRoom({
           <Reveal delay={0.15}>
             <div className="mt-14 max-w-3xl space-y-6 border-l border-brass/40 pl-8">
               {collection.manifesto.map((p) => (
-                <p key={p} className="lede text-xl leading-[1.7] text-ivory/85 md:text-2xl">
+                <p key={p} className="lede text-xl leading-[1.7] text-charcoal/85 md:text-2xl">
                   {p}
                 </p>
               ))}
-              <p className="eyebrow pt-2 text-stone">— {collection.title}, a note from the house</p>
+              <p className="eyebrow pt-2 text-stone-dark">— {collection.title}, a note from the house</p>
             </div>
           </Reveal>
         </div>
       </section>
 
       {/* The works */}
-      <section className="bg-charcoal">
+      <section className="bg-ivory">
         {pieces.map((piece, i) => (
           <PieceShowcase key={piece.slug} piece={piece} index={i} />
         ))}
       </section>
 
       {/* Onward */}
-      <section className="border-t border-charcoal-line bg-charcoal-deep py-20 text-center">
+      <section className="border-t border-ivory-mute bg-ivory-bright py-20 text-center">
         <Reveal>
-          <p className="eyebrow text-stone">Continue through the archive</p>
+          <p className="eyebrow text-stone-dark">Continue through the archive</p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 px-6">
             {COLLECTIONS.filter((c) => c.slug !== collection.slug).map((c) => (
               <Link
                 key={c.slug}
                 href={`/collections/${c.slug}`}
-                className="display link-line text-2xl text-ivory/80 hover:text-gold md:text-3xl"
+                className="display link-line text-2xl text-charcoal/80 hover:text-brass md:text-3xl"
               >
                 {c.title}
               </Link>
