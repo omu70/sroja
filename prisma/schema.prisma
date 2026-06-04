@@ -1,0 +1,51 @@
+// SROJA Maison — optional persistence layer.
+// The site ships with a curated static archive (src/data) and runs without a DB.
+// Wire DATABASE_URL and run `npm run db:push && npm run db:seed` to persist
+// the archive and capture acquisition inquiries in PostgreSQL.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Piece {
+  id            String   @id @default(uuid())
+  slug          String   @unique
+  name          String
+  collection    String
+  craft         String
+  region        String
+  price         Int // INR
+  hours         Int // artisan-hours
+  artisans      Int
+  editionSize   Int
+  materials     String
+  dimensions    String
+  description   String
+  designersNote String
+  inspiration   String
+  story         String
+  uniqueness    String
+  images        String[] // public URLs
+  featured      Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  inquiries     Inquiry[]
+}
+
+model Inquiry {
+  id        String   @id @default(uuid())
+  type      String // acquisition | consultation | advisor | general
+  name      String
+  email     String
+  country   String?
+  phone     String?
+  message   String
+  piece     Piece?   @relation(fields: [pieceId], references: [id])
+  pieceId   String?
+  status    String   @default("new") // new | in-conversation | closed
+  createdAt DateTime @default(now())
+}
