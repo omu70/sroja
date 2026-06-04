@@ -152,8 +152,6 @@ export const TIMELINE = [
 export const MANIFESTO = [
   "Mass production asks how fast a thing can be made.",
   "We ask how long a thing can be loved.",
-  "A machine repeats. A hand remembers.",
-  "Every SROJA piece carries the small, human variations that no factory can counterfeit — and no algorithm can design.",
   "Trends expire. Drawings endure.",
   "We make few things, slowly, so that each one can outlive us.",
 ] as const;

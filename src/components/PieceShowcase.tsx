@@ -59,7 +59,7 @@ export default function PieceShowcase({ piece, index }: PieceShowcaseProps) {
                 {piece.name}
               </Link>
             </h3>
-            <p className="lede mt-5 text-lg leading-relaxed text-stone-dark">
+            <p className="lede mt-5 line-clamp-2 text-lg leading-relaxed text-stone-dark">
               {piece.description}
             </p>
 

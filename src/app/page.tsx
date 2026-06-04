@@ -13,8 +13,9 @@ import AtelierStrip from "@/components/home/AtelierStrip";
 import ConsultationSection from "@/components/home/ConsultationSection";
 import PieceShowcase from "@/components/PieceShowcase";
 import Reveal from "@/components/Reveal";
-import { IconArrow } from "@/components/icons";
-import { getFeatured } from "@/data/pieces";
+import ValueLedger from "@/components/ValueLedger";
+import { IconArrow, IconClock, IconHash, IconLayers, IconLotus } from "@/components/icons";
+import { getFeatured, PIECES } from "@/data/pieces";
 import { img } from "@/data/site";
 
 const HERO_FRAMES = [
@@ -38,11 +39,29 @@ const HERO_FRAMES = [
 
 export default function HomePage() {
   const featured = getFeatured();
+  const totalHours = PIECES.reduce((a, p) => a + p.hours, 0);
 
   return (
     <>
       <HeroFilm frames={HERO_FRAMES} />
       <Marquee />
+
+      {/* The house's arithmetic — why the price is the price */}
+      <section className="bg-ivory-bright py-14 md:py-20">
+        <div className="mx-auto max-w-[1700px] px-6 md:px-12">
+          <Reveal>
+            <ValueLedger
+              items={[
+                { icon: IconClock, value: totalHours, label: "artisan-hours in the archive" },
+                { icon: IconLayers, value: PIECES.length, label: "numbered works" },
+                { icon: IconLotus, value: 3, label: "living craft traditions" },
+                { icon: IconHash, value: "≤50", label: "pieces per edition" },
+              ]}
+            />
+          </Reveal>
+        </div>
+      </section>
+
       <VisionSection />
       <CraftTimeline />
 

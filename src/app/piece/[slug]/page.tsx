@@ -7,7 +7,9 @@ import ParallaxImage from "@/components/ParallaxImage";
 import ZoomImage from "@/components/ZoomImage";
 import CountUp from "@/components/CountUp";
 import InquiryForm from "@/components/InquiryForm";
-import LoomObjectLazy from "@/components/LoomObjectLazy";
+import ValueLedger from "@/components/ValueLedger";
+import HoursBars from "@/components/HoursBars";
+import DimensionDrawing from "@/components/DimensionDrawing";
 import { COLLECTIONS, SITE } from "@/data/site";
 import { PIECES, getPiece, getRelated, formatINR } from "@/data/pieces";
 import {
@@ -16,6 +18,7 @@ import {
   IconHash,
   IconLayers,
   IconLotus,
+  IconPencil,
   IconPin,
   IconRuler,
   IconShield,
@@ -58,6 +61,8 @@ export default async function PieceDossier({
   const collection = COLLECTIONS.find((c) => c.slug === piece.collection);
   const related = getRelated(piece);
   const editionLabel = `Edition ${String(piece.edition.number).padStart(2, "0")} / ${piece.edition.of}`;
+  const sentences = piece.story.split(". ");
+  const storyLede = sentences.slice(0, 2).join(". ") + (sentences.length > 1 ? "." : "");
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -128,6 +133,26 @@ export default async function PieceDossier({
         </div>
       </section>
 
+      {/* ── The Value Ledger — the justification, in numerals ──── */}
+      <section className="border-t border-ivory-mute bg-ivory-bright py-14 md:py-20">
+        <div className="mx-auto max-w-[1700px] px-6 md:px-12">
+          <Reveal>
+            <ValueLedger
+              items={[
+                { icon: IconClock, value: piece.hours, label: "artisan-hours" },
+                {
+                  icon: IconHash,
+                  value: `${String(piece.edition.number).padStart(2, "0")}/${piece.edition.of}`,
+                  label: "numbered edition",
+                },
+                { icon: IconHand, value: piece.artisans, label: "master artisans" },
+                { icon: IconPencil, value: 1, label: "original drawing" },
+              ]}
+            />
+          </Reveal>
+        </div>
+      </section>
+
       {/* ── Act II — From the designer ─────────────────────────── */}
       <section className="border-t border-ivory-mute bg-ivory-bright py-24 md:py-36">
         <div className="mx-auto max-w-4xl px-6 text-center md:px-12">
@@ -159,23 +184,28 @@ export default async function PieceDossier({
           </div>
           <div className="md:col-span-6 md:col-start-7">
             <Reveal>
-              <p className="eyebrow text-brass">The Story</p>
-              <p className="mt-8 text-base leading-[1.95] text-charcoal/85 md:text-lg">
-                {piece.story}
+              <p className="eyebrow text-brass">The Inspiration</p>
+              <p className="display mt-6 text-3xl leading-[1.25] text-charcoal md:text-5xl">
+                {piece.inspiration}
               </p>
             </Reveal>
             <Reveal delay={0.12}>
-              <div className="mt-12 border-l border-brass/40 pl-6">
-                <p className="eyebrow text-stone-dark">The Inspiration</p>
-                <p className="lede mt-3 text-xl text-charcoal md:text-2xl">
-                  {piece.inspiration}
-                </p>
-              </div>
+              <p className="mt-10 max-w-xl border-l border-brass/40 pl-6 text-base leading-[1.85] text-stone-dark">
+                {storyLede}
+              </p>
             </Reveal>
             <Reveal delay={0.2}>
-              <p className="mt-12 text-sm leading-relaxed text-stone-dark">
-                {piece.uniqueness}
-              </p>
+              <div className="mt-10 flex flex-wrap gap-3">
+                {piece.palette.map((hex) => (
+                  <span
+                    key={hex}
+                    className="h-10 w-10 rounded-full border border-charcoal/10 shadow-sm"
+                    style={{ backgroundColor: hex }}
+                    title={hex}
+                  />
+                ))}
+                <span className="eyebrow self-center pl-2 text-stone-dark">The palette, as dyed</span>
+              </div>
             </Reveal>
           </div>
         </div>
@@ -192,33 +222,25 @@ export default async function PieceDossier({
                 <CountUp to={piece.hours} className="text-brass" /> hours.
               </h2>
             </div>
-            <p className="mt-4 max-w-xl text-sm leading-relaxed text-stone-dark">
-              {piece.artisans} artisans · {piece.region} · hours recorded across the
-              phases below
+            <p className="eyebrow mt-4 text-stone-dark">
+              {piece.artisans} artisans · {piece.region}
             </p>
           </Reveal>
 
-          <ol className="mt-16 border-t border-ivory-mute">
-            {piece.process.map((step, i) => (
-              <Reveal key={step.phase}>
-                <li className="grid gap-4 border-b border-ivory-mute py-8 md:grid-cols-12 md:items-baseline md:py-10">
-                  <p className="display text-2xl text-brass/70 md:col-span-1">
-                    0{i + 1}
-                  </p>
-                  <p className="display text-3xl text-charcoal md:col-span-3 md:text-4xl">
-                    {step.phase}
-                  </p>
-                  <p className="text-sm leading-relaxed text-stone-dark md:col-span-6 md:text-base">
-                    {step.detail}
-                  </p>
-                  <p className="eyebrow md:col-span-2 md:text-right">
-                    <span className="text-brass">{step.hours}</span>
-                    <span className="text-stone-dark"> hrs</span>
-                  </p>
-                </li>
-              </Reveal>
-            ))}
-          </ol>
+          <div className="mt-14 grid gap-14 md:grid-cols-12">
+            <Reveal className="md:col-span-7">
+              <HoursBars steps={[...piece.process]} total={piece.hours} />
+            </Reveal>
+            <Reveal delay={0.15} className="md:col-span-4 md:col-start-9">
+              <ZoomImage
+                src={piece.images[2] ?? piece.images[0]}
+                alt={`${piece.name} — in the making`}
+                className="aspect-[3/4] w-full"
+                sizes="(max-width: 768px) 100vw, 33vw"
+              />
+              <p className="eyebrow mt-3 text-stone-dark">In the making</p>
+            </Reveal>
+          </div>
         </div>
       </section>
 
@@ -232,11 +254,8 @@ export default async function PieceDossier({
                 Specifications,
                 <span className="italic text-stone-dark"> as drawn.</span>
               </h2>
-              <div className="mt-10 hidden md:block">
-                <LoomObjectLazy className="h-72 w-72 opacity-90" />
-                <p className="eyebrow mt-2 text-stone-dark">
-                  The Thread — digital maquette of the house
-                </p>
+              <div className="mt-10">
+                <DimensionDrawing dimensions={piece.dimensions} name={piece.name} />
               </div>
             </Reveal>
           </div>
@@ -330,12 +349,18 @@ export default async function PieceDossier({
                 designed at the maison, handcrafted by master artisans, released as{" "}
                 {editionLabel.toLowerCase()}.
               </p>
-              <p className="mt-8 text-sm leading-relaxed text-stone-dark">
-                Protected under Intellectual Property Rights. This design cannot be
-                replicated, reproduced, or commercially utilised without
-                authorisation. The certificate accompanies the piece, recording its
-                edition number, artisan-hours and date of completion.
-              </p>
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+                {[
+                  { Icon: IconShield, label: "IPR Protected" },
+                  { Icon: IconHash, label: "Numbered" },
+                  { Icon: IconClock, label: `${piece.hours} hrs recorded` },
+                ].map(({ Icon, label }) => (
+                  <span key={label} className="eyebrow flex items-center gap-2.5 text-stone-dark">
+                    <Icon size={15} className="text-brass" />
+                    {label}
+                  </span>
+                ))}
+              </div>
               <p className="display mt-10 text-2xl italic text-brass">{SITE.founder}</p>
             </div>
           </Reveal>
@@ -353,11 +378,11 @@ export default async function PieceDossier({
                 <span className="italic text-stone-dark"> conversation.</span>
               </h2>
               <p className="mt-8 text-base leading-[1.9] text-charcoal/80">
-                {piece.name} is currently {editionLabel.toLowerCase()}, at{" "}
-                <span className="text-brass">{formatINR(piece.price)}</span>. There is
-                no checkout — a design advisor confirms the edition, walks you through
-                provenance and care, and arranges insured delivery anywhere in the
-                world.
+                {editionLabel} · <span className="display text-2xl text-brass">{formatINR(piece.price)}</span>
+                <span className="mt-2 block text-sm text-stone-dark">
+                  No checkout — an advisor reserves your number and arranges insured
+                  delivery, worldwide.
+                </span>
               </p>
               <ul className="mt-10 space-y-4 text-sm text-stone-dark">
                 <li className="flex items-center gap-3">

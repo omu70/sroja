@@ -124,8 +124,7 @@ export const QUILTS: Piece[] = [
     process: chettinadProcess(150, "the indigo rekha").concat([
       {
         phase: "The Quilting",
-        detail:
-          "The woven length is layered and quilted through by hand-guided needle, the stitching kept invisible inside the line-work.",
+        detail: "Quilted through by hand — stitching hidden inside the line-work.",
         hours: 36,
       },
     ]),

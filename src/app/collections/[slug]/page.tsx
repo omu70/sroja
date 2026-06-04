@@ -3,9 +3,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Reveal from "@/components/Reveal";
 import PieceShowcase from "@/components/PieceShowcase";
+import ValueLedger from "@/components/ValueLedger";
 import { COLLECTIONS } from "@/data/site";
 import { getByCollection } from "@/data/pieces";
 import type { CollectionSlug } from "@/data/types";
+import { IconClock, IconHand, IconHash, IconLayers } from "@/components/icons";
 
 interface Params {
   slug: CollectionSlug;
@@ -29,7 +31,7 @@ export async function generateMetadata({
   };
 }
 
-/** A single room of the archive — manifesto first, then the works. */
+/** A single room of the archive — one line of manifesto, then the works. */
 export default async function CollectionRoom({
   params,
 }: {
@@ -40,32 +42,43 @@ export default async function CollectionRoom({
   if (!collection) notFound();
 
   const pieces = getByCollection(collection.slug);
+  const roomHours = pieces.reduce((a, p) => a + p.hours, 0);
+  const maxEdition = Math.max(...pieces.map((p) => p.edition.of));
+  const crafts = [...new Set(pieces.map((p) => p.craft))];
+  const manifestoLine = collection.manifesto[0].split(". ")[0] + ".";
 
   return (
     <>
-      {/* Manifesto wall */}
-      <section className="relative bg-ivory-bright pb-24 pt-44 md:pb-32 md:pt-56">
+      {/* Manifesto wall — one line, then numbers */}
+      <section className="relative bg-ivory-bright pb-16 pt-44 md:pb-24 md:pt-56">
         <div className="mx-auto max-w-[1700px] px-6 md:px-12">
           <Reveal>
-            <p className="eyebrow text-brass">
-              The Archive — {pieces.length} numbered works
-            </p>
+            <p className="eyebrow text-brass">The Archive · Room of {collection.name}</p>
             <h1 className="display mt-6 text-6xl leading-[0.98] text-charcoal md:text-[7rem]">
               {collection.name}
               <span className="block text-4xl italic text-stone-dark md:text-5xl">
                 {collection.subtitle}
               </span>
             </h1>
+            <p className="lede mt-8 max-w-2xl border-l border-brass/40 pl-6 text-xl leading-snug text-charcoal/85 md:text-2xl">
+              {manifestoLine}
+            </p>
           </Reveal>
+
           <Reveal delay={0.15}>
-            <div className="mt-14 max-w-3xl space-y-6 border-l border-brass/40 pl-8">
-              {collection.manifesto.map((p) => (
-                <p key={p} className="lede text-xl leading-[1.7] text-charcoal/85 md:text-2xl">
-                  {p}
-                </p>
-              ))}
-              <p className="eyebrow pt-2 text-stone-dark">— {collection.title}, a note from the house</p>
-            </div>
+            <ValueLedger
+              className="mt-14"
+              items={[
+                { icon: IconLayers, value: pieces.length, label: "numbered works" },
+                { icon: IconClock, value: roomHours, label: "artisan-hours" },
+                { icon: IconHash, value: `≤${maxEdition}`, label: "per edition" },
+                {
+                  icon: IconHand,
+                  value: crafts.length,
+                  label: crafts.length === 1 ? "craft tradition" : "craft traditions",
+                },
+              ]}
+            />
           </Reveal>
         </div>
       </section>
