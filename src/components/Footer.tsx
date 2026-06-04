@@ -57,7 +57,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="eyebrow mb-5 text-brass-bright">Private Enquiries</p>
+            <p className="eyebrow mb-5 text-brass-bright">Contact</p>
             <ul className="space-y-4 text-sm text-ivory/75">
               <li className="flex items-start gap-3">
                 <IconEnvelope size={16} className="mt-0.5 shrink-0 text-brass-bright" />

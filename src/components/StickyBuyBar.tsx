@@ -55,7 +55,7 @@ export default function StickyBuyBar({ piece }: { piece: Piece }) {
                 href="#acquire"
                 className="eyebrow border border-brass bg-charcoal px-5 py-3.5 text-gold transition-colors duration-500 hover:bg-charcoal-deep md:px-8 md:py-4"
               >
-                Acquire
+                Buy Now
               </a>
             </div>
           </div>

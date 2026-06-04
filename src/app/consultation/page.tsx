@@ -4,9 +4,9 @@ import InquiryForm from "@/components/InquiryForm";
 import { SITE } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Private Consultation — Begin The Conversation",
+  title: "Contact — Talk To The Maison",
   description:
-    "Request acquisition, schedule a private consultation, or speak with a SROJA design advisor. Collectible handcrafted design deserves correspondence, not checkout.",
+    "Questions about a piece, an order, or a project? Write to SROJA — a design advisor replies within one working day.",
 };
 
 const EXPECT = [
@@ -30,14 +30,12 @@ export default function ConsultationPage() {
       <section className="relative bg-ivory-bright pb-20 pt-44 md:pb-28 md:pt-56">
         <div className="mx-auto max-w-[1700px] px-6 md:px-12">
           <Reveal>
-            <p className="eyebrow text-brass">Private Consultation</p>
+            <p className="eyebrow text-brass">Contact</p>
             <h1 className="display mt-6 max-w-5xl text-6xl leading-[0.98] text-charcoal md:text-[7rem]">
-              No cart.
-              <span className="italic text-stone-dark"> A conversation.</span>
+              Talk to <span className="italic text-stone-dark">the maison.</span>
             </h1>
             <p className="lede mt-10 max-w-2xl text-lg text-stone-dark md:text-xl">
-              Prefer to talk before you buy? Tell us about the room — an advisor
-              does the rest.
+              A question, an order, a project — an advisor replies within a day.
             </p>
           </Reveal>
         </div>

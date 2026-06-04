@@ -83,13 +83,13 @@ export default function PieceShowcase({ piece, index }: PieceShowcaseProps) {
                 href={`/piece/${piece.slug}#acquire`}
                 className="eyebrow border border-brass bg-charcoal px-7 py-4 text-gold transition-all duration-700 hover:bg-charcoal-deep"
               >
-                Acquire
+                Buy Now
               </Link>
               <Link
                 href={`/piece/${piece.slug}`}
                 className="link-line eyebrow inline-flex items-center gap-3 text-brass"
               >
-                Full Story <IconArrow size={15} />
+                View <IconArrow size={15} />
               </Link>
             </div>
           </Reveal>

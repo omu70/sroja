@@ -21,11 +21,11 @@ export const SITE = {
 };
 
 export const NAV = [
-  { label: "The Archive", href: "/collections" },
+  { label: "Shop", href: "/collections" },
   { label: "Maison", href: "/maison" },
   { label: "Atelier", href: "/atelier" },
   { label: "Provenance", href: "/provenance" },
-  { label: "Consultation", href: "/consultation" },
+  { label: "Contact", href: "/consultation" },
 ] as const;
 
 export const COLLECTIONS: CollectionMeta[] = [

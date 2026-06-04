@@ -10,7 +10,6 @@ import GlobalSection from "@/components/home/GlobalSection";
 import ProvenanceSection from "@/components/home/ProvenanceSection";
 import CollectorNotes from "@/components/home/CollectorNotes";
 import AtelierStrip from "@/components/home/AtelierStrip";
-import ConsultationSection from "@/components/home/ConsultationSection";
 import PieceShowcase from "@/components/PieceShowcase";
 import Reveal from "@/components/Reveal";
 import ValueLedger from "@/components/ValueLedger";
@@ -112,7 +111,28 @@ export default function HomePage() {
       <ProvenanceSection />
       <CollectorNotes />
       <AtelierStrip />
-      <ConsultationSection />
+
+      {/* Final CTA — straight to the shop */}
+      <section className="relative overflow-hidden border-t border-ivory-mute bg-ivory py-24 text-center md:py-36">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute left-1/2 top-0 h-[50rem] w-[50rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.1]"
+          style={{ background: "radial-gradient(circle, #C6A75E 0%, transparent 60%)" }}
+        />
+        <Reveal>
+          <h2 className="display mx-auto max-w-4xl px-6 text-5xl leading-[1.02] text-charcoal md:text-8xl">
+            Own an <span className="italic text-brass">original.</span>
+          </h2>
+          <Link
+            href="/collections"
+            className="eyebrow group mt-12 inline-flex items-center gap-4 border border-brass bg-charcoal px-12 py-6 text-gold transition-all duration-700 hover:bg-charcoal-deep"
+          >
+            Shop All {PIECES.length} Pieces
+            <IconArrow size={16} className="transition-transform duration-700 group-hover:translate-x-2" />
+          </Link>
+        </Reveal>
+      </section>
+
       <Marquee dark />
     </>
   );
