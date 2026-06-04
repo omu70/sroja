@@ -12,19 +12,19 @@ export const metadata: Metadata = {
 const PILLARS = [
   {
     title: "Original by birth",
-    text: "Each design originates as a drawing at the maison. The archive holds the studies, dates and iterations of every released motif — a paper trail of authorship that precedes the cloth itself.",
+    text: "Every motif begins as a dated drawing in the maison's archive.",
   },
   {
     title: "Protected by law",
-    text: "SROJA designs are protected under Intellectual Property Rights. They cannot be replicated, reproduced, or commercially utilised without authorisation. What you collect, no one else may lawfully make.",
+    text: "IPR-protected — no one else may lawfully make what you collect.",
   },
   {
     title: "Numbered by hand",
-    text: "Editions are deliberately small. Each piece carries its number — 07 of 50 is not a marketing line; it is the count of how many will ever exist in that edition.",
+    text: "07 of 50 is not marketing. It is the count that will ever exist.",
   },
   {
     title: "Certified for generations",
-    text: "Every acquisition includes a certificate recording edition number, artisan-hours, craft region and completion date — the document your estate will one day be glad you kept.",
+    text: "Edition number, hours, region and date — recorded on your certificate.",
   },
 ] as const;
 

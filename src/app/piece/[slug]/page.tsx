@@ -7,6 +7,7 @@ import ParallaxImage from "@/components/ParallaxImage";
 import ZoomImage from "@/components/ZoomImage";
 import CountUp from "@/components/CountUp";
 import AcquisitionPanel from "@/components/AcquisitionPanel";
+import StickyBuyBar from "@/components/StickyBuyBar";
 import ValueLedger from "@/components/ValueLedger";
 import HoursBars from "@/components/HoursBars";
 import DimensionDrawing from "@/components/DimensionDrawing";
@@ -61,8 +62,10 @@ export default async function PieceDossier({
   const collection = COLLECTIONS.find((c) => c.slug === piece.collection);
   const related = getRelated(piece);
   const editionLabel = `Edition ${String(piece.edition.number).padStart(2, "0")} / ${piece.edition.of}`;
-  const sentences = piece.story.split(". ");
-  const storyLede = sentences.slice(0, 2).join(". ") + (sentences.length > 1 ? "." : "");
+  const storyLede = piece.story.split(". ")[0] + ".";
+  const noteSentences = piece.designersNote.split(". ");
+  const noteLede =
+    noteSentences.slice(0, 2).join(". ") + (noteSentences.length > 2 ? "." : "");
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -87,6 +90,7 @@ export default async function PieceDossier({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <StickyBuyBar piece={piece} />
 
       {/* ── Act I — The work, full screen ─────────────────────── */}
       <section className="grain relative h-[100svh] min-h-[620px] overflow-hidden">
@@ -163,7 +167,7 @@ export default async function PieceDossier({
             <p className="eyebrow text-brass">From The Designer</p>
             <p className="display mt-10 text-3xl leading-[1.3] text-charcoal md:text-[2.7rem]">
               <span aria-hidden className="text-brass">“</span>
-              {piece.designersNote}
+              {noteLede}
               <span aria-hidden className="text-brass">”</span>
             </p>
             <IconLotus size={22} className="mx-auto mt-10 text-brass animate-pulse-soft" />

@@ -4,6 +4,9 @@ import { SITE } from "@/data/site";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import Cursor from "@/components/Cursor";
+import ScrollProgress from "@/components/ScrollProgress";
+import Preloader from "@/components/Preloader";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -62,6 +65,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
         />
         <SmoothScroll>
+          <Preloader />
+          <ScrollProgress />
+          <Cursor />
           <Navigation />
           <main>{children}</main>
           <Footer />

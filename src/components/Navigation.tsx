@@ -5,12 +5,12 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { NAV } from "@/data/site";
-import { IconCalendar, IconEnvelope, IconLotus, IconSearch } from "./icons";
+import { IconBag, IconEnvelope, IconLotus, IconSearch } from "./icons";
 
 const ICON_LINKS = [
-  { href: "/collections", label: "Search the archive", Icon: IconSearch },
+  { href: "/collections", label: "Search the collection", Icon: IconSearch },
   { href: "/consultation", label: "Write to the maison", Icon: IconEnvelope },
-  { href: "/consultation", label: "Book a consultation", Icon: IconCalendar },
+  { href: "/collections", label: "Shop the collection", Icon: IconBag },
 ] as const;
 
 export default function Navigation() {
@@ -99,7 +99,7 @@ export default function Navigation() {
                   lightText
                     ? "border-ivory/30 text-ivory"
                     : "border-brass/30 text-brass"
-                } ${i === 2 ? "hidden xl:flex" : ""}`}
+                } ${i === 1 ? "hidden xl:flex" : ""}`}
               >
                 <Icon size={17} />
               </Link>

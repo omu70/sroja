@@ -13,19 +13,19 @@ export const metadata: Metadata = {
 const PRINCIPLES = [
   {
     title: "The drawing is law",
-    text: "Nothing enters the archive that did not begin as an original drawing by Archit. No licensed patterns, no trend boards, no borrowed motifs. The sketchbook is the constitution of the house.",
+    text: "No licensed patterns, no borrowed motifs — every design starts in the sketchbook.",
   },
   {
     title: "Hands over machines",
-    text: "If a machine can make it identically twice, it does not belong here. Every technique in the maison — block, loom, needle — leaves human evidence in the cloth.",
+    text: "If a machine can make it identically twice, it does not belong here.",
   },
   {
     title: "Editions, not inventory",
-    text: "Works are released in deliberately small, numbered editions. When an edition closes, the blocks rest. Scarcity is not a strategy; it is a consequence of honesty about time.",
+    text: "When an edition closes, the blocks rest.",
   },
   {
     title: "Generations as the unit of time",
-    text: "A SROJA piece is judged by a single question: will it be argued over in a will? Design for the decade is decoration. Design for the century is the brief.",
+    text: "Will it be argued over in a will? That is the brief.",
   },
 ] as const;
 
@@ -67,24 +67,14 @@ export default function MaisonPage() {
               <h2 className="display mt-4 text-5xl text-charcoal md:text-7xl">{SITE.founder}</h2>
               <div className="mt-10 space-y-7 text-base leading-[1.95] text-charcoal/80 md:text-lg">
                 <p>
-                  Archit trained as a fashion designer — a discipline where a
-                  collection lives or dies by the originality of its drawing and the
-                  fidelity of its making. SROJA began when he turned that discipline
-                  away from the runway and toward the rooms we actually live in.
+                  Archit trained as a fashion designer, then turned that discipline
+                  toward the rooms we actually live in — founding SROJA as a refusal
+                  of an industry of copies.
                 </p>
                 <p>
-                  What he found was an industry of copies: motifs licensed by the
-                  thousand, “handmade” as a label rather than a fact. The maison was
-                  founded as the refusal of that — a house where every motif is drawn
-                  by one hand, executed by master artisans, and released in editions
-                  small enough that each owner holds something the world cannot
-                  reorder.
-                </p>
-                <p>
-                  His obsession is detail at the threshold of visibility: the drift
-                  of an impression, the rise of an extra weft, the half-tone where
-                  indigo exhausts itself. The work is designed to reward the second
-                  decade of looking, not the second glance.
+                  Every motif is drawn by one hand, executed by master artisans, and
+                  released in editions small enough that each owner holds something
+                  the world cannot reorder.
                 </p>
                 <p className="lede text-xl text-charcoal md:text-2xl">
                   “Luxury is not the price. Luxury is the refusal to hurry.”

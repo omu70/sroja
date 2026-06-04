@@ -89,7 +89,7 @@ export const CRAFTS = [
     age: "c. 12th century",
     line: "Carved teak blocks, pressed by hand, one impression at a time.",
     detail:
-      "The maison's drawings are translated by master carvers into teak blocks — one block per colour. Printers walk the table for days, striking each impression by eye. The micro-misregistrations between strikes are the proof of the hand.",
+      "One carved teak block per colour, struck by hand — the slight drift between strikes is the proof.",
   },
   {
     key: "bhujodi",
@@ -98,7 +98,7 @@ export const CRAFTS = [
     age: "c. 500 years",
     line: "Indigenous kala cotton, handspun and woven with extra-weft motifs.",
     detail:
-      "In the village of Bhujodi, weaving families work rain-fed kala cotton — handspun, undyed at its heart — lifting each motif thread by thread as extra weft. A single cushion face can take a week at the loom.",
+      "Handspun kala cotton, motifs lifted thread by thread — a single face can take a week at the loom.",
   },
   {
     key: "chettinad",
@@ -107,7 +107,7 @@ export const CRAFTS = [
     age: "c. 19th century",
     line: "Architectural checks and stripes from the mansion country of the south.",
     detail:
-      "The Chettinad palette — olive, wine, marigold, rust — comes from the painted mansions of Karaikudi. Our weavers set those geometries in yarn-dyed cotton, beat dense enough to drape with calm weight.",
+      "Yarn-dyed checks in the palette of Karaikudi's mansions, beaten dense for a calm drape.",
   },
 ] as const;
 
@@ -159,19 +159,19 @@ export const MANIFESTO = [
 export const COLLECTOR_NOTES = [
   {
     quote:
-      "I stopped thinking of it as a quilt the day I saw the printer's hand in the repeat — the slight drift of indigo at the border. It hangs in our bedroom like a painting we are allowed to sleep under.",
+      "It hangs in our bedroom like a painting we are allowed to sleep under.",
     name: "Private Collector",
     place: "New Delhi",
   },
   {
     quote:
-      "My clients buy art for their walls without blinking. SROJA is the first house I have found that brings that same standard to what they actually live with.",
+      "The first house that brings gallery standards to what my clients actually live with.",
     name: "Interior Architect",
     place: "Dubai",
   },
   {
     quote:
-      "The dossier arrived before the piece did — the sketches, the hours, the artisans' names. By the time the dohar came, it already had a biography.",
+      "By the time the piece arrived, it already had a biography.",
     name: "Collector",
     place: "London",
   },
@@ -238,8 +238,8 @@ export const MATERIALS_LIB = [
 export const IPR_STATEMENT = {
   headline: "Original. Protected. Unrepeatable.",
   lines: [
-    "Every SROJA design originates as an original work of the maison and is protected under Intellectual Property Rights.",
-    "These designs cannot be replicated, reproduced, or commercially utilised without authorisation — which is precisely why owning one means owning something no one else can make.",
-    "Each piece is released in a deliberately small edition, numbered, and accompanied by a certificate of authenticity signed by the house.",
+    "Every SROJA design is an original work of the maison, protected under Intellectual Property Rights.",
+    "No one else may make it — owning one means owning something unrepeatable.",
+    "Small editions. Numbered. Certified.",
   ],
 };

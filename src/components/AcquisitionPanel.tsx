@@ -36,6 +36,7 @@ export default function AcquisitionPanel({ piece }: { piece: Piece }) {
   const [stage, setStage] = useState<Stage>("form");
   const [error, setError] = useState("");
   const [form, setForm] = useState({ name: "", email: "", phone: "", address: "" });
+  const remaining = Math.max(piece.edition.of - piece.edition.number, 0);
 
   const set =
     (k: keyof typeof form) =>
@@ -142,6 +143,13 @@ export default function AcquisitionPanel({ piece }: { piece: Piece }) {
 
   return (
     <div>
+      {remaining > 0 && (
+        <p className="eyebrow mb-5 flex items-center gap-2 text-brass">
+          <span className="inline-block h-1.5 w-1.5 rounded-full bg-brass animate-pulse-soft" />
+          {remaining} of {piece.edition.of} still available in this edition
+        </p>
+      )}
+
       {/* Mode switch */}
       <div className="mb-8 flex border border-ivory-mute">
         {(
@@ -216,11 +224,16 @@ export default function AcquisitionPanel({ piece }: { piece: Piece }) {
 
             {error && <p className="text-sm leading-relaxed text-brass">{error}</p>}
 
-            <p className="eyebrow flex items-center gap-2 text-[0.55rem] text-stone-dark">
-              <IconShield size={14} className="text-brass" />
-              UPI · Cards · Netbanking — secured by Razorpay. Price includes the
-              numbered edition & certificate.
-            </p>
+            <div className="space-y-2">
+              <p className="eyebrow flex items-center gap-2 text-[0.55rem] text-stone-dark">
+                <IconShield size={14} className="shrink-0 text-brass" />
+                UPI · Cards · Netbanking — secured by Razorpay
+              </p>
+              <p className="eyebrow flex items-center gap-2 text-[0.55rem] text-stone-dark">
+                <IconCrate size={14} className="shrink-0 text-brass" />
+                Free shipping over ₹15,000 · 30-day returns · Certificate included
+              </p>
+            </div>
           </motion.form>
         ) : (
           <motion.div

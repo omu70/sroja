@@ -41,9 +41,8 @@ export default function AtelierPage() {
               <span className="block italic text-stone-dark">Dozens of hands. One standard.</span>
             </h1>
             <p className="lede mt-10 max-w-2xl text-lg text-stone-dark md:text-xl">
-              SROJA does not own factories. It keeps company with workshops — block
-              tables in Rajasthan, pit looms in Kutch, handlooms in Tamil Nadu —
-              where the knowledge predates the brand by centuries.
+              No factories — only workshops where the knowledge predates the brand
+              by centuries.
             </p>
           </Reveal>
 

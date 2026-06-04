@@ -12,15 +12,15 @@ export const metadata: Metadata = {
 const EXPECT = [
   {
     step: "Within one working day",
-    text: "A design advisor replies personally — no tickets, no queues.",
+    text: "An advisor replies personally.",
   },
   {
     step: "The conversation",
-    text: "Rooms, light, editions, provenance, timelines. By email, call, or visit to the atelier by appointment.",
+    text: "Rooms, light, editions — by email, call, or visit.",
   },
   {
     step: "The acquisition",
-    text: "Your edition is reserved and prepared. Insured, archival-packed delivery worldwide, certificate enclosed.",
+    text: "Reserved, certified, delivered insured.",
   },
 ] as const;
 
@@ -36,8 +36,8 @@ export default function ConsultationPage() {
               <span className="italic text-stone-dark"> A conversation.</span>
             </h1>
             <p className="lede mt-10 max-w-2xl text-lg text-stone-dark md:text-xl">
-              Every acquisition at {SITE.name} begins with a conversation — about the
-              piece, the room it will live in, and the years it is expected to serve.
+              Prefer to talk before you buy? Tell us about the room — an advisor
+              does the rest.
             </p>
           </Reveal>
         </div>

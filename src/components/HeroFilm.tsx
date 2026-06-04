@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Magnetic from "./Magnetic";
 import { IconArrow, IconHand, IconHash, IconShield, IconLotus } from "./icons";
 
 interface HeroFilmProps {
@@ -91,13 +92,15 @@ export default function HeroFilm({ frames }: HeroFilmProps) {
         </p>
 
         <div className="mt-12 animate-fade-up [animation-delay:800ms]">
-          <Link
-            href="/collections"
-            className="eyebrow group inline-flex items-center gap-4 border border-ivory/35 bg-charcoal-deep/20 px-10 py-5 text-ivory backdrop-blur-sm transition-all duration-700 hover:border-gold hover:bg-gold hover:text-charcoal-deep"
-          >
-            Explore The Collection
-            <IconArrow size={16} className="transition-transform duration-700 group-hover:translate-x-2" />
-          </Link>
+          <Magnetic>
+            <Link
+              href="/collections"
+              className="eyebrow group inline-flex items-center gap-4 border border-ivory/35 bg-charcoal-deep/20 px-10 py-5 text-ivory backdrop-blur-sm transition-all duration-700 hover:border-gold hover:bg-gold hover:text-charcoal-deep"
+            >
+              Shop The Collection
+              <IconArrow size={16} className="transition-transform duration-700 group-hover:translate-x-2" />
+            </Link>
+          </Magnetic>
         </div>
 
         {/* Icon proofs */}

@@ -175,6 +175,13 @@ export const IconEye = (p: IconProps) => (
   </Base>
 );
 
+export const IconBag = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M5 8h14l-1.2 12.5H6.2L5 8z" />
+    <path d="M8.5 10.5V6.8a3.5 3.5 0 017 0v3.7" />
+  </Base>
+);
+
 export const IconChat = (p: IconProps) => (
   <Base {...p}>
     <path d="M4 5.5h16v11H10l-4.5 3.5v-3.5H4v-11z" />
