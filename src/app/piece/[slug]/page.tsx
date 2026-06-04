@@ -43,7 +43,7 @@ export async function generateMetadata({
   const collection = COLLECTIONS.find((c) => c.slug === piece.collection);
   return {
     title: `${piece.name} — ${collection?.title ?? "The Archive"} | Limited Edition Handcrafted Design`,
-    description: `${piece.description} An original ${piece.craft} work by ${SITE.founder}, crafted over ${piece.hours} artisan-hours. Edition of ${piece.edition.of}. Protected under IPR.`,
+    description: `${piece.description} An original ${piece.craft} work from the SROJA maison, crafted over ${piece.hours} artisan-hours. Edition of ${piece.edition.of}. Protected under IPR.`,
     openGraph: { images: [{ url: piece.images[0] }] },
   };
 }
@@ -163,8 +163,8 @@ export default async function PieceDossier({
               {piece.designersNote}
               <span aria-hidden className="text-brass">”</span>
             </p>
-            <p className="display mt-10 text-2xl italic text-brass">{SITE.founder}</p>
-            <p className="eyebrow mt-1 text-stone-dark">{SITE.founderTitle}</p>
+            <IconLotus size={22} className="mx-auto mt-10 text-brass animate-pulse-soft" />
+            <p className="eyebrow mt-3 text-stone-dark">The Designer — SROJA</p>
           </Reveal>
         </div>
       </section>
@@ -270,7 +270,7 @@ export default async function PieceDossier({
                     [IconHash, "Edition", `${editionLabel} — numbered & certified`],
                     [IconClock, "Creation time", `${piece.hours} artisan-hours`],
                     [IconLotus, "Artisans", `${piece.artisans} master hands`],
-                    [IconShield, "Provenance", `Original design by ${SITE.founder}, protected under IPR`],
+                    [IconShield, "Provenance", "Original design of the maison — protected under IPR"],
                   ] as const
                 ).map(([Icon, k, v]) => (
                   <div key={k} className="grid grid-cols-3 items-baseline gap-6 py-5">
@@ -309,7 +309,7 @@ export default async function PieceDossier({
             <Reveal>
               <p className="eyebrow text-brass">The Gallery</p>
               <h2 className="display mt-4 text-5xl text-charcoal md:text-6xl">
-                Closer. <span className="italic text-stone-dark">Closer still.</span>
+                The details, <span className="italic text-stone-dark">up close.</span>
               </h2>
             </Reveal>
             <div className="mt-14 grid gap-6 md:grid-cols-12">
@@ -345,8 +345,8 @@ export default async function PieceDossier({
               <IconLotus size={26} className="mx-auto text-brass animate-pulse-soft" />
               <p className="eyebrow mt-5 text-brass">Certificate of Authenticity</p>
               <p className="display mt-8 text-3xl leading-snug text-charcoal md:text-4xl">
-                {piece.name} is certified an original design by {SITE.founder} —
-                designed at the maison, handcrafted by master artisans, released as{" "}
+                {piece.name} is certified an original design of the maison —
+                handcrafted by master artisans and released as{" "}
                 {editionLabel.toLowerCase()}.
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
@@ -361,7 +361,7 @@ export default async function PieceDossier({
                   </span>
                 ))}
               </div>
-              <p className="display mt-10 text-2xl italic text-brass">{SITE.founder}</p>
+              <p className="display mt-10 text-2xl tracking-[0.42em] text-brass">SROJA</p>
             </div>
           </Reveal>
         </div>
@@ -414,7 +414,7 @@ export default async function PieceDossier({
           <Reveal>
             <p className="eyebrow text-brass">From The Designer’s Collection</p>
             <h2 className="display mt-4 text-4xl text-charcoal md:text-5xl">
-              Works that share its blood.
+              More pieces <span className="italic text-stone-dark">like this one.</span>
             </h2>
           </Reveal>
           <div className="mt-14 grid gap-10 md:grid-cols-3">

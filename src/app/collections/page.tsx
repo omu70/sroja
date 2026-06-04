@@ -8,9 +8,9 @@ import { IconArrow, IconClock, IconHash, IconLayers, IconLotus } from "@/compone
 import CountUp from "@/components/CountUp";
 
 export const metadata: Metadata = {
-  title: "The Archive — Curated Design Collections",
+  title: "The Collection — Limited Edition Handcrafted Pieces",
   description:
-    "The complete SROJA archive: collectible handcrafted textile art in numbered editions — cushions, bed linens, quilts, dohars and curtains designed by Archit.",
+    "The complete SROJA collection: limited-edition handcrafted textile art — cushions, bed linens, quilts, dohars and curtains, drawn and numbered at the maison.",
 };
 
 /** The Archive — five wings of a gallery. Images first; words as labels. */
@@ -25,8 +25,8 @@ export default function CollectionsPage() {
           <Reveal>
             <p className="eyebrow text-brass">The Archive</p>
             <h1 className="display mt-6 max-w-5xl text-6xl leading-[0.98] text-charcoal md:text-8xl">
-              Twenty-eight works.
-              <span className="block italic text-stone-dark">Five rooms. One hand.</span>
+              The complete
+              <span className="block italic text-stone-dark">collection.</span>
             </h1>
           </Reveal>
 
@@ -66,7 +66,7 @@ export default function CollectionsPage() {
                 <div className="flex flex-wrap items-end justify-between gap-6">
                   <div>
                     <p className="eyebrow text-brass">
-                      Room {String(ci + 1).padStart(2, "0")}
+                      Collection {String(ci + 1).padStart(2, "0")} · {collection.name}
                     </p>
                     <h2 className="display mt-3 text-5xl text-charcoal md:text-7xl">
                       {collection.title}

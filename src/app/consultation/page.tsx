@@ -33,7 +33,7 @@ export default function ConsultationPage() {
             <p className="eyebrow text-brass">Private Consultation</p>
             <h1 className="display mt-6 max-w-5xl text-6xl leading-[0.98] text-charcoal md:text-[7rem]">
               No cart.
-              <span className="italic text-stone-dark"> A correspondence.</span>
+              <span className="italic text-stone-dark"> A conversation.</span>
             </h1>
             <p className="lede mt-10 max-w-2xl text-lg text-stone-dark md:text-xl">
               Every acquisition at {SITE.name} begins with a conversation — about the

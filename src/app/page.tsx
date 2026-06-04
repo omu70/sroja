@@ -77,10 +77,10 @@ export default function HomePage() {
       <section className="relative border-t border-ivory-mute bg-ivory-bright pt-24 md:pt-36">
         <div className="mx-auto max-w-[1700px] px-6 md:px-12">
           <Reveal>
-            <p className="eyebrow text-brass">Signature Works</p>
+            <p className="eyebrow text-brass">Signature Pieces</p>
             <h2 className="display mt-4 max-w-4xl text-5xl text-charcoal md:text-7xl">
-              The current editions,
-              <span className="italic text-stone-dark"> hung for viewing.</span>
+              From the
+              <span className="italic text-stone-dark"> current editions.</span>
             </h2>
           </Reveal>
         </div>
@@ -105,7 +105,7 @@ export default function HomePage() {
       <ImageBand
         src={img("1778737274664_pn4aiafoyzm.webp")}
         alt="The quilting frame — Genda Baagh in progress"
-        line="Twenty-eight works. Five rooms. One hand."
+        line="Twenty-eight pieces. Every one numbered."
       />
 
       <GlobalSection />

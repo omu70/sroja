@@ -53,7 +53,7 @@ export default function ProvenanceSection() {
                 <IconLotus size={26} className="text-gold animate-pulse-soft" />
                 <p className="eyebrow mt-6 text-brass-bright">Certificate of Authenticity</p>
                 <p className="display mt-7 text-3xl leading-snug text-ivory md:text-4xl">
-                  Certified an original design by {SITE.founder}, executed by master
+                  Certified an original design of the maison, executed by master
                   artisans for {SITE.name}.
                 </p>
                 <dl className="mt-9 space-y-3 text-sm">
@@ -66,7 +66,7 @@ export default function ProvenanceSection() {
                     <dd className="text-ivory">Recorded at the atelier</dd>
                   </div>
                 </dl>
-                <p className="display mt-9 text-right text-2xl italic text-gold">{SITE.founder}</p>
+                <p className="display mt-9 text-right text-xl tracking-[0.42em] text-gold">SROJA</p>
               </div>
             </Reveal>
           </div>

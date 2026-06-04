@@ -21,7 +21,7 @@ export default function MaterialLibrary() {
         <Reveal>
           <p className="eyebrow text-brass">The Material Library</p>
           <h2 className="display mt-4 max-w-3xl text-5xl text-charcoal md:text-7xl">
-            Matter, <span className="italic text-stone-dark">chosen slowly.</span>
+            The materials <span className="italic text-stone-dark">we choose.</span>
           </h2>
         </Reveal>
 

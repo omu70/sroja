@@ -3,12 +3,12 @@ import Link from "next/link";
 export default function NotFound() {
   return (
     <section className="flex min-h-[100svh] flex-col items-center justify-center bg-ivory-bright px-6 text-center">
-      <p className="eyebrow text-brass">Not In The Archive</p>
+      <p className="eyebrow text-brass">404</p>
       <h1 className="display mt-6 text-6xl text-charcoal md:text-8xl">
-        This room <span className="italic text-stone-dark">does not exist.</span>
+        Page <span className="italic text-stone-dark">not found.</span>
       </h1>
       <p className="lede mt-8 max-w-md text-lg text-stone-dark">
-        Perhaps the edition closed, or the corridor was never built.
+        The piece may have moved, or the edition may have closed.
       </p>
       <Link
         href="/"

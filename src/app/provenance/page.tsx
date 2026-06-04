@@ -6,13 +6,13 @@ import { IPR_STATEMENT, SITE } from "@/data/site";
 export const metadata: Metadata = {
   title: "Provenance — Authenticity & Intellectual Property",
   description:
-    "Every SROJA design is an original work by Archit, protected under Intellectual Property Rights, released in numbered editions with a certificate of authenticity.",
+    "Every SROJA design is an original work of the maison, protected under Intellectual Property Rights, released in numbered editions with a certificate of authenticity.",
 };
 
 const PILLARS = [
   {
     title: "Original by birth",
-    text: "Each design originates as a drawing by Archit at the maison. The archive holds the studies, dates and iterations of every released motif — a paper trail of authorship that precedes the cloth itself.",
+    text: "Each design originates as a drawing at the maison. The archive holds the studies, dates and iterations of every released motif — a paper trail of authorship that precedes the cloth itself.",
   },
   {
     title: "Protected by law",
@@ -70,8 +70,8 @@ export default function ProvenancePage() {
               <p className="eyebrow text-brass">Specimen — Certificate of Authenticity</p>
               <p className="display mt-8 text-2xl tracking-[0.42em] text-charcoal">SROJA</p>
               <p className="display mt-8 text-2xl leading-relaxed text-charcoal md:text-3xl">
-                This certifies that the accompanying work is an original design by{" "}
-                {SITE.founder}, handcrafted by master artisans for {SITE.legalName}.
+                This certifies that the accompanying work is an original design of
+                the maison, handcrafted by master artisans for {SITE.legalName}.
               </p>
               <div className="mx-auto mt-10 grid max-w-md grid-cols-2 gap-y-3 text-left text-sm">
                 <span className="eyebrow text-stone-dark">Work</span>
@@ -83,8 +83,8 @@ export default function ProvenancePage() {
                 <span className="eyebrow text-stone-dark">Completed</span>
                 <span className="text-charcoal">———</span>
               </div>
-              <p className="display mt-12 text-2xl italic text-brass">{SITE.founder}</p>
-              <p className="eyebrow mt-1 text-stone-dark">{SITE.founderTitle}</p>
+              <p className="display mt-12 text-xl tracking-[0.42em] text-brass">SROJA</p>
+              <p className="eyebrow mt-1 text-stone-dark">The Maison, Gurugram</p>
             </div>
           </Reveal>
 

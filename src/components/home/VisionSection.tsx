@@ -36,10 +36,10 @@ export default function VisionSection() {
         {/* The text — reduced to its essence */}
         <div className="md:col-span-6 md:col-start-7">
           <Reveal>
-            <p className="eyebrow text-brass">The Vision</p>
+            <p className="eyebrow text-brass">The Designer</p>
             <h2 className="display mt-4 text-5xl leading-[1.02] text-charcoal md:text-7xl">
-              Archit draws first.
-              <span className="block italic text-stone-dark">Everything else follows.</span>
+              Every piece begins
+              <span className="block italic text-stone-dark">with a drawing.</span>
             </h2>
           </Reveal>
 

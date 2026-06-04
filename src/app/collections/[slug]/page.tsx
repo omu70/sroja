@@ -53,10 +53,10 @@ export default async function CollectionRoom({
       <section className="relative bg-ivory-bright pb-16 pt-44 md:pb-24 md:pt-56">
         <div className="mx-auto max-w-[1700px] px-6 md:px-12">
           <Reveal>
-            <p className="eyebrow text-brass">The Archive · Room of {collection.name}</p>
+            <p className="eyebrow text-brass">The Archive · {collection.name}</p>
             <h1 className="display mt-6 text-6xl leading-[0.98] text-charcoal md:text-[7rem]">
-              {collection.name}
-              <span className="block text-4xl italic text-stone-dark md:text-5xl">
+              {collection.title}
+              <span className="block text-3xl italic text-stone-dark md:text-4xl">
                 {collection.subtitle}
               </span>
             </h1>

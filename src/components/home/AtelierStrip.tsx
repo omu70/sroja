@@ -22,8 +22,8 @@ export default function AtelierStrip() {
             <div>
               <p className="eyebrow text-brass">The Atelier</p>
               <h2 className="display mt-4 max-w-2xl text-5xl text-charcoal md:text-7xl">
-                Where hours
-                <span className="italic text-stone-dark"> become heirlooms.</span>
+                The hands behind
+                <span className="italic text-stone-dark"> every piece.</span>
               </h2>
             </div>
             <Link

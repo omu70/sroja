@@ -53,7 +53,7 @@ export default function ManifestoSection() {
           ))}
         </div>
         <p className="eyebrow mt-20 text-center text-stone-dark">
-          — The House Manifesto, written by Archit
+          — The House Manifesto
         </p>
       </div>
     </section>

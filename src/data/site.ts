@@ -11,7 +11,7 @@ export const SITE = {
   tagline: "Designed To Be Collected.",
   subTagline: "Not manufactured. Crafted.",
   description:
-    "SROJA is a luxury design house from India. Every piece is a collectible work of textile art — designed by Archit, handcrafted by master artisans, produced in deliberately small editions and protected as original intellectual property.",
+    "SROJA is a luxury design house from India. Every piece is a collectible work of textile art — drawn at the maison, handcrafted by master artisans, produced in deliberately small editions and protected as original intellectual property.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://sroja.in",
   founder: "Archit",
   founderTitle: "Founder & Creative Director",
@@ -32,51 +32,51 @@ export const COLLECTIONS: CollectionMeta[] = [
   {
     slug: "cushions",
     name: "Baithak",
-    title: "The Baithak Collection",
-    subtitle: "Objects of the sitting room",
+    title: "The Cushion Collection",
+    subtitle: "Hand-printed and handwoven cushion covers",
     manifesto: [
-      "In the old houses of India, the baithak was never furnished. It was composed — cushion by cushion, weave by weave — until a room became a conversation.",
-      "These are not accessories. Each cushion is a small canvas: block-printed in Rajasthan or woven on five-century-old looms in Kutch, carrying motifs drawn by Archit and executed by hands that learned their craft from their grandparents.",
+      "Each cushion is a small canvas — block-printed in Rajasthan or woven on five-century-old looms in Kutch, from original drawings made at the maison.",
+      "Limited, numbered, and finished entirely by hand.",
     ],
   },
   {
     slug: "bed-linens",
     name: "Shayan",
-    title: "The Shayan Collection",
-    subtitle: "The architecture of rest",
+    title: "The Bed Linen Collection",
+    subtitle: "Hand block printed bedsheets",
     manifesto: [
-      "A third of a life is spent within the bed. SROJA treats that territory as architecture — planes of hand-printed cotton, gardens pressed into cloth one wooden block at a time.",
-      "No two impressions land identically. That is not a tolerance. That is the signature.",
+      "Nine feet of hand-printed cotton — gardens pressed into cloth one wooden block at a time.",
+      "No two impressions land identically. That is the signature of the hand.",
     ],
   },
   {
     slug: "quilts",
     name: "Razai",
-    title: "The Razai Collection",
-    subtitle: "The quilted canvas",
+    title: "The Quilt Collection",
+    subtitle: "Hand-printed, hand-quilted heirlooms",
     manifesto: [
-      "The razai is India's oldest heirloom — the object most often handed down, mended, and remembered. Ours are built to deserve that inheritance.",
-      "Each quilt passes through more artisan-hours than any other object in the house: printing, layering, quilting, washing, sunning, examining. Slowness is the material.",
+      "The quilt is India's oldest heirloom — handed down, mended, remembered. Ours are built to deserve that inheritance.",
+      "Each one passes through more artisan-hours than any other piece in the house.",
     ],
   },
   {
     slug: "dohars",
     name: "Dohar",
     title: "The Dohar Collection",
-    subtitle: "The summer layer",
+    subtitle: "Handwoven summer blankets",
     manifesto: [
-      "A dohar is weight made considerate — the layer for verandah evenings and ceiling-fan afternoons. It must drape like a garment and breathe like one.",
-      "Woven, not printed; structured, not stiff. The restraint is the luxury.",
+      "The light layer for warm evenings — handwoven cotton that drapes like a garment and breathes like one.",
+      "Woven, not printed. Structured, not stiff.",
     ],
   },
   {
     slug: "curtains",
     name: "Jharokha",
-    title: "The Jharokha Collection",
-    subtitle: "Portraits of light",
+    title: "The Curtain Collection",
+    subtitle: "Handwoven and block-printed curtains",
     manifesto: [
-      "A window is a frame; the curtain decides the picture. These lengths of handwoven and block-printed cotton are designed to edit daylight the way a jharokha once did — softening it, slowing it, giving it grain.",
-      "Hung, they are architecture. Backlit, they are stained glass in cloth.",
+      "The curtain decides what daylight does to a room — these lengths soften it, slow it, give it grain.",
+      "Hung, they are architecture. Backlit, they glow like stained glass.",
     ],
   },
 ];
@@ -89,7 +89,7 @@ export const CRAFTS = [
     age: "c. 12th century",
     line: "Carved teak blocks, pressed by hand, one impression at a time.",
     detail:
-      "Archit's drawings are translated by master carvers into teak blocks — one block per colour. Printers walk the table for days, striking each impression by eye. The micro-misregistrations between strikes are the proof of the hand.",
+      "The maison's drawings are translated by master carvers into teak blocks — one block per colour. Printers walk the table for days, striking each impression by eye. The micro-misregistrations between strikes are the proof of the hand.",
   },
   {
     key: "bhujodi",
@@ -115,7 +115,7 @@ export const TIMELINE = [
   {
     phase: "01 — The Drawing",
     title: "Design",
-    text: "Every piece begins in Archit's sketchbook — a motif redrawn until the repeat breathes. Nothing borrowed.",
+    text: "Every piece begins as an original sketch at the maison — redrawn until it breathes. Nothing borrowed.",
     stat: "20+",
     statLabel: "studies per motif",
   },
@@ -238,7 +238,7 @@ export const MATERIALS_LIB = [
 export const IPR_STATEMENT = {
   headline: "Original. Protected. Unrepeatable.",
   lines: [
-    "Every SROJA design originates as an original work by Archit and is protected under Intellectual Property Rights.",
+    "Every SROJA design originates as an original work of the maison and is protected under Intellectual Property Rights.",
     "These designs cannot be replicated, reproduced, or commercially utilised without authorisation — which is precisely why owning one means owning something no one else can make.",
     "Each piece is released in a deliberately small edition, numbered, and accompanied by a certificate of authenticity signed by the house.",
   ],
