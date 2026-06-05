@@ -209,11 +209,29 @@ export default async function PiecePage({ params }: { params: Promise<Params> })
               <CountUp to={piece.hours} className="text-brass" /> hours, by hand.
             </h2>
           </Reveal>
-          <Reveal delay={0.08}>
-            <div className="mt-10 max-w-3xl">
+          <div className="mt-10 grid items-start gap-10 lg:grid-cols-12">
+            <Reveal delay={0.08} className="lg:col-span-7">
               <HoursBars steps={[...piece.process]} total={piece.hours} />
+            </Reveal>
+            <div className="hidden lg:col-span-4 lg:col-start-9 lg:block">
+              <Reveal delay={0.15}>
+                <ZoomImage
+                  src={piece.images[2] ?? piece.images[0]}
+                  alt={`${piece.name} — in the making`}
+                  className="aspect-[3/4] w-full"
+                  sizes="33vw"
+                />
+              </Reveal>
+              <Reveal delay={0.22}>
+                <ZoomImage
+                  src={piece.images[3] ?? piece.images[1] ?? piece.images[0]}
+                  alt={`${piece.name} — detail study`}
+                  className="mt-6 aspect-square w-full"
+                  sizes="33vw"
+                />
+              </Reveal>
             </div>
-          </Reveal>
+          </div>
         </div>
       </section>
 

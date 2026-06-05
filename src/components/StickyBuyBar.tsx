@@ -51,12 +51,12 @@ export default function StickyBuyBar({ piece }: { piece: Piece }) {
               <span className="display text-xl text-brass md:text-3xl">
                 {formatINR(piece.price)}
               </span>
-              <a
-                href="#acquire"
+              <button
+                onClick={() => window.dispatchEvent(new CustomEvent("sroja:buy"))}
                 className="eyebrow border border-brass bg-charcoal px-5 py-3.5 text-gold transition-colors duration-500 hover:bg-charcoal-deep md:px-8 md:py-4"
               >
                 Buy Now
-              </a>
+              </button>
             </div>
           </div>
         </motion.div>
