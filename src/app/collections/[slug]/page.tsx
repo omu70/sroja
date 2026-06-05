@@ -53,7 +53,7 @@ export default async function CollectionRoom({
       <section className="relative bg-ivory-bright pb-16 pt-44 md:pb-24 md:pt-56">
         <div className="mx-auto max-w-[1700px] px-6 md:px-12">
           <Reveal>
-            <p className="eyebrow text-brass">The Archive · {collection.name}</p>
+            <p className="eyebrow text-brass">The Shop · {collection.name}</p>
             <h1 className="display mt-6 text-6xl leading-[0.98] text-charcoal md:text-[7rem]">
               {collection.title}
               <span className="block text-3xl italic text-stone-dark md:text-4xl">
@@ -93,7 +93,7 @@ export default async function CollectionRoom({
       {/* Onward */}
       <section className="border-t border-ivory-mute bg-ivory-bright py-20 text-center">
         <Reveal>
-          <p className="eyebrow text-stone-dark">Continue through the archive</p>
+          <p className="eyebrow text-stone-dark">More collections</p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 px-6">
             {COLLECTIONS.filter((c) => c.slug !== collection.slug).map((c) => (
               <Link

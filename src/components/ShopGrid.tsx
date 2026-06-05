@@ -63,7 +63,7 @@ function Card({ piece, index }: { piece: Piece; index: number }) {
             </div>
 
             <span className="eyebrow absolute left-3 top-3 bg-ivory-bright/90 px-2.5 py-1.5 text-[0.5rem] text-charcoal backdrop-blur-sm">
-              № {String(piece.edition.number).padStart(2, "0")}/{piece.edition.of}
+              No. {String(piece.edition.number).padStart(2, "0")}/{piece.edition.of}
             </span>
             {remaining <= 5 && remaining > 0 && (
               <span className="eyebrow absolute right-3 top-3 bg-charcoal/85 px-2.5 py-1.5 text-[0.5rem] text-gold backdrop-blur-sm">
@@ -176,7 +176,7 @@ export default function ShopGrid({ pieces }: { pieces: Piece[] }) {
           >
             {active
               ? `${active.subtitle} — ${active.manifesto[1] ?? active.manifesto[0]}`
-              : "Every piece an original of the maison — numbered, certified, handcrafted."}
+              : "Every piece an original SROJA design — numbered, certified, handcrafted."}
           </motion.p>
         </AnimatePresence>
       </div>

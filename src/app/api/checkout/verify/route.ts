@@ -70,7 +70,7 @@ export async function POST(req: Request) {
       await resend.emails.send({
         from: process.env.INQUIRY_FROM_EMAIL ?? "SROJA Maison <onboarding@resend.dev>",
         to: [process.env.INQUIRY_TO_EMAIL ?? SITE.email],
-        subject: `★ Acquisition paid — ${piece?.name ?? "SROJA piece"}`,
+        subject: `★ Order paid — ${piece?.name ?? "SROJA piece"}`,
         text: lines,
       });
 
@@ -78,7 +78,7 @@ export async function POST(req: Request) {
         await resend.emails.send({
           from: process.env.INQUIRY_FROM_EMAIL ?? "SROJA Maison <onboarding@resend.dev>",
           to: [data.email],
-          subject: `Your SROJA acquisition is confirmed${piece ? ` — ${piece.name}` : ""}`,
+          subject: `Your SROJA order is confirmed${piece ? ` — ${piece.name}` : ""}`,
           text: [
             `Thank you${data.name ? `, ${data.name}` : ""}.`,
             ``,

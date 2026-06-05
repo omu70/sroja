@@ -4,7 +4,7 @@ import InquiryForm from "@/components/InquiryForm";
 import { SITE } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Contact — Talk To The Maison",
+  title: "Contact — Talk To Us",
   description:
     "Questions about a piece, an order, or a project? Write to SROJA — a design advisor replies within one working day.",
 };
@@ -19,7 +19,7 @@ const EXPECT = [
     text: "Rooms, light, editions — by email, call, or visit.",
   },
   {
-    step: "The acquisition",
+    step: "The delivery",
     text: "Reserved, certified, delivered insured.",
   },
 ] as const;
@@ -32,7 +32,7 @@ export default function ConsultationPage() {
           <Reveal>
             <p className="eyebrow text-brass">Contact</p>
             <h1 className="display mt-6 max-w-5xl text-6xl leading-[0.98] text-charcoal md:text-[7rem]">
-              Talk to <span className="italic text-stone-dark">the maison.</span>
+              Talk to <span className="italic text-stone-dark">us.</span>
             </h1>
             <p className="lede mt-10 max-w-2xl text-lg text-stone-dark md:text-xl">
               A question, an order, a project — an advisor replies within a day.
@@ -58,7 +58,7 @@ export default function ConsultationPage() {
               </ol>
 
               <div className="mt-14 border-t border-ivory-mute pt-8 text-sm leading-relaxed text-stone-dark">
-                <p className="eyebrow mb-4 text-brass">The Maison</p>
+                <p className="eyebrow mb-4 text-brass">Reach Us</p>
                 <p>
                   <a href={`mailto:${SITE.email}`} className="link-line text-charcoal">
                     {SITE.email}

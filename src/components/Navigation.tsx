@@ -9,7 +9,7 @@ import { IconBag, IconEnvelope, IconLotus, IconSearch } from "./icons";
 
 const ICON_LINKS = [
   { href: "/collections", label: "Search the collection", Icon: IconSearch },
-  { href: "/consultation", label: "Write to the maison", Icon: IconEnvelope },
+  { href: "/consultation", label: "Contact us", Icon: IconEnvelope },
   { href: "/collections", label: "Shop the collection", Icon: IconBag },
 ] as const;
 

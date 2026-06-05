@@ -13,7 +13,7 @@ interface HeroFilmProps {
 const PROOFS = [
   { icon: IconHand, label: "Entirely By Hand" },
   { icon: IconHash, label: "Numbered Editions" },
-  { icon: IconShield, label: "IPR Protected" },
+  { icon: IconShield, label: "Design Protected" },
 ] as const;
 
 /**

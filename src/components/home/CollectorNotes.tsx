@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { COLLECTOR_NOTES } from "@/data/site";
 import { IconLotus } from "@/components/icons";
 
-/** Collector Notes — correspondence, not reviews. Rotates on its own, like a vitrine. */
+/** What Collectors Say — correspondence, not reviews. Rotates on its own, like a vitrine. */
 export default function CollectorNotes() {
   const [index, setIndex] = useState(0);
 
@@ -29,7 +29,7 @@ export default function CollectorNotes() {
           <IconLotus size={18} className="text-brass animate-pulse-soft" />
           <span className="rule w-16" />
         </div>
-        <p className="eyebrow mt-5 text-brass">Collector Notes</p>
+        <p className="eyebrow mt-5 text-brass">What Collectors Say</p>
 
         <div className="relative mt-12 min-h-[15rem] md:min-h-[13rem]">
           <AnimatePresence mode="wait">

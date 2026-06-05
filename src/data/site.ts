@@ -11,7 +11,7 @@ export const SITE = {
   tagline: "Designed To Be Collected.",
   subTagline: "Not manufactured. Crafted.",
   description:
-    "SROJA is a luxury design house from India. Every piece is a collectible work of textile art — drawn at the maison, handcrafted by master artisans, produced in deliberately small editions and protected as original intellectual property.",
+    "SROJA is a luxury design house from India. Every piece is a collectible work of textile art — drawn in our studio, handcrafted by master artisans, produced in deliberately small editions and protected as original intellectual property.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://sroja.in",
   founder: "Archit",
   founderTitle: "Founder & Creative Director",
@@ -22,9 +22,9 @@ export const SITE = {
 
 export const NAV = [
   { label: "Shop", href: "/collections" },
-  { label: "Maison", href: "/maison" },
-  { label: "Atelier", href: "/atelier" },
-  { label: "Provenance", href: "/provenance" },
+  { label: "Our Story", href: "/maison" },
+  { label: "The Craft", href: "/atelier" },
+  { label: "Authenticity", href: "/provenance" },
   { label: "Contact", href: "/consultation" },
 ] as const;
 
@@ -35,7 +35,7 @@ export const COLLECTIONS: CollectionMeta[] = [
     title: "The Cushion Collection",
     subtitle: "Hand-printed and handwoven cushion covers",
     manifesto: [
-      "Each cushion is a small canvas — block-printed in Rajasthan or woven on five-century-old looms in Kutch, from original drawings made at the maison.",
+      "Each cushion is a small canvas — block-printed in Rajasthan or woven on five-century-old looms in Kutch, from original drawings made in our studio.",
       "Limited, numbered, and finished entirely by hand.",
     ],
   },
@@ -115,7 +115,7 @@ export const TIMELINE = [
   {
     phase: "01 — The Drawing",
     title: "Design",
-    text: "Every piece begins as an original sketch at the maison — redrawn until it breathes. Nothing borrowed.",
+    text: "Every piece begins as an original sketch in our studio — redrawn until it breathes. Nothing borrowed.",
     stat: "20+",
     statLabel: "studies per motif",
   },
@@ -178,7 +178,7 @@ export const COLLECTOR_NOTES = [
 ] as const;
 
 export const WORLD_CITIES = [
-  { city: "Gurugram", role: "The Atelier", x: 66.5, y: 44 },
+  { city: "Gurugram", role: "Our Studio", x: 66.5, y: 44 },
   { city: "Mumbai", role: "Collectors", x: 65, y: 50 },
   { city: "Dubai", role: "Interior Architects", x: 60, y: 46 },
   { city: "London", role: "Collectors", x: 46.5, y: 30 },
@@ -238,7 +238,7 @@ export const MATERIALS_LIB = [
 export const IPR_STATEMENT = {
   headline: "Original. Protected. Unrepeatable.",
   lines: [
-    "Every SROJA design is an original work of the maison, protected under Intellectual Property Rights.",
+    "Every SROJA design is an original work by SROJA, protected under Intellectual Property Rights.",
     "No one else may make it — owning one means owning something unrepeatable.",
     "Small editions. Numbered. Certified.",
   ],

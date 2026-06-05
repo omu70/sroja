@@ -14,7 +14,7 @@ export default function NotFound() {
         href="/"
         className="eyebrow mt-12 border border-brass/60 px-10 py-5 text-brass transition-all duration-700 hover:border-charcoal hover:bg-charcoal hover:text-gold"
       >
-        Return To The Maison
+        Back To Home
       </Link>
     </section>
   );

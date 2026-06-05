@@ -183,7 +183,7 @@ export default async function PiecePage({ params }: { params: Promise<Params> })
                     [IconHand, "Craft", `${piece.craft} — ${piece.region}`],
                     [IconHash, "Edition", `${piece.edition.number} of ${piece.edition.of} · numbered & certified`],
                     [IconClock, "Made in", `${piece.hours} artisan-hours · ${piece.artisans} artisans`],
-                    [IconShield, "Provenance", "Original design of the maison — IPR protected"],
+                    [IconShield, "Authenticity", "Original SROJA design — legally protected"],
                   ] as const
                 ).map(([Icon, k, v]) => (
                   <div key={k} className="grid grid-cols-3 items-baseline gap-6 py-4">

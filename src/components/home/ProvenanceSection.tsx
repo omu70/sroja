@@ -6,7 +6,7 @@ import { IconArrow, IconCertificate, IconHash, IconLotus, IconShield } from "@/c
 const PILLARS = [
   { Icon: IconShield, title: "Protected", line: "Original designs under IPR — no one else may make them." },
   { Icon: IconHash, title: "Numbered", line: "Small editions; the count is real and it ends." },
-  { Icon: IconCertificate, title: "Certified", line: "Signed certificate with every acquisition." },
+  { Icon: IconCertificate, title: "Certified", line: "Signed certificate with every order." },
 ] as const;
 
 /** Intellectual Property — framed as exclusivity, presented like a certificate. */
@@ -17,7 +17,7 @@ export default function ProvenanceSection() {
         <div className="grid items-center gap-16 lg:grid-cols-12">
           <div className="lg:col-span-6">
             <Reveal>
-              <p className="eyebrow text-brass">Provenance & Protection</p>
+              <p className="eyebrow text-brass">Authenticity & Protection</p>
               <h2 className="display mt-4 text-5xl leading-[1.02] text-charcoal md:text-7xl">
                 Original. Protected.
                 <span className="italic text-stone-dark"> Unrepeatable.</span>
@@ -53,7 +53,7 @@ export default function ProvenanceSection() {
                 <IconLotus size={26} className="text-gold animate-pulse-soft" />
                 <p className="eyebrow mt-6 text-brass-bright">Certificate of Authenticity</p>
                 <p className="display mt-7 text-3xl leading-snug text-ivory md:text-4xl">
-                  Certified an original design of the maison, executed by master
+                  Certified an original SROJA design, executed by master
                   artisans for {SITE.name}.
                 </p>
                 <dl className="mt-9 space-y-3 text-sm">

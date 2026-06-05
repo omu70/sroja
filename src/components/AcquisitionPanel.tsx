@@ -30,7 +30,7 @@ export default function AcquisitionPanel({ piece }: { piece: Piece }) {
 
         <p className="display mt-5 text-2xl text-charcoal md:text-3xl">{piece.name}</p>
         <p className="eyebrow mt-1 text-stone-dark">
-          Edition № {String(piece.edition.number).padStart(2, "0")} of {piece.edition.of}
+          Edition No. {String(piece.edition.number).padStart(2, "0")} of {piece.edition.of}
         </p>
 
         <p className="display mt-7 text-6xl text-brass">{formatINR(piece.price)}</p>

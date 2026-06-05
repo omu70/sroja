@@ -16,7 +16,7 @@ function distribute(total: number, weights: number[]): number[] {
 export function blockProcess(total: number, motif: string): ProcessStep[] {
   const h = distribute(total, [0.16, 0.22, 0.1, 0.32, 0.1, 0.1]);
   return [
-    { phase: "The Drawing", detail: `${motif} drawn by hand at the maison.`, hours: h[0] },
+    { phase: "The Drawing", detail: `${motif} drawn by hand in our studio.`, hours: h[0] },
     { phase: "The Block", detail: "Teak blocks carved in mirror image — one per colour.", hours: h[1] },
     { phase: "The Dye", detail: "Pigments mastered by eye under north light.", hours: h[2] },
     { phase: "The Impression", detail: "Struck by hand; the slight drift is the signature.", hours: h[3] },
@@ -28,7 +28,7 @@ export function blockProcess(total: number, motif: string): ProcessStep[] {
 export function quiltProcess(total: number, motif: string): ProcessStep[] {
   const h = distribute(total, [0.12, 0.16, 0.08, 0.26, 0.24, 0.06, 0.08]);
   return [
-    { phase: "The Drawing", detail: `${motif} composed at the maison — field, border, corner.`, hours: h[0] },
+    { phase: "The Drawing", detail: `${motif} composed in our studio — field, border, corner.`, hours: h[0] },
     { phase: "The Block", detail: "A family of teak blocks, carved in mirror image.", hours: h[1] },
     { phase: "The Dye", detail: "Small vats, matched against the drawing.", hours: h[2] },
     { phase: "The Impression", detail: "Metres printed impression by impression.", hours: h[3] },

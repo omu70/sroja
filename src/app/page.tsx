@@ -51,7 +51,7 @@ export default function HomePage() {
           <Reveal>
             <ValueLedger
               items={[
-                { icon: IconClock, value: totalHours, label: "artisan-hours in the archive" },
+                { icon: IconClock, value: totalHours, label: "artisan-hours of work" },
                 { icon: IconLayers, value: PIECES.length, label: "numbered works" },
                 { icon: IconLotus, value: 3, label: "living craft traditions" },
                 { icon: IconHash, value: "≤50", label: "pieces per edition" },

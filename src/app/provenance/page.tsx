@@ -4,15 +4,15 @@ import Reveal from "@/components/Reveal";
 import { IPR_STATEMENT, SITE } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Provenance — Authenticity & Intellectual Property",
+  title: "Authenticity & Intellectual Property",
   description:
-    "Every SROJA design is an original work of the maison, protected under Intellectual Property Rights, released in numbered editions with a certificate of authenticity.",
+    "Every SROJA design is an original work by SROJA, protected under Intellectual Property Rights, released in numbered editions with a certificate of authenticity.",
 };
 
 const PILLARS = [
   {
     title: "Original by birth",
-    text: "Every motif begins as a dated drawing in the maison's archive.",
+    text: "Every motif begins as a dated drawing in our studio records.",
   },
   {
     title: "Protected by law",
@@ -34,7 +34,7 @@ export default function ProvenancePage() {
       <section className="relative bg-ivory-bright pb-24 pt-44 md:pb-32 md:pt-56">
         <div className="mx-auto max-w-[1700px] px-6 md:px-12">
           <Reveal>
-            <p className="eyebrow text-brass">Provenance & Protection</p>
+            <p className="eyebrow text-brass">Authenticity & Protection</p>
             <h1 className="display mt-6 max-w-5xl text-6xl leading-[0.98] text-charcoal md:text-[7rem]">
               {IPR_STATEMENT.headline}
             </h1>
@@ -70,8 +70,7 @@ export default function ProvenancePage() {
               <p className="eyebrow text-brass">Specimen — Certificate of Authenticity</p>
               <p className="display mt-8 text-2xl tracking-[0.42em] text-charcoal">SROJA</p>
               <p className="display mt-8 text-2xl leading-relaxed text-charcoal md:text-3xl">
-                This certifies that the accompanying work is an original design of
-                the maison, handcrafted by master artisans for {SITE.legalName}.
+                This certifies that the accompanying work is an original SROJA design, handcrafted by master artisans for {SITE.legalName}.
               </p>
               <div className="mx-auto mt-10 grid max-w-md grid-cols-2 gap-y-3 text-left text-sm">
                 <span className="eyebrow text-stone-dark">Work</span>
@@ -84,7 +83,7 @@ export default function ProvenancePage() {
                 <span className="text-charcoal">———</span>
               </div>
               <p className="display mt-12 text-xl tracking-[0.42em] text-brass">SROJA</p>
-              <p className="eyebrow mt-1 text-stone-dark">The Maison, Gurugram</p>
+              <p className="eyebrow mt-1 text-stone-dark">Gurugram, India</p>
             </div>
           </Reveal>
 
@@ -95,14 +94,14 @@ export default function ProvenancePage() {
               <a href={`mailto:${SITE.email}`} className="link-line text-brass">
                 {SITE.email}
               </a>
-              . The house responds to every serious enquiry personally.
+              . We reply to every message personally.
             </p>
             <div className="mt-10 text-center">
               <Link
                 href="/consultation"
                 className="eyebrow group inline-flex items-center gap-4 border border-brass/60 px-10 py-5 text-brass transition-all duration-700 hover:border-charcoal hover:bg-charcoal hover:text-gold"
               >
-                Speak With The House
+                Contact Us
                 <span aria-hidden className="transition-transform duration-700 group-hover:translate-x-2">→</span>
               </Link>
             </div>

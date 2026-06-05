@@ -20,7 +20,7 @@ export default function AtelierStrip() {
         <Reveal>
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
-              <p className="eyebrow text-brass">The Atelier</p>
+              <p className="eyebrow text-brass">The Workshop</p>
               <h2 className="display mt-4 max-w-2xl text-5xl text-charcoal md:text-7xl">
                 The hands behind
                 <span className="italic text-stone-dark"> every piece.</span>
@@ -30,7 +30,7 @@ export default function AtelierStrip() {
               href="/atelier"
               className="link-line eyebrow inline-flex items-center gap-3 text-brass"
             >
-              Enter The Atelier <IconArrow size={15} />
+              Inside The Workshop <IconArrow size={15} />
             </Link>
           </div>
         </Reveal>

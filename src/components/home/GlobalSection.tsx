@@ -91,7 +91,7 @@ export default function GlobalSection() {
                 ))}
               </svg>
               <p className="eyebrow absolute bottom-4 left-4 flex items-center gap-2 text-stone-dark">
-                <IconPin size={13} className="text-brass" /> The Atelier, Gurugram — threads mark collector cities
+                <IconPin size={13} className="text-brass" /> Our studio, Gurugram — threads mark collector cities
               </p>
             </div>
           </Reveal>

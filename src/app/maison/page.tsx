@@ -7,7 +7,7 @@ import { img, SITE } from "@/data/site";
 export const metadata: Metadata = {
   title: "Maison — The Vision of Archit",
   description:
-    "SROJA is a luxury design house founded by fashion designer Archit — original drawings, master artisans, numbered editions. The story of the maison.",
+    "SROJA is a luxury design house founded by fashion designer Archit — original drawings, master artisans, numbered editions. The story of SROJA.",
 };
 
 const PRINCIPLES = [
@@ -36,7 +36,7 @@ export default function MaisonPage() {
       <section className="relative bg-ivory-bright pb-24 pt-44 md:pb-32 md:pt-56">
         <div className="mx-auto max-w-[1700px] px-6 md:px-12">
           <Reveal>
-            <p className="eyebrow text-brass">The Maison</p>
+            <p className="eyebrow text-brass">Our Story</p>
             <h1 className="display mt-6 max-w-5xl text-6xl leading-[0.98] text-charcoal md:text-[7rem]">
               A fashion designer&apos;s eye,
               <span className="block italic text-stone-dark">loaned to the home.</span>
@@ -52,7 +52,7 @@ export default function MaisonPage() {
             <Reveal>
               <ParallaxImage
                 src={img("1778767833856_4t842ktzits.png")}
-                alt="The maison's work in study — the Neel Rekha weave"
+                alt="SROJA at work — the Neel Rekha weave"
                 className="aspect-[3/4] w-full"
                 sizes="(max-width: 768px) 100vw, 40vw"
               />
@@ -118,7 +118,7 @@ export default function MaisonPage() {
             href="/atelier"
             className="eyebrow group mt-10 inline-flex items-center gap-4 border border-brass/60 px-10 py-5 text-brass transition-all duration-700 hover:border-charcoal hover:bg-charcoal hover:text-gold"
           >
-            Meet The Atelier
+            See The Workshop
             <span aria-hidden className="transition-transform duration-700 group-hover:translate-x-2">→</span>
           </Link>
         </Reveal>

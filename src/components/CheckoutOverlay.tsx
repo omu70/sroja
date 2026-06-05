@@ -32,7 +32,7 @@ function EditionRegister({ piece }: { piece: Piece }) {
   const tokens = Array.from({ length: Math.min(piece.edition.of, 50) }, (_, i) => i + 1);
   return (
     <div>
-      <p className="eyebrow text-stone">The Edition Register</p>
+      <p className="eyebrow text-stone">Edition Availability</p>
       <div className="mt-3 flex flex-wrap gap-1.5">
         {tokens.map((n) => {
           const sold = n < piece.edition.number;
@@ -47,7 +47,7 @@ function EditionRegister({ piece }: { piece: Piece }) {
                     ? "border-charcoal-line text-stone-dark/60 line-through"
                     : "border-charcoal-line text-stone/70"
               }`}
-              title={yours ? "Yours on payment" : sold ? "In a collector's home" : "Future edition"}
+              title={yours ? "Yours on payment" : sold ? "Sold" : "Not yet released"}
             >
               {String(n).padStart(2, "0")}
             </span>
@@ -55,14 +55,14 @@ function EditionRegister({ piece }: { piece: Piece }) {
         })}
       </div>
       <p className="eyebrow mt-3 text-gold">
-        № {String(piece.edition.number).padStart(2, "0")} becomes yours on payment
+        No. {String(piece.edition.number).padStart(2, "0")} becomes yours on payment
       </p>
     </div>
   );
 }
 
 /**
- * The Private Acquisition — a full-screen ritual, not a checkout.
+ * The Secure Checkout — a full-screen ritual, not a checkout.
  * Sign the certificate line, watch your name take the edition, then pay.
  */
 export default function CheckoutOverlay({
@@ -110,7 +110,7 @@ export default function CheckoutOverlay({
 
       if (!data.configured) {
         setStage("form");
-        setError(`Online payment is being enabled. Write to ${SITE.email} and we will reserve № ${String(piece.edition.number).padStart(2, "0")} for you today.`);
+        setError(`Online payment is being enabled. Write to ${SITE.email} and we will reserve No. ${String(piece.edition.number).padStart(2, "0")} for you today.`);
         return;
       }
 
@@ -206,10 +206,10 @@ export default function CheckoutOverlay({
                 <div className="flex min-h-full flex-col items-center justify-center py-16 text-center">
                   <IconLotus size={34} className="text-gold animate-pulse-soft" />
                   <p className="display mt-7 text-4xl text-gold">
-                    № {String(piece.edition.number).padStart(2, "0")} is yours.
+                    No. {String(piece.edition.number).padStart(2, "0")} is yours.
                   </p>
                   <p className="display mt-4 max-w-sm text-xl italic text-ivory/85">
-                    {piece.name}, inscribed to {form.name || "you"}.
+                    {piece.name}, certificate in the name of {form.name || "you"}.
                   </p>
                   <p className="mt-6 max-w-xs text-sm leading-relaxed text-stone">
                     Confirmation is on its way by email. The certificate travels with the piece.
@@ -218,7 +218,7 @@ export default function CheckoutOverlay({
                 </div>
               ) : (
                 <>
-                  <p className="eyebrow text-gold">Private Acquisition</p>
+                  <p className="eyebrow text-gold">Secure Checkout</p>
                   <p className="display mt-3 text-3xl text-ivory md:text-4xl">
                     {piece.name}
                     <span className="ml-4 text-brass-bright">{formatINR(piece.price)}</span>
@@ -232,7 +232,7 @@ export default function CheckoutOverlay({
                   <div className="mt-9 border border-brass/30 bg-charcoal px-6 py-5">
                     <p className="eyebrow text-stone">The certificate will read</p>
                     <p className="display mt-2 text-lg leading-relaxed text-ivory/90 md:text-xl">
-                      Edition № {String(piece.edition.number).padStart(2, "0")} of{" "}
+                      Edition No. {String(piece.edition.number).padStart(2, "0")} of{" "}
                       {piece.edition.of}, held by{" "}
                       <span className={signed ? "italic text-gold" : "text-stone-dark"}>
                         {signed ? form.name : "…………………"}
@@ -243,7 +243,7 @@ export default function CheckoutOverlay({
                   <form onSubmit={pay} className="mt-8 grid gap-5">
                     <div>
                       <label htmlFor="co-name" className="eyebrow mb-1 block text-stone">
-                        Sign your name *
+                        Full name *
                       </label>
                       <input
                         id="co-name"
@@ -281,7 +281,7 @@ export default function CheckoutOverlay({
                           </div>
                           <div>
                             <label htmlFor="co-address" className="eyebrow mb-1 block text-stone">
-                              Where it will live *
+                              Delivery address *
                             </label>
                             <textarea id="co-address" required rows={2} value={form.address} onChange={set("address")} className={field} placeholder="Street, city, state, PIN" autoComplete="street-address" />
                           </div>
@@ -297,8 +297,8 @@ export default function CheckoutOverlay({
                       {stage === "creating"
                         ? "Preparing secure payment…"
                         : stage === "verifying"
-                          ? "Inscribing your edition…"
-                          : `Take № ${String(piece.edition.number).padStart(2, "0")} — ${formatINR(piece.price)}`}
+                          ? "Confirming your order…"
+                          : `Pay ${formatINR(piece.price)} — Reserve No. ${String(piece.edition.number).padStart(2, "0")}`}
                     </button>
 
                     {error && <p className="text-sm leading-relaxed text-brass-bright">{error}</p>}

@@ -6,10 +6,10 @@ import { PIECES } from "@/data/pieces";
 import { IconLotus } from "./icons";
 
 const TYPES = [
-  "Request Acquisition",
-  "Schedule Private Consultation",
-  "Speak With A Design Advisor",
-  "Enquire About A Piece",
+  "Order a piece",
+  "Ask a question",
+  "Talk to an advisor",
+  "Trade / interior design project",
 ] as const;
 
 interface InquiryFormProps {
@@ -20,7 +20,7 @@ interface InquiryFormProps {
 
 export default function InquiryForm({
   defaultPiece = "",
-  defaultType = "Request Acquisition",
+  defaultType = "Order a piece",
   compact = false,
 }: InquiryFormProps) {
   const [state, setState] = useState<"idle" | "sending" | "sent" | "error">("idle");
@@ -81,7 +81,7 @@ export default function InquiryForm({
           >
             <div className={compact ? "" : "md:col-span-2"}>
               <label htmlFor="inq-type" className={label}>
-                Nature of Enquiry
+                How can we help?
               </label>
               <select id="inq-type" value={form.type} onChange={set("type")} className={`${field} appearance-none`}>
                 {TYPES.map((t) => (
@@ -118,12 +118,12 @@ export default function InquiryForm({
               <label htmlFor="inq-country" className={label}>
                 Country / City
               </label>
-              <input id="inq-country" value={form.country} onChange={set("country")} className={field} placeholder="For shipping & advisory" />
+              <input id="inq-country" value={form.country} onChange={set("country")} className={field} placeholder="For shipping estimate" />
             </div>
 
             <div>
               <label htmlFor="inq-piece" className={label}>
-                Piece of Interest
+                Which piece?
               </label>
               <select id="inq-piece" value={form.piece} onChange={set("piece")} className={`${field} appearance-none`}>
                 <option value="">— General / undecided —</option>
@@ -156,7 +156,7 @@ export default function InquiryForm({
                 disabled={state === "sending"}
                 className="eyebrow w-full border border-brass/60 px-10 py-5 text-brass transition-all duration-700 hover:border-charcoal hover:bg-charcoal hover:text-gold disabled:opacity-50 md:w-auto"
               >
-                {state === "sending" ? "Sending…" : "Begin The Conversation"}
+                {state === "sending" ? "Sending…" : "Send Message"}
               </button>
               {state === "error" && (
                 <p className="mt-4 text-sm text-brass">

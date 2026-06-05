@@ -41,7 +41,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="eyebrow mb-5 text-brass-bright">The Archive</p>
+            <p className="eyebrow mb-5 text-brass-bright">The Shop</p>
             <ul className="space-y-3">
               {COLLECTIONS.map((c) => (
                 <li key={c.slug}>
@@ -87,9 +87,9 @@ export default function Footer() {
 
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <p className="text-xs leading-relaxed text-stone-dark">
-            Every SROJA design is an original work of the house, protected under
-            Intellectual Property Rights. Reproduction or commercial use without
-            authorisation is prohibited.
+            Every design here is an original SROJA work, protected under
+            Intellectual Property Rights. Copying or commercial use without
+            permission is prohibited.
           </p>
           <div className="shrink-0 text-right">
             <p className="eyebrow text-[0.52rem] text-stone-dark">

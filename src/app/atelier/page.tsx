@@ -7,7 +7,7 @@ import { CRAFTS, img } from "@/data/site";
 import { PIECES } from "@/data/pieces";
 
 export const metadata: Metadata = {
-  title: "The Atelier — Master Artisans & Living Craft",
+  title: "The Workshop — Master Artisans & Living Craft",
   description:
     "Inside the SROJA atelier: hand block printing in Rajasthan, 500-year-old Bhujodi weaving in Kutch, Chettinad looms in Tamil Nadu. The hands behind the house.",
 };
@@ -35,7 +35,7 @@ export default function AtelierPage() {
       <section className="relative bg-ivory-bright pb-24 pt-44 md:pb-32 md:pt-56">
         <div className="mx-auto max-w-[1700px] px-6 md:px-12">
           <Reveal>
-            <p className="eyebrow text-brass">The Atelier</p>
+            <p className="eyebrow text-brass">The Workshop</p>
             <h1 className="display mt-6 max-w-5xl text-6xl leading-[0.98] text-charcoal md:text-[7rem]">
               Three regions.
               <span className="block italic text-stone-dark">Dozens of hands. One standard.</span>

@@ -64,7 +64,7 @@ export default function VisionSection() {
             </div>
 
             <Link href="/maison" className="link-line eyebrow mt-10 inline-flex items-center gap-3 text-brass">
-              The Maison <IconArrow size={15} />
+              Our Story <IconArrow size={15} />
             </Link>
           </Reveal>
         </div>
