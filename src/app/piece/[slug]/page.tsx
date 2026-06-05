@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import Reveal from "@/components/Reveal";
 import ZoomImage from "@/components/ZoomImage";
 import AcquisitionPanel from "@/components/AcquisitionPanel";
+import TrustStrip from "@/components/TrustStrip";
 import StickyBuyBar from "@/components/StickyBuyBar";
 import HoursBars from "@/components/HoursBars";
 import DimensionDrawing from "@/components/DimensionDrawing";
@@ -143,6 +144,7 @@ export default async function PiecePage({ params }: { params: Promise<Params> })
             <Reveal delay={0.1}>
               <div className="lg:sticky lg:top-28">
                 <AcquisitionPanel piece={piece} />
+                <TrustStrip className="mt-5" />
                 <div className="mt-5 flex flex-wrap gap-2.5">
                   {piece.palette.map((hex) => (
                     <span

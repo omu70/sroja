@@ -91,9 +91,14 @@ export default function Footer() {
             Intellectual Property Rights. Reproduction or commercial use without
             authorisation is prohibited.
           </p>
-          <p className="shrink-0 text-xs text-stone-dark">
-            © {new Date().getFullYear()} {SITE.legalName}
-          </p>
+          <div className="shrink-0 text-right">
+            <p className="eyebrow text-[0.52rem] text-stone-dark">
+              UPI · Visa · Mastercard · Netbanking — secured by Razorpay
+            </p>
+            <p className="mt-2 text-xs text-stone-dark">
+              © {new Date().getFullYear()} {SITE.legalName}
+            </p>
+          </div>
         </div>
       </div>
     </footer>

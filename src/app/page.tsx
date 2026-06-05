@@ -4,7 +4,6 @@ import Marquee from "@/components/Marquee";
 import ImageBand from "@/components/ImageBand";
 import VisionSection from "@/components/home/VisionSection";
 import CraftTimeline from "@/components/CraftTimeline";
-import ManifestoSection from "@/components/home/ManifestoSection";
 import MaterialLibrary from "@/components/MaterialLibrary";
 import GlobalSection from "@/components/home/GlobalSection";
 import ProvenanceSection from "@/components/home/ProvenanceSection";
@@ -13,6 +12,7 @@ import AtelierStrip from "@/components/home/AtelierStrip";
 import PieceShowcase from "@/components/PieceShowcase";
 import Reveal from "@/components/Reveal";
 import ValueLedger from "@/components/ValueLedger";
+import TrustStrip from "@/components/TrustStrip";
 import { IconArrow, IconClock, IconHash, IconLayers, IconLotus } from "@/components/icons";
 import { getFeatured, PIECES } from "@/data/pieces";
 import { img } from "@/data/site";
@@ -45,8 +45,8 @@ export default function HomePage() {
       <HeroFilm frames={HERO_FRAMES} />
       <Marquee />
 
-      {/* The house's arithmetic — why the price is the price */}
-      <section className="bg-ivory-bright py-14 md:py-20">
+      {/* The arithmetic + the reassurance — wordless justification */}
+      <section className="bg-ivory-bright py-12 md:py-16">
         <div className="mx-auto max-w-[1700px] px-6 md:px-12">
           <Reveal>
             <ValueLedger
@@ -58,10 +58,49 @@ export default function HomePage() {
               ]}
             />
           </Reveal>
+          <Reveal delay={0.1}>
+            <TrustStrip className="mt-5" />
+          </Reveal>
         </div>
       </section>
 
-      <VisionSection />
+      {/* Products first — the funnel starts immediately */}
+      <section className="relative border-t border-ivory-mute bg-ivory-bright pt-20 md:pt-28">
+        <div className="mx-auto max-w-[1700px] px-6 md:px-12">
+          <Reveal>
+            <div className="flex flex-wrap items-end justify-between gap-6">
+              <div>
+                <p className="eyebrow text-brass">Signature Pieces</p>
+                <h2 className="display mt-4 max-w-4xl text-5xl text-charcoal md:text-7xl">
+                  From the
+                  <span className="italic text-stone-dark"> current editions.</span>
+                </h2>
+              </div>
+              <Link
+                href="/collections"
+                className="link-line eyebrow inline-flex items-center gap-3 text-brass"
+              >
+                Shop All {PIECES.length} <IconArrow size={14} />
+              </Link>
+            </div>
+          </Reveal>
+        </div>
+        <div className="mt-6">
+          {featured.map((piece, i) => (
+            <PieceShowcase key={piece.slug} piece={piece} index={i} />
+          ))}
+        </div>
+        <div className="border-t border-ivory-mute py-14 text-center">
+          <Link
+            href="/collections"
+            className="eyebrow group inline-flex items-center gap-4 border border-brass bg-charcoal px-12 py-6 text-gold transition-all duration-700 hover:bg-charcoal-deep"
+          >
+            Shop All {PIECES.length} Pieces
+            <IconArrow size={16} className="transition-transform duration-700 group-hover:translate-x-2" />
+          </Link>
+        </div>
+      </section>
+
       <CraftTimeline />
 
       <ImageBand
@@ -70,35 +109,7 @@ export default function HomePage() {
         line="A machine repeats. A hand remembers."
       />
 
-      <ManifestoSection />
-
-      {/* Signature Works — pieces hung like works */}
-      <section className="relative border-t border-ivory-mute bg-ivory-bright pt-24 md:pt-36">
-        <div className="mx-auto max-w-[1700px] px-6 md:px-12">
-          <Reveal>
-            <p className="eyebrow text-brass">Signature Pieces</p>
-            <h2 className="display mt-4 max-w-4xl text-5xl text-charcoal md:text-7xl">
-              From the
-              <span className="italic text-stone-dark"> current editions.</span>
-            </h2>
-          </Reveal>
-        </div>
-        <div className="mt-8">
-          {featured.map((piece, i) => (
-            <PieceShowcase key={piece.slug} piece={piece} index={i} />
-          ))}
-        </div>
-        <div className="border-t border-ivory-mute py-14 text-center">
-          <Link
-            href="/collections"
-            className="eyebrow group inline-flex items-center gap-4 text-brass"
-          >
-            <span className="link-line">View The Complete Archive</span>
-            <IconArrow size={16} className="transition-transform duration-700 group-hover:translate-x-2" />
-          </Link>
-        </div>
-      </section>
-
+      <VisionSection />
       <MaterialLibrary />
 
       <ImageBand
@@ -107,9 +118,9 @@ export default function HomePage() {
         line="Twenty-eight pieces. Every one numbered."
       />
 
-      <GlobalSection />
       <ProvenanceSection />
       <CollectorNotes />
+      <GlobalSection />
       <AtelierStrip />
 
       {/* Final CTA — straight to the shop */}

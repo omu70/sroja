@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 import ShopGrid from "@/components/ShopGrid";
+import TrustStrip from "@/components/TrustStrip";
 import CountUp from "@/components/CountUp";
 import { PIECES } from "@/data/pieces";
 import { IconClock, IconHash, IconLayers, IconLotus } from "@/components/icons";
@@ -40,7 +41,11 @@ export default function ShopPage() {
           </div>
         </Reveal>
 
-        <div className="rule-live mt-10" />
+        <Reveal delay={0.1}>
+          <TrustStrip className="mt-9" />
+        </Reveal>
+
+        <div className="rule-live mt-9" />
 
         <div className="mt-10">
           <ShopGrid pieces={PIECES} />
