@@ -4,6 +4,7 @@ import Reveal from "@/components/Reveal";
 import ParallaxImage from "@/components/ParallaxImage";
 import ZoomImage from "@/components/ZoomImage";
 import CountUp from "@/components/CountUp";
+import OriginsMap from "@/components/OriginsMap";
 import { CRAFTS, img } from "@/data/site";
 import { PIECES } from "@/data/pieces";
 import { MATERIAL_SCHOOL, HAND_VS_MACHINE, GLOSSARY } from "@/data/materials-edu";
@@ -86,6 +87,9 @@ export default function CraftPage() {
           </Reveal>
         </div>
       </section>
+
+      {/* ── Origins — hover a material, India answers ─────────── */}
+      <OriginsMap />
 
       {/* ── The Material School — six chapters ────────────────── */}
       {MATERIAL_SCHOOL.map((m, mi) => {
