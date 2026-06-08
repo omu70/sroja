@@ -10,6 +10,7 @@ import ProvenanceSection from "@/components/home/ProvenanceSection";
 import CollectorNotes from "@/components/home/CollectorNotes";
 import AtelierStrip from "@/components/home/AtelierStrip";
 import PieceShowcase from "@/components/PieceShowcase";
+import HomeProductGrid from "@/components/home/HomeProductGrid";
 import Reveal from "@/components/Reveal";
 import ValueLedger from "@/components/ValueLedger";
 import TrustStrip from "@/components/TrustStrip";
@@ -38,6 +39,8 @@ const HERO_FRAMES = [
 
 export default function HomePage() {
   const featured = getFeatured();
+  const featuredSlugs = new Set(featured.map((p) => p.slug));
+  const gridPieces = PIECES.filter((p) => !featuredSlugs.has(p.slug)).slice(0, 8);
   const totalHours = PIECES.reduce((a, p) => a + p.hours, 0);
 
   return (
@@ -90,7 +93,21 @@ export default function HomePage() {
             <PieceShowcase key={piece.slug} piece={piece} index={i} />
           ))}
         </div>
-        <div className="border-t border-ivory-mute py-14 text-center">
+
+        {/* Two-column shoppable grid — more pieces, compact */}
+        <div className="mx-auto max-w-[1700px] border-t border-ivory-mute px-6 pt-16 md:px-12 md:pt-24">
+          <Reveal>
+            <p className="eyebrow text-brass">More to explore</p>
+            <h3 className="display mt-3 text-4xl text-charcoal md:text-5xl">
+              The full shelf.
+            </h3>
+          </Reveal>
+          <div className="mt-10">
+            <HomeProductGrid pieces={gridPieces} />
+          </div>
+        </div>
+
+        <div className="border-t border-ivory-mute py-14 text-center mt-16">
           <Link
             href="/collections"
             className="eyebrow group inline-flex items-center gap-4 border border-brass bg-charcoal px-12 py-6 text-gold transition-all duration-700 hover:bg-charcoal-deep"

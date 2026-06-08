@@ -1,14 +1,44 @@
 {% comment %}
-  Customer Reviews — scroll-snap carousel with arrows + dot pagination.
-  Matches Libas-style reference: centered heading, white cards, black stars,
-  soft quote marks, right-aligned "_Author", 4 cards per row on desktop.
+  Customer Reviews — premium scroll-snap carousel
+  Centered heading with optional eyebrow + accent line, star ratings,
+  soft quote marks, optional avatars, verified badges, role/date,
+  arrows, dot pagination and optional autoplay.
   Typography inherits the theme's default fonts (no font-family overrides).
-  Fully editable: section settings + one block per review.
 {% endcomment %}
 
 {%- liquid
   assign n = section.settings.cards_desktop
-  assign gap_total = n | minus: 1 | times: 24
+  assign gap = section.settings.card_gap
+  assign gap_total = n | minus: 1 | times: gap
+
+  assign tu = 'none'
+  if section.settings.heading_uppercase
+    assign tu = 'uppercase'
+  endif
+
+  case section.settings.heading_size
+    when 'small'
+      assign h_clamp = 'clamp(20px, 3vw, 28px)'
+    when 'large'
+      assign h_clamp = 'clamp(30px, 5vw, 46px)'
+    else
+      assign h_clamp = 'clamp(24px, 4vw, 36px)'
+  endcase
+
+  case section.settings.card_shadow
+    when 'none'
+      assign shadow = 'none'
+      assign shadow_hover = '0 8px 20px rgba(0,0,0,0.08)'
+    when 'medium'
+      assign shadow = '0 8px 24px rgba(0,0,0,0.08)'
+      assign shadow_hover = '0 16px 34px rgba(0,0,0,0.12)'
+    when 'strong'
+      assign shadow = '0 14px 36px rgba(0,0,0,0.12)'
+      assign shadow_hover = '0 22px 48px rgba(0,0,0,0.16)'
+    else
+      assign shadow = '0 4px 15px rgba(0,0,0,0.05)'
+      assign shadow_hover = '0 12px 28px rgba(0,0,0,0.10)'
+  endcase
 -%}
 
 {%- style -%}
@@ -23,14 +53,32 @@
     padding: 0 15px;
     position: relative;
   }
-  #CustomerReviews-{{ section.id }} .cr-heading {
-    text-align: center;
-    font-size: clamp(24px, 4vw, 36px);
-    font-weight: bold;
+  #CustomerReviews-{{ section.id }} .cr-header {
+    text-align: {{ section.settings.heading_alignment }};
+    margin-bottom: {{ section.settings.heading_spacing }}px;
+  }
+  #CustomerReviews-{{ section.id }} .cr-eyebrow {
+    margin: 0 0 10px;
+    font-size: 12px;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
+    font-weight: 600;
+    color: {{ section.settings.accent_color }};
+  }
+  #CustomerReviews-{{ section.id }} .cr-heading {
+    margin: 0;
+    font-size: {{ h_clamp }};
+    font-weight: bold;
+    text-transform: {{ tu }};
     letter-spacing: 0.05em;
-    margin: 0 0 40px;
     color: {{ section.settings.text_color }};
+  }
+  #CustomerReviews-{{ section.id }} .cr-accent {
+    display: inline-block;
+    width: 64px;
+    height: 2px;
+    margin-top: 18px;
+    background: {{ section.settings.accent_color }};
   }
   #CustomerReviews-{{ section.id }} .cr-slider-wrapper {
     position: relative;
@@ -38,33 +86,44 @@
     align-items: center;
   }
   #CustomerReviews-{{ section.id }} .cr-arrow {
+    {% if section.settings.arrow_style == 'circle' %}
+    background: {{ section.settings.arrow_bg }};
+    width: 40px;
+    height: 40px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    {% else %}
     background: transparent;
+    width: 30px;
+    height: 30px;
+    {% endif %}
     border: none;
     cursor: pointer;
-    padding: 10px 6px;
+    padding: 0;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
     z-index: 2;
     color: {{ section.settings.text_color }};
-    transition: opacity 0.2s ease;
+    transition: opacity 0.2s ease, background 0.2s ease;
   }
-  #CustomerReviews-{{ section.id }} .cr-arrow:hover { opacity: 0.6; }
+  #CustomerReviews-{{ section.id }} .cr-arrow:hover { opacity: 0.65; }
   #CustomerReviews-{{ section.id }} .cr-arrow svg {
-    width: 26px;
-    height: 26px;
+    width: 22px;
+    height: 22px;
     stroke: currentColor;
     fill: none;
     stroke-width: 1.5;
   }
   #CustomerReviews-{{ section.id }} .cr-track {
     display: flex;
-    gap: 24px;
+    gap: {{ gap }}px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    padding: 10px 0;
+    padding: 22px 4px;
     scroll-behavior: smooth;
     flex: 1;
   }
@@ -74,15 +133,23 @@
     scroll-snap-align: start;
     background-color: {{ section.settings.card_bg }};
     border-radius: {{ section.settings.card_radius }}px;
-    padding: 40px 30px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    {% if section.settings.card_border %}border: 1px solid {{ section.settings.card_border_color }};{% endif %}
+    padding: {{ section.settings.card_padding }}px;
+    box-shadow: {{ shadow }};
     display: flex;
     flex-direction: column;
     position: relative;
     color: {{ section.settings.text_color }};
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
+  {%- if section.settings.hover_lift -%}
+  #CustomerReviews-{{ section.id }} .cr-card:hover {
+    transform: translateY(-4px);
+    box-shadow: {{ shadow_hover }};
+  }
+  {%- endif -%}
   @media (min-width: 768px) {
-    #CustomerReviews-{{ section.id }} .cr-card { flex: 0 0 calc(50% - 12px); }
+    #CustomerReviews-{{ section.id }} .cr-card { flex: 0 0 calc(50% - {{ gap | divided_by: 2 }}px); }
   }
   @media (min-width: 1024px) {
     #CustomerReviews-{{ section.id }} .cr-card {
@@ -96,14 +163,15 @@
     display: flex;
     justify-content: center;
     gap: 4px;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     color: {{ section.settings.star_color }};
   }
   #CustomerReviews-{{ section.id }} .cr-stars svg {
-    width: 18px;
-    height: 18px;
-    fill: currentColor;
+    width: {{ section.settings.star_size }}px;
+    height: {{ section.settings.star_size }}px;
   }
+  #CustomerReviews-{{ section.id }} .cr-stars svg.is-filled { fill: currentColor; }
+  #CustomerReviews-{{ section.id }} .cr-stars svg.is-empty { fill: {{ section.settings.star_empty_color }}; }
   #CustomerReviews-{{ section.id }} .cr-quote-icon {
     position: absolute;
     width: 44px;
@@ -111,13 +179,13 @@
     fill: {{ section.settings.quote_color }};
     z-index: 0;
   }
-  #CustomerReviews-{{ section.id }} .cr-quote-icon.left { top: 78px; left: 14px; }
+  #CustomerReviews-{{ section.id }} .cr-quote-icon.left { top: {{ section.settings.card_padding | plus: 38 }}px; left: 14px; }
   #CustomerReviews-{{ section.id }} .cr-quote-icon.right { bottom: 54px; right: 14px; transform: rotate(180deg); }
   #CustomerReviews-{{ section.id }} .cr-text {
     text-align: center;
     font-size: {{ section.settings.text_size }}px;
     line-height: 1.6;
-    margin-bottom: 25px;
+    margin: 0 0 24px;
     position: relative;
     z-index: 1;
     flex-grow: 1;
@@ -125,12 +193,45 @@
     align-items: center;
     justify-content: center;
   }
-  #CustomerReviews-{{ section.id }} .cr-author {
-    text-align: right;
-    font-weight: 600;
-    font-size: 13px;
+  #CustomerReviews-{{ section.id }} .cr-footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     position: relative;
     z-index: 1;
+    justify-content: center;
+  }
+  #CustomerReviews-{{ section.id }} .cr-footer.is-left { justify-content: flex-start; }
+  #CustomerReviews-{{ section.id }} .cr-footer.is-right { justify-content: flex-end; }
+  #CustomerReviews-{{ section.id }} .cr-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  #CustomerReviews-{{ section.id }} .cr-meta { display: flex; flex-direction: column; }
+  #CustomerReviews-{{ section.id }} .cr-footer.is-right .cr-meta { align-items: flex-end; text-align: right; }
+  #CustomerReviews-{{ section.id }} .cr-footer.is-center .cr-meta { align-items: center; text-align: center; }
+  #CustomerReviews-{{ section.id }} .cr-author {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    color: {{ section.settings.author_color }};
+  }
+  #CustomerReviews-{{ section.id }} .cr-verified {
+    width: 15px;
+    height: 15px;
+    fill: {{ section.settings.accent_color }};
+    flex-shrink: 0;
+  }
+  #CustomerReviews-{{ section.id }} .cr-role {
+    margin-top: 2px;
+    font-size: 12px;
+    opacity: 0.6;
+    color: {{ section.settings.text_color }};
   }
   #CustomerReviews-{{ section.id }} .cr-dots {
     display: flex;
@@ -147,46 +248,98 @@
     cursor: pointer;
     background-color: {{ section.settings.text_color }};
     opacity: 0.25;
-    transition: opacity 0.2s ease;
+    transition: opacity 0.2s ease, width 0.2s ease;
   }
-  #CustomerReviews-{{ section.id }} .cr-dot.is-active { opacity: 1; }
+  #CustomerReviews-{{ section.id }} .cr-dot.is-active { opacity: 1; width: 22px; border-radius: 4px; }
 {%- endstyle -%}
 
-<customer-reviews id="CustomerReviews-{{ section.id }}">
+<customer-reviews
+  id="CustomerReviews-{{ section.id }}"
+  data-autoplay="{{ section.settings.autoplay }}"
+  data-speed="{{ section.settings.autoplay_speed | times: 1000 }}"
+  data-dots="{{ section.settings.show_dots }}"
+>
   <div class="cr-container">
-    {%- if section.settings.heading != blank -%}
-      <h2 class="cr-heading">{{ section.settings.heading | escape }}</h2>
+    {%- if section.settings.heading != blank or section.settings.eyebrow != blank -%}
+      <div class="cr-header">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="cr-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="cr-heading">{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.show_accent_line -%}
+          <span class="cr-accent" aria-hidden="true"></span>
+        {%- endif -%}
+      </div>
     {%- endif -%}
+
     <div class="cr-slider-wrapper">
-      <button class="cr-arrow cr-prev" type="button" aria-label="Previous reviews">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 4 7 12 15 20"/></svg>
-      </button>
+      {%- if section.settings.show_arrows -%}
+        <button class="cr-arrow cr-prev" type="button" aria-label="Previous reviews">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 4 7 12 15 20"/></svg>
+        </button>
+      {%- endif -%}
+
       <div class="cr-track" tabindex="0" aria-label="Customer reviews carousel">
         {%- for block in section.blocks -%}
+          {%- assign al = section.settings.author_alignment -%}
           <div class="cr-card" {{ block.shopify_attributes }}>
             <div class="cr-stars" role="img" aria-label="{{ block.settings.rating }} out of 5 stars">
               {%- for i in (1..5) -%}
                 {%- if i <= block.settings.rating -%}
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                  <svg class="is-filled" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                 {%- else -%}
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                  <svg class="is-empty" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                 {%- endif -%}
               {%- endfor -%}
             </div>
-            <svg class="cr-quote-icon left" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
-            <svg class="cr-quote-icon right" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+
+            {%- if section.settings.show_quotes -%}
+              <svg class="cr-quote-icon left" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+              <svg class="cr-quote-icon right" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+            {%- endif -%}
+
             <div class="cr-text">{{ block.settings.review_text }}</div>
-            {%- if block.settings.author != blank -%}
-              <div class="cr-author">_{{ block.settings.author | escape }}</div>
+
+            {%- if block.settings.author != blank or block.settings.avatar != blank -%}
+              <div class="cr-footer is-{{ al }}">
+                {%- if block.settings.avatar != blank -%}
+                  <img class="cr-avatar" src="{{ block.settings.avatar | image_url: width: 120 }}" alt="{{ block.settings.author | escape }}" width="46" height="46" loading="lazy">
+                {%- endif -%}
+                <div class="cr-meta">
+                  {%- if block.settings.author != blank -%}
+                    <span class="cr-author">
+                      {{ section.settings.author_prefix }}{{ block.settings.author | escape }}
+                      {%- if block.settings.verified -%}
+                        <svg class="cr-verified" viewBox="0 0 24 24" aria-label="Verified"><path d="M12 2l2.4 1.8 3 .2.9 2.9L21 9l-1.2 2.8L21 14.6l-2.7 1.9-.9 2.9-3 .2L12 22l-2.4-1.8-3-.2-.9-2.9L3 14.6l1.2-2.8L3 9l2.7-1.9.9-2.9 3-.2z" fill="currentColor"/><path d="M10.6 14.6l-2.3-2.3 1.1-1.1 1.2 1.2 3.1-3.1 1.1 1.1z" fill="#fff"/></svg>
+                      {%- endif -%}
+                    </span>
+                  {%- endif -%}
+                  {%- if block.settings.role != blank or block.settings.date != blank -%}
+                    <span class="cr-role">
+                      {{- block.settings.role | escape -}}
+                      {%- if block.settings.role != blank and block.settings.date != blank %} · {% endif -%}
+                      {{- block.settings.date | escape -}}
+                    </span>
+                  {%- endif -%}
+                </div>
+              </div>
             {%- endif -%}
           </div>
         {%- endfor -%}
       </div>
-      <button class="cr-arrow cr-next" type="button" aria-label="Next reviews">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 4 17 12 9 20"/></svg>
-      </button>
+
+      {%- if section.settings.show_arrows -%}
+        <button class="cr-arrow cr-next" type="button" aria-label="Next reviews">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 4 17 12 9 20"/></svg>
+        </button>
+      {%- endif -%}
     </div>
-    <div class="cr-dots" role="tablist" aria-label="Review pages"></div>
+
+    {%- if section.settings.show_dots -%}
+      <div class="cr-dots" role="tablist" aria-label="Review pages"></div>
+    {%- endif -%}
   </div>
 </customer-reviews>
 
@@ -196,14 +349,23 @@
       connectedCallback() {
         this.track = this.querySelector('.cr-track');
         this.dotsWrap = this.querySelector('.cr-dots');
+        this.showDots = this.getAttribute('data-dots') === 'true';
+        this.autoplay = this.getAttribute('data-autoplay') === 'true';
+        this.speed = parseInt(this.getAttribute('data-speed'), 10) || 0;
         var prev = this.querySelector('.cr-prev');
         var next = this.querySelector('.cr-next');
         if (!this.track) return;
-        if (prev) prev.addEventListener('click', this.scrollTrack.bind(this, -1));
-        if (next) next.addEventListener('click', this.scrollTrack.bind(this, 1));
+        if (prev) prev.addEventListener('click', () => { this.scrollTrack(-1); this.resetAutoplay(); });
+        if (next) next.addEventListener('click', () => { this.scrollTrack(1); this.resetAutoplay(); });
         this.track.addEventListener('scroll', this.onScroll.bind(this), { passive: true });
         window.addEventListener('resize', this.buildDots.bind(this));
         this.buildDots();
+
+        if (this.autoplay && this.speed > 0) {
+          ['mouseenter', 'touchstart', 'focusin'].forEach(e => this.addEventListener(e, this.stopAutoplay.bind(this), { passive: true }));
+          ['mouseleave', 'touchend', 'focusout'].forEach(e => this.addEventListener(e, this.startAutoplay.bind(this), { passive: true }));
+          this.startAutoplay();
+        }
       }
       cardStep() {
         var card = this.track.querySelector('.cr-card');
@@ -221,7 +383,7 @@
         return Math.max(1, Math.ceil((this.track.scrollWidth - w) / w) + 1);
       }
       buildDots() {
-        if (!this.dotsWrap) return;
+        if (!this.dotsWrap || !this.showDots) return;
         var pages = this.pageCount();
         this.dotsWrap.innerHTML = '';
         if (pages < 2) return;
@@ -247,7 +409,7 @@
         });
       }
       updateDots() {
-        if (!this.dotsWrap) return;
+        if (!this.dotsWrap || !this.showDots) return;
         var dots = this.dotsWrap.children;
         if (!dots.length) return;
         var w = this.track.clientWidth;
@@ -255,6 +417,24 @@
         for (var i = 0; i < dots.length; i++) {
           dots[i].classList.toggle('is-active', i === current);
         }
+      }
+      startAutoplay() {
+        if (!this.autoplay || this.speed <= 0 || this._timer) return;
+        var self = this;
+        this._timer = setInterval(function () {
+          var pages = self.pageCount();
+          var w = self.track.clientWidth || 1;
+          var cur = Math.round(self.track.scrollLeft / w);
+          var nextPage = (cur + 1) % pages;
+          self.goToPage(nextPage);
+        }, this.speed);
+      }
+      stopAutoplay() {
+        if (this._timer) { clearInterval(this._timer); this._timer = null; }
+      }
+      resetAutoplay() {
+        this.stopAutoplay();
+        this.startAutoplay();
       }
     }
     customElements.define('customer-reviews', CustomerReviews);
@@ -268,48 +448,68 @@
   "class": "section",
   "settings": [
     {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label",
+      "default": "Loved by thousands"
+    },
+    {
       "type": "text",
       "id": "heading",
       "label": "Heading",
       "default": "CUSTOMER REVIEWS"
     },
     {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_uppercase",
+      "label": "Uppercase heading",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_accent_line",
+      "label": "Show accent line under heading",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Space below heading",
+      "default": 40
+    },
+    {
       "type": "header",
-      "content": "Colors"
-    },
-    {
-      "type": "color",
-      "id": "section_bg",
-      "label": "Section background",
-      "default": "#F5F3EF"
-    },
-    {
-      "type": "color",
-      "id": "card_bg",
-      "label": "Card background",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text, arrows and dots",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "star_color",
-      "label": "Stars",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "quote_color",
-      "label": "Quote marks",
-      "default": "#F2DEE9"
-    },
-    {
-      "type": "header",
-      "content": "Layout"
+      "content": "Carousel"
     },
     {
       "type": "range",
@@ -322,6 +522,120 @@
     },
     {
       "type": "range",
+      "id": "card_gap",
+      "min": 8,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap between cards",
+      "default": 24
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Show arrows",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "arrow_style",
+      "label": "Arrow style",
+      "options": [
+        { "value": "plain", "label": "Plain" },
+        { "value": "circle", "label": "Circle button" }
+      ],
+      "default": "plain"
+    },
+    {
+      "type": "color",
+      "id": "arrow_bg",
+      "label": "Arrow button background (circle style)",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dots",
+      "label": "Show pagination dots",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Autoplay speed",
+      "default": 5
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "min": 0,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "label": "Card corner radius",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Card padding",
+      "default": 38
+    },
+    {
+      "type": "checkbox",
+      "id": "card_border",
+      "label": "Card border",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card border color",
+      "default": "#ECE8E1"
+    },
+    {
+      "type": "select",
+      "id": "card_shadow",
+      "label": "Card shadow",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "soft", "label": "Soft" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "strong", "label": "Strong" }
+      ],
+      "default": "soft"
+    },
+    {
+      "type": "checkbox",
+      "id": "hover_lift",
+      "label": "Lift card on hover",
+      "default": true
+    },
+    {
+      "type": "range",
       "id": "text_size",
       "min": 12,
       "max": 18,
@@ -331,14 +645,96 @@
       "default": 14
     },
     {
+      "type": "header",
+      "content": "Stars"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star color",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "color",
+      "id": "star_empty_color",
+      "label": "Empty star color",
+      "default": "#D9D5CC"
+    },
+    {
       "type": "range",
-      "id": "card_radius",
-      "min": 0,
-      "max": 20,
+      "id": "star_size",
+      "min": 14,
+      "max": 26,
       "step": 1,
       "unit": "px",
-      "label": "Card corner radius",
-      "default": 8
+      "label": "Star size",
+      "default": 18
+    },
+    {
+      "type": "header",
+      "content": "Quote marks"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quotes",
+      "label": "Show quote marks",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "quote_color",
+      "label": "Quote mark color",
+      "default": "#EFE6DA"
+    },
+    {
+      "type": "header",
+      "content": "Author"
+    },
+    {
+      "type": "text",
+      "id": "author_prefix",
+      "label": "Name prefix",
+      "default": "— ",
+      "info": "Shown before each name, e.g. — or _"
+    },
+    {
+      "type": "select",
+      "id": "author_alignment",
+      "label": "Author alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "color",
+      "id": "author_color",
+      "label": "Author name color",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Section background",
+      "default": "#F5F3EF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Heading & text color",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent (eyebrow, line, verified)",
+      "default": "#B08D57"
     },
     {
       "type": "range",
@@ -354,21 +750,21 @@
       "type": "range",
       "id": "padding_top",
       "min": 0,
-      "max": 100,
+      "max": 120,
       "step": 4,
       "unit": "px",
       "label": "Padding top",
-      "default": 60
+      "default": 64
     },
     {
       "type": "range",
       "id": "padding_bottom",
       "min": 0,
-      "max": 100,
+      "max": 120,
       "step": 4,
       "unit": "px",
       "label": "Padding bottom",
-      "default": 60
+      "default": 64
     }
   ],
   "blocks": [
@@ -376,6 +772,34 @@
       "type": "review",
       "name": "Review",
       "settings": [
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Customer photo (optional)"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author name",
+          "default": "Jane Doe"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Role / location (optional)",
+          "default": "Verified Buyer"
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Date (optional)"
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Show verified badge",
+          "default": true
+        },
         {
           "type": "range",
           "id": "rating",
@@ -390,12 +814,6 @@
           "id": "review_text",
           "label": "Review text",
           "default": "The quality of the clothes is top notch and the color palette is always soothing!"
-        },
-        {
-          "type": "text",
-          "id": "author",
-          "label": "Author name",
-          "default": "Jane Doe"
         }
       ]
     }
@@ -404,11 +822,11 @@
     {
       "name": "Customer Reviews",
       "blocks": [
-        { "type": "review", "settings": { "author": "Madhu Soundharya", "review_text": "The only brand which I kept buying again and again. The fabric quality is awesome. It feels so comfortable and soft. Both casual wear and ethnic wear are good. The cost is also reasonable for the quality and fitting." } },
-        { "type": "review", "settings": { "author": "Tejasvi Chavan", "review_text": "I'm in love with this brand now, the quality of the clothes is top notch. The app is very user-friendly and easy to access." } },
-        { "type": "review", "settings": { "author": "Devika Bhattarai", "review_text": "I recently tried out the app, overall had a positive experience. The user interface is sleek and easy to navigate. I appreciated the wide range of clothing options available." } },
-        { "type": "review", "settings": { "author": "Trisha Jha", "review_text": "My first choice for buying suit sets. The color palette is always soothing! The kurta set I bought had the perfect and breathable fabric. Its fit is comfortable." } },
-        { "type": "review", "settings": { "author": "Sneha P.", "review_text": "Absolutely beautiful designs and extremely comfortable fabric. Delivery was fast and seamless." } }
+        { "type": "review", "settings": { "author": "Madhu Soundharya", "role": "Verified Buyer", "review_text": "The only brand which I kept buying again and again. The fabric quality is awesome. It feels so comfortable and soft. Both casual wear and ethnic wear are good. The cost is also reasonable for the quality and fitting." } },
+        { "type": "review", "settings": { "author": "Tejasvi Chavan", "role": "Verified Buyer", "review_text": "I'm in love with this brand now, the quality of the clothes is top notch. The app is very user-friendly and easy to access." } },
+        { "type": "review", "settings": { "author": "Devika Bhattarai", "role": "Verified Buyer", "review_text": "I recently tried out the app, overall had a positive experience. The user interface is sleek and easy to navigate. I appreciated the wide range of clothing options available." } },
+        { "type": "review", "settings": { "author": "Trisha Jha", "role": "Verified Buyer", "review_text": "My first choice for buying suit sets. The color palette is always soothing! The kurta set I bought had the perfect and breathable fabric. Its fit is comfortable." } },
+        { "type": "review", "settings": { "author": "Sneha P.", "role": "Verified Buyer", "review_text": "Absolutely beautiful designs and extremely comfortable fabric. Delivery was fast and seamless." } }
       ]
     }
   ]

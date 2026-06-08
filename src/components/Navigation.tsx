@@ -50,12 +50,36 @@ export default function Navigation() {
             : "border-b border-transparent bg-transparent"
         }`}
       >
-        <div className="mx-auto flex h-20 max-w-[1700px] items-center justify-between px-6 md:px-12">
-          {/* Real SROJA logo from the brand manual */}
-          <Link href="/" aria-label="SROJA — home" className="group relative z-50">
+        <div className="relative mx-auto flex h-20 max-w-[1700px] items-center justify-between px-6 md:px-12">
+          {/* Menu trigger — left on mobile */}
+          <button
+            onClick={() => setOpen((v) => !v)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            className={`z-50 flex h-10 w-10 flex-col items-center justify-center gap-[6px] rounded-full border transition-colors duration-500 lg:hidden ${
+              lightText && !open ? "border-ivory/30" : "border-brass/30"
+            }`}
+          >
+            <span
+              className={`h-px transition-all duration-500 ${
+                open ? "w-5 translate-y-[3.5px] rotate-45 bg-charcoal" : `w-5 ${lightText ? "bg-ivory" : "bg-charcoal"}`
+              }`}
+            />
+            <span
+              className={`h-px transition-all duration-500 ${
+                open ? "w-5 -translate-y-[3.5px] -rotate-45 bg-charcoal" : `w-3.5 ${lightText ? "bg-ivory" : "bg-charcoal"}`
+              }`}
+            />
+          </button>
+
+          {/* Real SROJA logo — centered on mobile, left on desktop */}
+          <Link
+            href="/"
+            aria-label="SROJA — home"
+            className="group absolute left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 lg:static lg:translate-x-0 lg:translate-y-0"
+          >
             <BrandLogo
               tone={lightText ? "ivory" : "charcoal"}
-              className="h-9 w-auto transition-opacity duration-500 group-hover:opacity-80 md:h-10"
+              className="h-8 w-auto transition-opacity duration-500 group-hover:opacity-80 md:h-10"
             />
           </Link>
 
@@ -78,7 +102,7 @@ export default function Navigation() {
             ))}
           </nav>
 
-          {/* Icon cluster */}
+          {/* Icon cluster — right */}
           <div className="relative z-50 flex items-center gap-2 md:gap-3">
             {ICON_LINKS.map(({ href, label, Icon }, i) => (
               <Link
@@ -87,9 +111,7 @@ export default function Navigation() {
                 aria-label={label}
                 title={label}
                 className={`hidden h-10 w-10 items-center justify-center rounded-full border transition-all duration-500 hover:-translate-y-0.5 hover:border-gold hover:bg-gold hover:text-charcoal-deep md:flex ${
-                  lightText
-                    ? "border-ivory/30 text-ivory"
-                    : "border-brass/30 text-brass"
+                  lightText ? "border-ivory/30 text-ivory" : "border-brass/30 text-brass"
                 } ${i === 1 ? "hidden xl:flex" : ""}`}
               >
                 <Icon size={17} />
@@ -110,30 +132,6 @@ export default function Navigation() {
                   {count}
                 </span>
               )}
-            </button>
-
-            {/* Menu trigger */}
-            <button
-              onClick={() => setOpen((v) => !v)}
-              aria-label={open ? "Close menu" : "Open menu"}
-              className={`flex h-10 w-10 flex-col items-center justify-center gap-[6px] rounded-full border transition-colors duration-500 lg:hidden ${
-                lightText && !open ? "border-ivory/30" : "border-brass/30"
-              }`}
-            >
-              <span
-                className={`h-px transition-all duration-500 ${
-                  open
-                    ? "w-5 translate-y-[3.5px] rotate-45 bg-charcoal"
-                    : `w-5 ${lightText ? "bg-ivory" : "bg-charcoal"}`
-                }`}
-              />
-              <span
-                className={`h-px transition-all duration-500 ${
-                  open
-                    ? "w-5 -translate-y-[3.5px] -rotate-45 bg-charcoal"
-                    : `w-3.5 ${lightText ? "bg-ivory" : "bg-charcoal"}`
-                }`}
-              />
             </button>
           </div>
         </div>
