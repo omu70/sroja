@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { IconLotus } from "./icons";
+import BrandLogo from "./BrandLogo";
 
 /**
  * The intro — one breath of the house mark before the first page.
@@ -30,20 +30,12 @@ export default function Preloader() {
           className="fixed inset-0 z-[99] flex flex-col items-center justify-center bg-charcoal-deep"
         >
           <motion.div
-            initial={{ scale: 0.7, opacity: 0, rotate: -30 }}
-            animate={{ scale: 1, opacity: 1, rotate: 0 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ scale: 0.85, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           >
-            <IconLotus size={44} className="text-gold" />
+            <BrandLogo tone="gold" className="h-12 w-auto md:h-14" />
           </motion.div>
-          <motion.p
-            initial={{ opacity: 0, letterSpacing: "0.2em" }}
-            animate={{ opacity: 1, letterSpacing: "0.42em" }}
-            transition={{ delay: 0.25, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="display mt-6 text-2xl text-ivory"
-          >
-            SROJA
-          </motion.p>
         </motion.div>
       )}
     </AnimatePresence>

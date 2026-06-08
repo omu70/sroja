@@ -5,7 +5,8 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { NAV } from "@/data/site";
-import { IconBag, IconEnvelope, IconLotus, IconSearch } from "./icons";
+import BrandLogo from "./BrandLogo";
+import { IconBag, IconEnvelope, IconSearch } from "./icons";
 
 const ICON_LINKS = [
   { href: "/collections", label: "Search the collection", Icon: IconSearch },
@@ -49,23 +50,12 @@ export default function Navigation() {
         }`}
       >
         <div className="mx-auto flex h-20 max-w-[1700px] items-center justify-between px-6 md:px-12">
-          {/* Wordmark with house mark */}
+          {/* Real SROJA logo from the brand manual */}
           <Link href="/" aria-label="SROJA — home" className="group relative z-50">
-            <span className="flex flex-col items-center">
-              <IconLotus
-                size={13}
-                className={`mb-1 transition-colors duration-500 group-hover:text-gold ${
-                  lightText ? "text-gold" : "text-brass"
-                }`}
-              />
-              <span
-                className={`font-brand text-[1.4rem] leading-none tracking-[0.42em] transition-colors duration-500 group-hover:text-brass ${
-                  lightText ? "text-ivory" : "text-charcoal"
-                }`}
-              >
-                SROJA
-              </span>
-            </span>
+            <BrandLogo
+              tone={lightText ? "ivory" : "charcoal"}
+              className="h-9 w-auto transition-opacity duration-500 group-hover:opacity-80 md:h-10"
+            />
           </Link>
 
           {/* Desktop nav */}
@@ -142,9 +132,10 @@ export default function Navigation() {
             transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
             className="fixed inset-0 z-40 flex flex-col justify-center bg-ivory-bright px-8 md:px-16"
           >
-            <IconLotus
-              size={120}
-              className="pointer-events-none absolute right-[-1.5rem] top-16 text-ivory-mute animate-spin-slow"
+            <BrandLogo
+              variant="mark"
+              tone="charcoal"
+              className="pointer-events-none absolute right-[-1.5rem] top-16 h-28 w-28 opacity-10 animate-spin-slow"
             />
             <nav className="flex flex-col gap-2">
               {NAV.map((item, i) => (

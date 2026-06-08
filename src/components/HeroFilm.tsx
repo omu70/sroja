@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Magnetic from "./Magnetic";
+import BrandLogo from "./BrandLogo";
 import { IconArrow, IconHand, IconHash, IconShield, IconLotus } from "./icons";
 
 interface HeroFilmProps {
@@ -73,7 +74,7 @@ export default function HeroFilm({ frames }: HeroFilmProps) {
 
       {/* Copy */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
-        <IconLotus size={30} className="mb-7 animate-[spin_28s_linear_infinite] text-gold" />
+        <BrandLogo variant="mark" tone="gold" className="mb-7 h-8 w-8 animate-[spin_28s_linear_infinite]" />
         <p className="eyebrow mb-8 text-gold animate-fade-up">
           A Luxury Design House from India
         </p>

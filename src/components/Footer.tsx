@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { NAV, SITE, COLLECTIONS } from "@/data/site";
-import { IconEnvelope, IconLotus, IconPin, IconCalendar } from "./icons";
+import BrandLogo from "./BrandLogo";
+import { IconEnvelope, IconPin, IconCalendar } from "./icons";
 
 /** The footer stays charcoal — the page's signature in ink. */
 export default function Footer() {
@@ -13,14 +14,14 @@ export default function Footer() {
             Designed to be collected.
             <span className="text-stone"> Crafted to be inherited.</span>
           </p>
-          <IconLotus size={54} className="shrink-0 text-brass/60 animate-spin-slow" />
+          <BrandLogo variant="mark" tone="gold" className="h-14 w-14 shrink-0 animate-spin-slow opacity-70" />
         </div>
 
         <div className="rule mt-14 mb-12" />
 
         <div className="grid gap-12 md:grid-cols-4">
           <div>
-            <p className="font-brand text-xl tracking-[0.42em] text-ivory">SROJA</p>
+            <BrandLogo tone="ivory" className="h-8 w-auto" />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-stone">
               A luxury design house from India. Original designs, handcrafted in
               deliberately small, numbered editions.

@@ -6,7 +6,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import type { Piece } from "@/data/types";
 import { formatINR } from "@/data/pieces";
 import { SITE } from "@/data/site";
-import { IconCrate, IconLotus, IconShield } from "./icons";
+import BrandLogo from "./BrandLogo";
+import { IconCrate, IconShield } from "./icons";
 
 declare global {
   interface Window {
@@ -184,7 +185,7 @@ export default function CheckoutOverlay({
               <Image src={piece.images[0]} alt={piece.name} fill sizes="36rem" className="img-luxe object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal-deep via-transparent to-charcoal-deep/30" />
               <div className="absolute bottom-8 left-8 right-8">
-                <IconLotus size={22} className="text-gold animate-pulse-soft" />
+                <BrandLogo variant="mark" tone="gold" className="h-6 w-6 animate-pulse-soft" />
                 <p className="display mt-3 text-4xl text-ivory">{piece.name}</p>
                 <p className="eyebrow mt-2 text-ivory/70">
                   {piece.craft} · {piece.hours} artisan-hours
@@ -204,7 +205,7 @@ export default function CheckoutOverlay({
 
               {stage === "paid" ? (
                 <div className="flex min-h-full flex-col items-center justify-center py-16 text-center">
-                  <IconLotus size={34} className="text-gold animate-pulse-soft" />
+                  <BrandLogo variant="mark" tone="gold" className="h-9 w-9 animate-pulse-soft" />
                   <p className="display mt-7 text-4xl text-gold">
                     No. {String(piece.edition.number).padStart(2, "0")} is yours.
                   </p>
