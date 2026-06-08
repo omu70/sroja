@@ -59,7 +59,7 @@ export default function Navigation() {
                 }`}
               />
               <span
-                className={`display text-[1.45rem] leading-none tracking-[0.42em] transition-colors duration-500 group-hover:text-brass ${
+                className={`font-brand text-[1.4rem] leading-none tracking-[0.42em] transition-colors duration-500 group-hover:text-brass ${
                   lightText ? "text-ivory" : "text-charcoal"
                 }`}
               >

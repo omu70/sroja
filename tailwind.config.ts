@@ -35,10 +35,21 @@ const config: Config = {
           DEFAULT: "#5A4533",
           deep: "#3E2F23",
         },
+        /* ── Brand manual palette — “Soft Light” ── */
+        paper: "#FAF8F5",
+        blush: "#F5E1D1",
+        softgold: {
+          DEFAULT: "#F6D996",
+          deep: "#F1C378",
+        },
+        rosewood: "#C0A290",
+        terracotta: "#D05E29",
+        pine: "#2D3131",
       },
       fontFamily: {
         serif: ["var(--font-serif)", "Cormorant Garamond", "Georgia", "serif"],
         sans: ["var(--font-sans)", "Inter", "system-ui", "sans-serif"],
+        brand: ["var(--font-brand)", "Cormorant Unicase", "Georgia", "serif"],
       },
       letterSpacing: {
         luxe: "0.32em",

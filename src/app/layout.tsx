@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { serif, sans } from "@/lib/fonts";
+import { serif, sans, brand } from "@/lib/fonts";
 import { SITE } from "@/data/site";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navigation from "@/components/Navigation";
@@ -58,7 +58,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${serif.variable} ${sans.variable}`}>
+    <html lang="en" className={`${serif.variable} ${sans.variable} ${brand.variable}`}>
       <body className="font-sans">
         <script
           type="application/ld+json"

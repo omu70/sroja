@@ -20,7 +20,7 @@ export default function Footer() {
 
         <div className="grid gap-12 md:grid-cols-4">
           <div>
-            <p className="display text-xl tracking-[0.42em] text-ivory">SROJA</p>
+            <p className="font-brand text-xl tracking-[0.42em] text-ivory">SROJA</p>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-stone">
               A luxury design house from India. Original designs, handcrafted in
               deliberately small, numbered editions.

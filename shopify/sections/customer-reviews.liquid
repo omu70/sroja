@@ -1,0 +1,416 @@
+{% comment %}
+  Customer Reviews — scroll-snap carousel with arrows + dot pagination.
+  Matches Libas-style reference: centered heading, white cards, black stars,
+  soft quote marks, right-aligned "_Author", 4 cards per row on desktop.
+  Typography inherits the theme's default fonts (no font-family overrides).
+  Fully editable: section settings + one block per review.
+{% endcomment %}
+
+{%- liquid
+  assign n = section.settings.cards_desktop
+  assign gap_total = n | minus: 1 | times: 24
+-%}
+
+{%- style -%}
+  #CustomerReviews-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.section_bg }};
+  }
+  #CustomerReviews-{{ section.id }} .cr-container {
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+    padding: 0 15px;
+    position: relative;
+  }
+  #CustomerReviews-{{ section.id }} .cr-heading {
+    text-align: center;
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 40px;
+    color: {{ section.settings.text_color }};
+  }
+  #CustomerReviews-{{ section.id }} .cr-slider-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  #CustomerReviews-{{ section.id }} .cr-arrow {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    color: {{ section.settings.text_color }};
+    transition: opacity 0.2s ease;
+  }
+  #CustomerReviews-{{ section.id }} .cr-arrow:hover { opacity: 0.6; }
+  #CustomerReviews-{{ section.id }} .cr-arrow svg {
+    width: 26px;
+    height: 26px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.5;
+  }
+  #CustomerReviews-{{ section.id }} .cr-track {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 10px 0;
+    scroll-behavior: smooth;
+    flex: 1;
+  }
+  #CustomerReviews-{{ section.id }} .cr-track::-webkit-scrollbar { display: none; }
+  #CustomerReviews-{{ section.id }} .cr-card {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    background-color: {{ section.settings.card_bg }};
+    border-radius: {{ section.settings.card_radius }}px;
+    padding: 40px 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    color: {{ section.settings.text_color }};
+  }
+  @media (min-width: 768px) {
+    #CustomerReviews-{{ section.id }} .cr-card { flex: 0 0 calc(50% - 12px); }
+  }
+  @media (min-width: 1024px) {
+    #CustomerReviews-{{ section.id }} .cr-card {
+      flex: 0 0 calc((100% - {{ gap_total }}px) / {{ n }});
+    }
+  }
+  @media (max-width: 767px) {
+    #CustomerReviews-{{ section.id }} .cr-arrow { display: none; }
+  }
+  #CustomerReviews-{{ section.id }} .cr-stars {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 20px;
+    color: {{ section.settings.star_color }};
+  }
+  #CustomerReviews-{{ section.id }} .cr-stars svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+  }
+  #CustomerReviews-{{ section.id }} .cr-quote-icon {
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    fill: {{ section.settings.quote_color }};
+    z-index: 0;
+  }
+  #CustomerReviews-{{ section.id }} .cr-quote-icon.left { top: 78px; left: 14px; }
+  #CustomerReviews-{{ section.id }} .cr-quote-icon.right { bottom: 54px; right: 14px; transform: rotate(180deg); }
+  #CustomerReviews-{{ section.id }} .cr-text {
+    text-align: center;
+    font-size: {{ section.settings.text_size }}px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 1;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #CustomerReviews-{{ section.id }} .cr-author {
+    text-align: right;
+    font-weight: 600;
+    font-size: 13px;
+    position: relative;
+    z-index: 1;
+  }
+  #CustomerReviews-{{ section.id }} .cr-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 24px;
+  }
+  #CustomerReviews-{{ section.id }} .cr-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    background-color: {{ section.settings.text_color }};
+    opacity: 0.25;
+    transition: opacity 0.2s ease;
+  }
+  #CustomerReviews-{{ section.id }} .cr-dot.is-active { opacity: 1; }
+{%- endstyle -%}
+
+<customer-reviews id="CustomerReviews-{{ section.id }}">
+  <div class="cr-container">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="cr-heading">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+    <div class="cr-slider-wrapper">
+      <button class="cr-arrow cr-prev" type="button" aria-label="Previous reviews">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 4 7 12 15 20"/></svg>
+      </button>
+      <div class="cr-track" tabindex="0" aria-label="Customer reviews carousel">
+        {%- for block in section.blocks -%}
+          <div class="cr-card" {{ block.shopify_attributes }}>
+            <div class="cr-stars" role="img" aria-label="{{ block.settings.rating }} out of 5 stars">
+              {%- for i in (1..5) -%}
+                {%- if i <= block.settings.rating -%}
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                {%- else -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+            <svg class="cr-quote-icon left" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+            <svg class="cr-quote-icon right" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+            <div class="cr-text">{{ block.settings.review_text }}</div>
+            {%- if block.settings.author != blank -%}
+              <div class="cr-author">_{{ block.settings.author | escape }}</div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+      <button class="cr-arrow cr-next" type="button" aria-label="Next reviews">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 4 17 12 9 20"/></svg>
+      </button>
+    </div>
+    <div class="cr-dots" role="tablist" aria-label="Review pages"></div>
+  </div>
+</customer-reviews>
+
+<script>
+  if (!customElements.get('customer-reviews')) {
+    class CustomerReviews extends HTMLElement {
+      connectedCallback() {
+        this.track = this.querySelector('.cr-track');
+        this.dotsWrap = this.querySelector('.cr-dots');
+        var prev = this.querySelector('.cr-prev');
+        var next = this.querySelector('.cr-next');
+        if (!this.track) return;
+        if (prev) prev.addEventListener('click', this.scrollTrack.bind(this, -1));
+        if (next) next.addEventListener('click', this.scrollTrack.bind(this, 1));
+        this.track.addEventListener('scroll', this.onScroll.bind(this), { passive: true });
+        window.addEventListener('resize', this.buildDots.bind(this));
+        this.buildDots();
+      }
+      cardStep() {
+        var card = this.track.querySelector('.cr-card');
+        if (!card) return 0;
+        var gap = parseInt(window.getComputedStyle(this.track).gap) || 24;
+        return card.offsetWidth + gap;
+      }
+      scrollTrack(direction) {
+        var step = this.cardStep();
+        if (step) this.track.scrollBy({ left: step * direction, behavior: 'smooth' });
+      }
+      pageCount() {
+        var w = this.track.clientWidth;
+        if (!w) return 1;
+        return Math.max(1, Math.ceil((this.track.scrollWidth - w) / w) + 1);
+      }
+      buildDots() {
+        if (!this.dotsWrap) return;
+        var pages = this.pageCount();
+        this.dotsWrap.innerHTML = '';
+        if (pages < 2) return;
+        for (var i = 0; i < pages; i++) {
+          var dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = 'cr-dot';
+          dot.setAttribute('aria-label', 'Go to review page ' + (i + 1));
+          dot.addEventListener('click', this.goToPage.bind(this, i));
+          this.dotsWrap.appendChild(dot);
+        }
+        this.updateDots();
+      }
+      goToPage(i) {
+        this.track.scrollTo({ left: i * this.track.clientWidth, behavior: 'smooth' });
+      }
+      onScroll() {
+        if (this._raf) return;
+        var self = this;
+        this._raf = requestAnimationFrame(function () {
+          self._raf = null;
+          self.updateDots();
+        });
+      }
+      updateDots() {
+        if (!this.dotsWrap) return;
+        var dots = this.dotsWrap.children;
+        if (!dots.length) return;
+        var w = this.track.clientWidth;
+        var current = Math.min(dots.length - 1, Math.round(this.track.scrollLeft / w));
+        for (var i = 0; i < dots.length; i++) {
+          dots[i].classList.toggle('is-active', i === current);
+        }
+      }
+    }
+    customElements.define('customer-reviews', CustomerReviews);
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Customer Reviews",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "CUSTOMER REVIEWS"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Section background",
+      "default": "#F5F3EF"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text, arrows and dots",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Stars",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "quote_color",
+      "label": "Quote marks",
+      "default": "#F2DEE9"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "cards_desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Reviews per row (desktop)",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Review text size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Card corner radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 1000,
+      "max": 1800,
+      "step": 50,
+      "unit": "px",
+      "label": "Max width",
+      "default": 1400
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Star rating",
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "review_text",
+          "label": "Review text",
+          "default": "The quality of the clothes is top notch and the color palette is always soothing!"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author name",
+          "default": "Jane Doe"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Customer Reviews",
+      "blocks": [
+        { "type": "review", "settings": { "author": "Madhu Soundharya", "review_text": "The only brand which I kept buying again and again. The fabric quality is awesome. It feels so comfortable and soft. Both casual wear and ethnic wear are good. The cost is also reasonable for the quality and fitting." } },
+        { "type": "review", "settings": { "author": "Tejasvi Chavan", "review_text": "I'm in love with this brand now, the quality of the clothes is top notch. The app is very user-friendly and easy to access." } },
+        { "type": "review", "settings": { "author": "Devika Bhattarai", "review_text": "I recently tried out the app, overall had a positive experience. The user interface is sleek and easy to navigate. I appreciated the wide range of clothing options available." } },
+        { "type": "review", "settings": { "author": "Trisha Jha", "review_text": "My first choice for buying suit sets. The color palette is always soothing! The kurta set I bought had the perfect and breathable fabric. Its fit is comfortable." } },
+        { "type": "review", "settings": { "author": "Sneha P.", "review_text": "Absolutely beautiful designs and extremely comfortable fabric. Delivery was fast and seamless." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
