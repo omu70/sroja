@@ -12,13 +12,17 @@ import DimensionDrawing from "@/components/DimensionDrawing";
 import CountUp from "@/components/CountUp";
 import { COLLECTIONS, SITE } from "@/data/site";
 import { PIECES, getPiece, getRelated, formatINR } from "@/data/pieces";
+import { getCare } from "@/data/care";
 import {
   IconClock,
+  IconCrate,
   IconHand,
   IconHash,
   IconLayers,
+  IconLeaf,
   IconRuler,
   IconShield,
+  IconThread,
 } from "@/components/icons";
 
 interface Params {
@@ -53,6 +57,7 @@ export default async function PiecePage({ params }: { params: Promise<Params> })
 
   const collection = COLLECTIONS.find((c) => c.slug === piece.collection);
   const related = getRelated(piece);
+  const care = getCare(piece.slug);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -179,7 +184,9 @@ export default async function PiecePage({ params }: { params: Promise<Params> })
                 {(
                   [
                     [IconLayers, "Materials", piece.materials.join(" · ")],
+                    [IconThread, "Textile", care?.textile ?? piece.craft],
                     [IconRuler, "Dimensions", piece.dimensions],
+                    ...(care?.components ? [[IconCrate, "What's included", care.components] as const] : []),
                     [IconHand, "Craft", `${piece.craft} — ${piece.region}`],
                     [IconHash, "Edition", `${piece.edition.number} of ${piece.edition.of} · numbered & certified`],
                     [IconClock, "Made in", `${piece.hours} artisan-hours · ${piece.artisans} artisans`],
@@ -197,6 +204,29 @@ export default async function PiecePage({ params }: { params: Promise<Params> })
                   </div>
                 ))}
               </dl>
+
+              {/* Care — straight from the product sheet */}
+              {care?.care?.length ? (
+                <Reveal delay={0.12}>
+                  <div className="mt-8 border border-ivory-mute bg-paper p-6 md:p-8">
+                    <p className="eyebrow flex items-center gap-2.5 text-brass">
+                      <IconLeaf size={15} /> Care
+                    </p>
+                    <ul className="mt-4 grid gap-x-8 gap-y-2.5 sm:grid-cols-2">
+                      {care.care.map((c) => (
+                        <li key={c} className="flex items-start gap-2.5 text-sm text-charcoal/85">
+                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-brass" />
+                          {c}
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="mt-5 border-t border-ivory-mute pt-4 text-xs leading-relaxed text-stone-dark">
+                      Minor irregularities in print, weave and colour are inherent to
+                      handcrafted textiles — the signature of the human hand, not a flaw.
+                    </p>
+                  </div>
+                </Reveal>
+              ) : null}
             </Reveal>
           </div>
         </div>

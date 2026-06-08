@@ -199,7 +199,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding: 14px 22px;
+    padding: {{ section.settings.drawer_item_padding }}px 22px;
     background: none;
     border: none;
     color: inherit;
@@ -210,6 +210,12 @@
     cursor: pointer;
     text-align: left;
   }
+  {%- if section.settings.drawer_dividers -%}
+  #shopify-section-{{ section.id }} .lh-drawer nav > a,
+  #shopify-section-{{ section.id }} .lh-drawer nav > .lh-subtoggle {
+    border-bottom: 1px solid {{ section.settings.drawer_divider_color }};
+  }
+  {%- endif -%}
   #shopify-section-{{ section.id }} .lh-drawer a:hover,
   #shopify-section-{{ section.id }} .lh-drawer .lh-subtoggle:hover { opacity: 0.65; }
   #shopify-section-{{ section.id }} .lh-subtoggle svg {
@@ -594,6 +600,29 @@
       "id": "search_placeholder",
       "label": "Search placeholder",
       "default": "Search"
+    },
+    {
+      "type": "range",
+      "id": "drawer_item_padding",
+      "min": 2,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Menu item spacing",
+      "default": 10,
+      "info": "Lower = tighter gap between menu items."
+    },
+    {
+      "type": "checkbox",
+      "id": "drawer_dividers",
+      "label": "Show divider line under each menu item",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "drawer_divider_color",
+      "label": "Divider line color",
+      "default": "#E6E6E6"
     },
     {
       "type": "header",
