@@ -1,0 +1,896 @@
+{%- if section.settings.heading_font -%}
+  <style>
+    {{ section.settings.heading_font | font_face: font_display: 'swap' }}
+  </style>
+{%- endif -%}
+
+{%- liquid
+  case section.settings.popup_orientation
+    when 'landscape'
+      assign popup_ratio = '16 / 9'
+      assign popup_max = 880
+    when 'square'
+      assign popup_ratio = '1 / 1'
+      assign popup_max = 560
+    else
+      assign popup_ratio = '9 / 16'
+      assign popup_max = 420
+  endcase
+-%}
+
+{%- style -%}
+  .shop-by-craft-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    background-color: {{ section.settings.bg_color }};
+    overflow: hidden;
+  }
+
+  @media screen and (min-width: 750px) {
+    .shop-by-craft-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .craft-container {
+    max-width: 100%;
+    margin: 0 auto;
+    position: relative;
+    padding-bottom: 2rem;
+  }
+
+  /* Ornate Header */
+  .craft-header-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: {{ section.settings.heading_gap }}px;
+    padding: 0 1.5rem;
+  }
+
+  .craft-header-line {
+    height: 1px;
+    width: 50px;
+    background-color: {{ section.settings.accent_color }};
+  }
+
+  .craft-header-icon {
+    width: 16px;
+    height: 16px;
+    fill: {{ section.settings.accent_color }};
+  }
+
+  .craft-title {
+    margin: 0;
+    color: {{ section.settings.accent_color }};
+    font-size: {{ section.settings.heading_size }}rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    /* font-family: {% if section.settings.heading_font != blank %}{{ section.settings.heading_font.family }}, {{ section.settings.heading_font.fallback_families }}{% else %}var(--font-heading-family){% endif %}; */
+  }
+
+  /* Carousel Track */
+  .craft-carousel-wrapper {
+    position: relative;
+    display: block;
+    width: 100%;
+  }
+
+  .craft-track {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: {{ section.settings.carousel_gap }}px 0;
+  }
+
+  .craft-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .craft-track.is-jumping {
+    scroll-behavior: auto !important;
+    scroll-snap-type: none !important;
+  }
+
+  .craft-card {
+    flex: 0 0 60vw;
+    width: 60vw;
+    height: 75vw;
+    margin: 0 -5vw;
+    scroll-snap-align: center;
+    position: relative;
+    border-radius: {{ section.settings.border_radius }}px;
+    overflow: hidden;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease, z-index 0s;
+    transform: scale(0.85);
+    opacity: 0.6;
+    z-index: 1;
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    background-color: #eaeaea;
+    cursor: pointer;
+  }
+
+  @media screen and (min-width: 768px) {
+    .craft-card {
+      flex: 0 0 28vw;
+      width: 28vw;
+      height: 35vw;
+      margin: 0 -2vw;
+    }
+  }
+
+  .craft-card.is-active {
+    transform: scale(1.1);
+    opacity: 1;
+    z-index: 10;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  }
+
+  .craft-media {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    z-index: 0;
+  }
+
+  /* Play badge for video cards */
+  .craft-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.45);
+    border: 1px solid rgba(255,255,255,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+  }
+  .craft-play svg { width: 20px; height: 20px; fill: #fff; margin-left: 3px; }
+  .craft-card.is-active .craft-play { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+
+  /* Overlay Box */
+  .craft-overlay {
+    position: absolute;
+    bottom: 15%;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.4s ease;
+    z-index: 2;
+  }
+
+  .craft-card.is-active .craft-overlay {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .craft-label {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    padding: 8px 24px;
+    /* font-family: {% if section.settings.heading_font != blank %}{{ section.settings.heading_font.family }}, {{ section.settings.heading_font.fallback_families }}{% else %}var(--font-heading-family){% endif %}; */
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  /* Navigation Arrows */
+  .craft-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    color: #121212;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease;
+  }
+
+  .craft-nav-btn:hover {
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .craft-nav-btn svg {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+  }
+
+  .craft-prev { left: 10%; }
+  .craft-next { right: 10%; }
+
+  @media screen and (max-width: 767px) {
+    .craft-prev { left: 5%; }
+    .craft-next { right: 5%; }
+    .craft-nav-btn { width: 36px; height: 36px; }
+  }
+
+  .craft-footer {
+    text-align: center;
+    margin-top: 3rem;
+  }
+
+  .craft-btn {
+    display: inline-block;
+    background-color: {{ section.settings.btn_color }};
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px 36px;
+    border-radius: 30px;
+    font-family: var(--font-body-family);
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    transition: opacity 0.3s ease;
+  }
+
+  .craft-btn:hover {
+    opacity: 0.8;
+  }
+
+  /* ---------- Video Popup / Lightbox ---------- */
+  .craft-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .craft-modal.is-open { display: flex; }
+  .craft-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.78);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+  }
+  .craft-modal-dialog {
+    position: relative;
+    width: min({{ popup_max }}px, 92vw);
+    max-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    animation: craftPop 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  @keyframes craftPop {
+    from { opacity: 0; transform: translateY(14px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .craft-modal-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: {{ popup_ratio }};
+    background: #000;
+    border-radius: 14px 14px 0 0;
+    overflow: hidden;
+  }
+  .craft-modal-media video,
+  .craft-modal-media iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    object-fit: cover;
+    background: #000;
+  }
+  .craft-modal-footer {
+    background: {{ section.settings.popup_footer_bg }};
+    border-radius: 0 0 14px 14px;
+    padding: 18px 20px 22px;
+    text-align: center;
+  }
+  .craft-modal-title {
+    margin: 0 0 14px;
+    color: {{ section.settings.popup_title_color }};
+    font-size: 1.05rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .craft-modal-title:empty { display: none; }
+  .craft-modal-btn {
+    display: inline-block;
+    background-color: {{ section.settings.btn_color }};
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px 40px;
+    border-radius: 30px;
+    font-family: var(--font-body-family);
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    transition: opacity 0.3s ease;
+  }
+  .craft-modal-btn:hover { opacity: 0.85; }
+  .craft-modal-close {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #fff;
+    color: #121212;
+    border: none;
+    cursor: pointer;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  }
+  .craft-modal-close svg { width: 16px; height: 16px; fill: currentColor; }
+  @media screen and (max-width: 767px) {
+    .craft-modal-close { top: -10px; right: 4px; }
+  }
+{%- endstyle -%}
+
+<div class="shop-by-craft-{{ section.id }}" id="CraftSection-{{ section.id }}">
+  <div class="craft-container">
+
+    <div class="craft-header-wrapper">
+      <svg class="craft-header-icon" viewBox="0 0 24 24"><path d="M12 2.5L13.5 9.5L20.5 11L13.5 12.5L12 19.5L10.5 12.5L3.5 11L10.5 9.5L12 2.5Z"/></svg>
+      <div class="craft-header-line"></div>
+      <h2 class="craft-title">{{ section.settings.heading | escape }}</h2>
+      <div class="craft-header-line"></div>
+      <svg class="craft-header-icon" viewBox="0 0 24 24"><path d="M12 2.5L13.5 9.5L20.5 11L13.5 12.5L12 19.5L10.5 12.5L3.5 11L10.5 9.5L12 2.5Z"/></svg>
+    </div>
+
+    <div class="craft-carousel-wrapper">
+      <button class="craft-nav-btn craft-prev" aria-label="Previous">
+        <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+      </button>
+
+      <div class="craft-track" id="CraftTrack-{{ section.id }}">
+        {% assign block_count = section.blocks.size %}
+        {% if block_count > 0 %}
+
+          {% for i in (1..7) %}
+            {% for block in section.blocks %}
+              {%- assign has_video = false -%}
+              {%- if block.settings.video != blank or block.settings.video_url != blank -%}
+                {%- assign has_video = true -%}
+              {%- endif -%}
+
+              <a href="{{ block.settings.product_link | default: '#' }}"
+                 class="craft-card"
+                 data-has-video="{{ has_video }}"
+                 data-title="{{ block.settings.title | escape }}"
+                 data-btn-text="{{ block.settings.button_text | escape }}"
+                 data-btn-link="{{ block.settings.product_link }}"
+                 {% if i == 4 %}{{ block.shopify_attributes }}{% endif %}>
+
+                {%- if block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 800, height: 1000, crop: 'center' | image_tag: class: 'craft-media', loading: 'eager' }}
+                {%- elsif block.settings.video != blank and block.settings.video.preview_image -%}
+                  {{ block.settings.video.preview_image | image_url: width: 800, height: 1000, crop: 'center' | image_tag: class: 'craft-media', loading: 'eager' }}
+                {%- else -%}
+                  <div style="position: absolute; top:0; left:0; width:100%; height:100%; display:flex; align-items:center; justify-content:center; background: #eaeaea;">
+                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg craft-media' }}
+                  </div>
+                {%- endif -%}
+
+                {%- if has_video -%}
+                  <span class="craft-play" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                  </span>
+                {%- endif -%}
+
+                {% if block.settings.title != blank %}
+                  <div class="craft-overlay">
+                    <span class="craft-label">{{ block.settings.title }}</span>
+                  </div>
+                {% endif %}
+
+                {%- if has_video -%}
+                  <template class="craft-video-template">
+                    {%- if block.settings.video != blank -%}
+                      <video class="craft-modal-video" controls playsinline autoplay preload="none"
+                        {% if block.settings.image != blank %}poster="{{ block.settings.image | image_url: width: 1200 }}"{% elsif block.settings.video.preview_image %}poster="{{ block.settings.video.preview_image | image_url: width: 1200 }}"{% endif %}>
+                        {%- for source in block.settings.video.sources -%}
+                          {%- if source.format == 'mp4' -%}
+                            <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                          {%- endif -%}
+                        {%- endfor -%}
+                      </video>
+                    {%- elsif block.settings.video_url != blank -%}
+                      {%- assign vid = block.settings.video_url -%}
+                      {%- if vid.type == 'youtube' -%}
+                        <iframe src="https://www.youtube.com/embed/{{ vid.id }}?autoplay=1&playsinline=1&rel=0" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
+                      {%- elsif vid.type == 'vimeo' -%}
+                        <iframe src="https://player.vimeo.com/video/{{ vid.id }}?autoplay=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                      {%- endif -%}
+                    {%- endif -%}
+                  </template>
+                {%- endif -%}
+              </a>
+            {% endfor %}
+          {% endfor %}
+
+        {% endif %}
+      </div>
+
+      <button class="craft-nav-btn craft-next" aria-label="Next">
+        <svg viewBox="0 0 24 24"><path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg>
+      </button>
+    </div>
+
+    {% if section.settings.btn_text != blank %}
+      <div class="craft-footer">
+        <a href="{{ section.settings.btn_link }}" class="craft-btn">{{ section.settings.btn_text }}</a>
+      </div>
+    {% endif %}
+
+  </div>
+
+  <!-- Video popup (one per section, populated on click) -->
+  <div class="craft-modal" id="CraftModal-{{ section.id }}" aria-hidden="true">
+    <div class="craft-modal-backdrop" data-craft-close></div>
+    <div class="craft-modal-dialog" role="dialog" aria-modal="true" aria-label="{{ section.settings.heading | escape }}">
+      <button class="craft-modal-close" type="button" data-craft-close aria-label="Close">
+        <svg viewBox="0 0 24 24"><path d="M18.3 5.71L12 12l6.3 6.29-1.42 1.42L10.59 13.4l-6.3 6.3-1.41-1.42L9.17 12 2.88 5.71 4.29 4.3l6.3 6.3 6.29-6.3z"/></svg>
+      </button>
+      <div class="craft-modal-media"></div>
+      <div class="craft-modal-footer">
+        <h3 class="craft-modal-title"></h3>
+        <a class="craft-modal-btn" href="#">{{ section.settings.default_button_text | default: 'Shop This Product' }}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initCraftCarousel() {
+    const track = document.getElementById('CraftTrack-{{ section.id }}');
+    if (!track) return;
+
+    const cards = Array.from(track.querySelectorAll('.craft-card'));
+    const originalCount = {{ section.blocks.size }};
+    if (originalCount === 0 || cards.length === 0) return;
+
+    const prevBtn = track.parentElement.querySelector('.craft-prev');
+    const nextBtn = track.parentElement.querySelector('.craft-next');
+
+    let currentIndex = originalCount * 3;
+    const autoPlaySpeed = {{ section.settings.autoplay_speed }} * 1000;
+    let autoPlayInterval;
+    let isTransitioning = false;
+
+    /* ---------- Video popup ---------- */
+    const modal = document.getElementById('CraftModal-{{ section.id }}');
+    const modalMedia = modal ? modal.querySelector('.craft-modal-media') : null;
+    const modalTitle = modal ? modal.querySelector('.craft-modal-title') : null;
+    const modalBtn = modal ? modal.querySelector('.craft-modal-btn') : null;
+
+    function openModal(card) {
+      if (!modal) return;
+      const tpl = card.querySelector('.craft-video-template');
+      modalMedia.innerHTML = '';
+      if (tpl) modalMedia.appendChild(tpl.content.cloneNode(true));
+
+      const title = card.getAttribute('data-title') || '';
+      modalTitle.textContent = title;
+
+      const link = card.getAttribute('data-btn-link') || '';
+      const btnText = card.getAttribute('data-btn-text');
+      if (link) {
+        modalBtn.style.display = '';
+        modalBtn.setAttribute('href', link);
+        if (btnText) modalBtn.textContent = btnText;
+      } else {
+        modalBtn.style.display = 'none';
+      }
+
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      clearInterval(autoPlayInterval);
+    }
+
+    function closeModal() {
+      if (!modal) return;
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      modalMedia.innerHTML = ''; // stops video / iframe
+      document.body.style.overflow = '';
+      startAutoPlay();
+    }
+
+    if (modal) {
+      modal.querySelectorAll('[data-craft-close]').forEach(el => {
+        el.addEventListener('click', closeModal);
+      });
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+      });
+    }
+
+    cards.forEach(card => {
+      card.addEventListener('click', e => {
+        const hasVideo = card.getAttribute('data-has-video') === 'true';
+        const href = card.getAttribute('href');
+        if (hasVideo) {
+          e.preventDefault();
+          openModal(card);
+        } else if (!href || href === '#') {
+          e.preventDefault();
+        }
+      });
+    });
+
+    /* ---------- Carousel ---------- */
+    function updateCenterCard() {
+      const trackCenter = track.getBoundingClientRect().left + track.clientWidth / 2;
+      let closest = null;
+      let closestDistance = Infinity;
+
+      cards.forEach((card, index) => {
+        const cardCenter = card.getBoundingClientRect().left + card.clientWidth / 2;
+        const distance = Math.abs(trackCenter - cardCenter);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closest = card;
+          currentIndex = index;
+        }
+      });
+
+      cards.forEach(c => c.classList.remove('is-active'));
+      if (closest) closest.classList.add('is-active');
+
+      checkInfiniteBounds();
+    }
+
+    function checkInfiniteBounds() {
+      if (isTransitioning) return;
+      if (currentIndex < originalCount * 2) {
+        jumpTo(currentIndex + (originalCount * 3));
+      } else if (currentIndex > originalCount * 5) {
+        jumpTo(currentIndex - (originalCount * 3));
+      }
+    }
+
+    function jumpTo(index) {
+      isTransitioning = true;
+      track.classList.add('is-jumping');
+
+      const targetCard = cards[index];
+      const scrollPos = targetCard.offsetLeft + (targetCard.clientWidth / 2) - (track.clientWidth / 2);
+      track.scrollTo({ left: scrollPos, behavior: 'instant' });
+
+      currentIndex = index;
+
+      setTimeout(() => {
+        track.classList.remove('is-jumping');
+        isTransitioning = false;
+      }, 50);
+    }
+
+    function scrollToIndex(index) {
+      if (cards.length <= 1) return;
+      const targetCard = cards[index];
+      if (!targetCard) return;
+      const scrollPos = targetCard.offsetLeft + (targetCard.clientWidth / 2) - (track.clientWidth / 2);
+      track.scrollTo({ left: scrollPos, behavior: 'smooth' });
+    }
+
+    if (prevBtn && nextBtn) {
+      prevBtn.onclick = () => { scrollToIndex(currentIndex - 1); resetAutoPlay(); };
+      nextBtn.onclick = () => { scrollToIndex(currentIndex + 1); resetAutoPlay(); };
+    }
+
+    track.addEventListener('scroll', () => {
+      if (!isTransitioning) requestAnimationFrame(updateCenterCard);
+    });
+
+    track.classList.add('is-jumping');
+    const startCard = cards[currentIndex];
+    const startPos = startCard.offsetLeft + (startCard.clientWidth / 2) - (track.clientWidth / 2);
+    track.scrollTo({ left: startPos, behavior: 'instant' });
+    updateCenterCard();
+
+    setTimeout(() => { track.classList.remove('is-jumping'); }, 100);
+
+    function startAutoPlay() {
+      if (autoPlaySpeed > 0 && cards.length > 1 && (!modal || !modal.classList.contains('is-open'))) {
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = setInterval(() => { scrollToIndex(currentIndex + 1); }, autoPlaySpeed);
+      }
+    }
+
+    function resetAutoPlay() {
+      clearInterval(autoPlayInterval);
+      startAutoPlay();
+    }
+
+    track.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+    track.addEventListener('mouseleave', startAutoPlay);
+    track.addEventListener('touchstart', () => clearInterval(autoPlayInterval), { passive: true });
+    track.addEventListener('touchend', startAutoPlay, { passive: true });
+
+    startAutoPlay();
+  }
+
+  document.addEventListener('DOMContentLoaded', initCraftCarousel);
+  document.addEventListener('shopify:section:load', initCraftCarousel);
+</script>
+
+{% schema %}
+{
+  "name": "Shop by Craft",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Text Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "SHOP BY CRAFT"
+    },
+    {
+      "type": "font_picker",
+      "id": "heading_font",
+      "label": "Heading & Label Font",
+      "default": "playfair_display_n4"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 1,
+      "max": 3,
+      "step": 0.1,
+      "unit": "rem",
+      "label": "Heading Size",
+      "default": 1.4
+    },
+    {
+      "type": "header",
+      "content": "Spacing & Layout"
+    },
+    {
+      "type": "range",
+      "id": "heading_gap",
+      "min": 0,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "label": "Space below heading",
+      "default": 48,
+      "info": "Gap between the heading and the cards."
+    },
+    {
+      "type": "range",
+      "id": "carousel_gap",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Carousel vertical breathing room",
+      "default": 40,
+      "info": "Space above/below cards. Keep some room so the active card's shadow isn't clipped."
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Text",
+      "default": "View All"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "color",
+      "id": "btn_color",
+      "label": "Button Color",
+      "default": "#8E5E53"
+    },
+    {
+      "type": "header",
+      "content": "Carousel Settings"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "sec",
+      "label": "Autoplay Speed",
+      "default": 3,
+      "info": "Set to 0 to disable auto-move."
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Corner Roundness",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Video Popup"
+    },
+    {
+      "type": "select",
+      "id": "popup_orientation",
+      "label": "Popup video shape",
+      "options": [
+        { "value": "portrait", "label": "Portrait (Reels 9:16)" },
+        { "value": "landscape", "label": "Landscape (16:9)" },
+        { "value": "square", "label": "Square (1:1)" }
+      ],
+      "default": "portrait"
+    },
+    {
+      "type": "text",
+      "id": "default_button_text",
+      "label": "Default popup button text",
+      "default": "Shop This Product",
+      "info": "Used when a card has no per-card button text."
+    },
+    {
+      "type": "color",
+      "id": "popup_footer_bg",
+      "label": "Popup footer background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "popup_title_color",
+      "label": "Popup title color",
+      "default": "#121212"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section Background",
+      "default": "#F7F6F2"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Heading Color",
+      "default": "#9C794D"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "craft",
+      "name": "Craft Style",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image / Video thumbnail",
+          "info": "Required dimensions: 800 x 1000 pixels (4:5 Ratio). Shown on the card."
+        },
+        {
+          "type": "header",
+          "content": "Video (opens in popup on click)"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Upload video"
+        },
+        {
+          "type": "video_url",
+          "id": "video_url",
+          "label": "Or paste video link (YouTube / Vimeo)",
+          "accept": ["youtube", "vimeo"]
+        },
+        {
+          "type": "header",
+          "content": "Details"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Craft Name",
+          "default": "TEMPLE"
+        },
+        {
+          "type": "url",
+          "id": "product_link",
+          "label": "Product link (popup button)"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Popup button text",
+          "default": "Shop This Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop by Craft",
+      "blocks": [
+        { "type": "craft", "settings": { "title": "TRIBAL" } },
+        { "type": "craft", "settings": { "title": "NAVRATNA" } },
+        { "type": "craft", "settings": { "title": "TEMPLE" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

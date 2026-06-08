@@ -7,7 +7,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import type { CollectionSlug, Piece } from "@/data/types";
 import { COLLECTIONS } from "@/data/site";
 import { formatINR } from "@/data/pieces";
-import { IconClock, IconHash, IconLotus } from "./icons";
+import { useCart } from "./cart/CartProvider";
+import { IconBag, IconClock, IconLotus } from "./icons";
 
 type Filter = "all" | CollectionSlug;
 
@@ -15,6 +16,7 @@ type Filter = "all" | CollectionSlug;
 const RATIOS = ["aspect-[3/4]", "aspect-square", "aspect-[4/5]", "aspect-[3/4]"] as const;
 
 function Card({ piece, index }: { piece: Piece; index: number }) {
+  const { add } = useCart();
   const feature = index % 9 === 0;
   const ratio = feature ? "aspect-[16/10]" : RATIOS[index % RATIOS.length];
   const remaining = Math.max(piece.edition.of - piece.edition.number, 0);
@@ -90,16 +92,17 @@ function Card({ piece, index }: { piece: Piece; index: number }) {
           {feature && (
             <p className="lede mt-1 line-clamp-1 text-base text-stone-dark">{piece.description}</p>
           )}
-          <div className="mt-2 flex items-center justify-between gap-2">
+          <div className="mt-2.5 flex items-center justify-between gap-2">
             <span className="eyebrow flex items-center gap-1.5 text-[0.52rem] text-stone-dark">
               <IconClock size={11} className="text-brass" /> {piece.hours} hrs
             </span>
-            <Link
-              href={`/piece/${piece.slug}`}
-              className="eyebrow border border-brass/50 px-4 py-2 text-[0.52rem] text-brass transition-all duration-500 hover:border-charcoal hover:bg-charcoal hover:text-gold"
+            <button
+              onClick={() => add(piece.slug, 1)}
+              aria-label={`Add ${piece.name} to cart`}
+              className="eyebrow flex items-center gap-1.5 border border-brass/50 px-4 py-2.5 text-[0.52rem] text-brass transition-all duration-500 hover:border-charcoal hover:bg-charcoal hover:text-gold active:scale-95"
             >
-              Buy Now
-            </Link>
+              <IconBag size={12} /> Add
+            </button>
           </div>
         </div>
       </div>

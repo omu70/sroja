@@ -7,6 +7,8 @@ import Footer from "@/components/Footer";
 import Cursor from "@/components/Cursor";
 import ScrollProgress from "@/components/ScrollProgress";
 import Preloader from "@/components/Preloader";
+import { CartProvider } from "@/components/cart/CartProvider";
+import CartDrawer from "@/components/cart/CartDrawer";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -64,14 +66,17 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
         />
-        <SmoothScroll>
-          <Preloader />
-          <ScrollProgress />
-          <Cursor />
-          <Navigation />
-          <main>{children}</main>
-          <Footer />
-        </SmoothScroll>
+        <CartProvider>
+          <SmoothScroll>
+            <Preloader />
+            <ScrollProgress />
+            <Cursor />
+            <Navigation />
+            <main>{children}</main>
+            <Footer />
+          </SmoothScroll>
+          <CartDrawer />
+        </CartProvider>
       </body>
     </html>
   );

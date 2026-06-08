@@ -6,12 +6,12 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { NAV } from "@/data/site";
 import BrandLogo from "./BrandLogo";
+import { useCart } from "./cart/CartProvider";
 import { IconBag, IconEnvelope, IconSearch } from "./icons";
 
 const ICON_LINKS = [
   { href: "/collections", label: "Search the collection", Icon: IconSearch },
   { href: "/consultation", label: "Contact us", Icon: IconEnvelope },
-  { href: "/collections", label: "Shop the collection", Icon: IconBag },
 ] as const;
 
 export default function Navigation() {
@@ -37,6 +37,7 @@ export default function Navigation() {
     };
   }, [open]);
 
+  const { count, openCart } = useCart();
   const onHero = pathname === "/" || pathname?.startsWith("/piece/");
   const lightText = onHero && !scrolled && !open;
 
@@ -94,6 +95,22 @@ export default function Navigation() {
                 <Icon size={17} />
               </Link>
             ))}
+
+            {/* Cart bag — opens the drawer, shows live count */}
+            <button
+              onClick={openCart}
+              aria-label={`Open cart${count ? ` (${count} item${count > 1 ? "s" : ""})` : ""}`}
+              className={`relative flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-500 hover:-translate-y-0.5 hover:border-gold hover:bg-gold hover:text-charcoal-deep ${
+                lightText ? "border-ivory/30 text-ivory" : "border-brass/30 text-brass"
+              }`}
+            >
+              <IconBag size={17} />
+              {count > 0 && (
+                <span className="absolute -right-1 -top-1 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-brass px-1 text-[0.6rem] font-medium text-ivory-bright">
+                  {count}
+                </span>
+              )}
+            </button>
 
             {/* Menu trigger */}
             <button

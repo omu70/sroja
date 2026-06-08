@@ -3,7 +3,13 @@ import { z } from "zod";
 import { getPiece } from "@/data/pieces";
 
 const CheckoutSchema = z.object({
-  piece: z.string().min(1).max(120),
+  // single-piece (Buy Now) — optional
+  piece: z.string().min(1).max(120).optional(),
+  // cart — optional
+  items: z
+    .array(z.object({ slug: z.string().min(1).max(120), qty: z.number().int().min(1).max(20) }))
+    .max(50)
+    .optional(),
   name: z.string().min(1).max(120),
   email: z.string().email().max(200),
   phone: z.string().min(6).max(20),
@@ -11,10 +17,10 @@ const CheckoutSchema = z.object({
 });
 
 /**
- * Creates a Razorpay order for a piece.
- * — The amount is ALWAYS taken from the server-side archive (never the client).
- * — Without RAZORPAY keys configured, responds { configured: false } so the
- *   storefront can fall back to the enquiry flow gracefully.
+ * Creates a Razorpay order for a single piece OR a whole cart.
+ * — Amounts are ALWAYS computed from the server-side catalogue (never the client).
+ * — Without RAZORPAY keys, responds { configured: false } so the storefront can
+ *   fall back gracefully.
  */
 export async function POST(req: Request) {
   let data: z.infer<typeof CheckoutSchema>;
@@ -24,10 +30,22 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "Invalid details." }, { status: 400 });
   }
 
-  const piece = getPiece(data.piece);
-  if (!piece) {
-    return NextResponse.json({ ok: false, error: "Unknown piece." }, { status: 404 });
+  // Resolve line items from server data
+  const requested = data.items?.length
+    ? data.items
+    : data.piece
+      ? [{ slug: data.piece, qty: 1 }]
+      : [];
+
+  const lines = requested
+    .map((r) => ({ piece: getPiece(r.slug), qty: r.qty }))
+    .filter((l): l is { piece: NonNullable<ReturnType<typeof getPiece>>; qty: number } => !!l.piece);
+
+  if (lines.length === 0) {
+    return NextResponse.json({ ok: false, error: "Nothing to check out." }, { status: 400 });
   }
+
+  const amount = lines.reduce((sum, l) => sum + l.piece.price * l.qty, 0) * 100; // paise
 
   const keyId = process.env.RAZORPAY_KEY_ID;
   const keySecret = process.env.RAZORPAY_KEY_SECRET;
@@ -40,28 +58,23 @@ export async function POST(req: Request) {
     const auth = Buffer.from(`${keyId}:${keySecret}`).toString("base64");
     const res = await fetch("https://api.razorpay.com/v1/orders", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Basic ${auth}`,
-      },
+      headers: { "Content-Type": "application/json", Authorization: `Basic ${auth}` },
       body: JSON.stringify({
-        amount: piece.price * 100, // paise — server-side price only
+        amount,
         currency: "INR",
-        receipt: `sroja_${piece.slug.slice(0, 30)}_${Date.now().toString(36)}`,
+        receipt: `sroja_${Date.now().toString(36)}`,
         notes: {
-          piece: piece.slug,
-          edition: `${piece.edition.number}/${piece.edition.of}`,
+          items: lines.map((l) => `${l.piece.name} ×${l.qty}`).join(", ").slice(0, 480),
           buyer: data.name,
           email: data.email,
           phone: data.phone,
-          address: data.address.slice(0, 500),
+          address: data.address.slice(0, 400),
         },
       }),
     });
 
     if (!res.ok) {
-      const err = await res.text();
-      console.error("[checkout] Razorpay order failed:", err.slice(0, 300));
+      console.error("[checkout] Razorpay order failed:", (await res.text()).slice(0, 300));
       return NextResponse.json(
         { ok: false, error: "Payment service unavailable. Please try again." },
         { status: 502 }
@@ -69,7 +82,6 @@ export async function POST(req: Request) {
     }
 
     const order = (await res.json()) as { id: string; amount: number; currency: string };
-
     return NextResponse.json({
       ok: true,
       configured: true,
@@ -77,7 +89,6 @@ export async function POST(req: Request) {
       orderId: order.id,
       amount: order.amount,
       currency: order.currency,
-      pieceName: piece.name,
     });
   } catch (err) {
     console.error("[checkout] error:", err);
