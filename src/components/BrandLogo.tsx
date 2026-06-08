@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 
 /**
- * The real SROJA marks, extracted verbatim from the brand manual
- * (public/sroja-logo*.svg and public/sroja-mark*.svg).
- * Three baked colours match the brand "Soft Light" system:
+ * The real SROJA logo, extracted verbatim from the brand manual
+ * (public/brand/*.png — the star mark + wordmark in Cormorant Unicase).
+ * Three baked inks match the brand "Soft Light" system:
  *   charcoal — for light backgrounds
  *   ivory    — for dark backgrounds (hero, footer, checkout)
  *   gold     — accent
@@ -18,15 +18,22 @@ interface LogoProps {
   variant?: "full" | "mark";
 }
 
+const TONE_FILE: Record<Tone, string> = {
+  charcoal: "dark",
+  ivory: "light",
+  gold: "gold",
+};
+
 export default function BrandLogo({
   tone = "charcoal",
   className = "",
   variant = "full",
 }: LogoProps) {
-  const file = variant === "mark" ? `sroja-mark-${tone}` : `sroja-logo-${tone}`;
+  const part = variant === "mark" ? "mark" : "lockup";
+  const file = `sroja-${part}-${TONE_FILE[tone]}`;
   return (
     <img
-      src={`/${file}.svg`}
+      src={`/brand/${file}.png`}
       alt="SROJA"
       className={className}
       draggable={false}
