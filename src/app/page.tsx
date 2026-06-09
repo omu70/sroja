@@ -106,25 +106,23 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Editorial showcases — desktop only (too long for mobile) */}
-        <div className="hidden border-t border-ivory-mute md:block">
+        {/* Editorial showcases */}
+        <div className="border-t border-ivory-mute">
           {featured.map((piece, i) => (
             <PieceShowcase key={piece.slug} piece={piece} index={i} />
           ))}
         </div>
       </section>
 
-      {/* Four storytelling sections — desktop only, keeps mobile short & conversion-focused */}
-      <div className="hidden md:block">
-        <CraftTimeline />
-        <ImageBand
-          src={img("1778664354807_msia342n03.webp")}
-          alt="The printed field — Neel Gul Bagh under north light"
-          line="A machine repeats. A hand remembers."
-        />
-        <VisionSection />
-        <MaterialLibrary />
-      </div>
+      {/* Four storytelling sections */}
+      <CraftTimeline />
+      <ImageBand
+        src={img("1778664354807_msia342n03.webp")}
+        alt="The printed field — Neel Gul Bagh under north light"
+        line="A machine repeats. A hand remembers."
+      />
+      <VisionSection />
+      <MaterialLibrary />
 
       {/* Second product row — after the four sections, shown everywhere */}
       <section className="border-t border-ivory-mute bg-ivory-bright py-16 md:py-24">
@@ -146,21 +144,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      <div className="hidden md:block">
-        <ImageBand
-          src={img("1778737274664_pn4aiafoyzm.webp")}
-          alt="The quilting frame — Genda Baagh in progress"
-          line="Twenty-eight pieces. Every one numbered."
-        />
-      </div>
+      <ImageBand
+        src={img("1778737274664_pn4aiafoyzm.webp")}
+        alt="The quilting frame — Genda Baagh in progress"
+        line="Twenty-eight pieces. Every one numbered."
+      />
 
-      {/* Social proof + trust — shown on every device */}
+      {/* Social proof + trust */}
       <ProvenanceSection />
       <CollectorNotes />
       <GlobalSection />
-      <div className="hidden md:block">
-        <AtelierStrip />
-      </div>
+      <AtelierStrip />
 
       {/* Final CTA — straight to the shop */}
       <section className="relative overflow-hidden border-t border-ivory-mute bg-ivory py-24 text-center md:py-36">
