@@ -51,7 +51,7 @@ export async function generateMetadata({
   const collection = COLLECTIONS.find((c) => c.slug === piece.collection);
   return {
     title: `${piece.name} — ${collection?.title ?? "Shop"} | Buy Limited Edition Handcrafted Design`,
-    description: `${piece.description} ${piece.hours} artisan-hours, edition of ${piece.edition.of}, IPR-protected. Buy online — UPI, cards, netbanking.`,
+    description: `${piece.description} ${piece.hours} artisan-hours, edition of ${piece.edition.of}. Buy online — UPI, cards, netbanking.`,
     openGraph: { images: [{ url: piece.images[0] }] },
   };
 }
@@ -195,9 +195,9 @@ export default async function PiecePage({ params }: { params: Promise<Params> })
                     [IconRuler, "Dimensions", piece.dimensions],
                     ...(care?.components ? [[IconCrate, "What's included", care.components] as const] : []),
                     [IconHand, "Craft", `${piece.craft} — ${piece.region}`],
-                    [IconHash, "Edition", `${piece.edition.number} of ${piece.edition.of} · numbered & certified`],
+                    [IconHash, "Edition", `${piece.edition.number} of ${piece.edition.of} · numbered edition`],
                     [IconClock, "Made in", `${piece.hours} artisan-hours · ${piece.artisans} artisans`],
-                    [IconShield, "Authenticity", "Original SROJA design — legally protected"],
+                    [IconShield, "Origin", "Original SROJA design, handmade in India"],
                   ] as const
                 ).map(([Icon, k, v]) => (
                   <div key={k} className="grid grid-cols-3 items-baseline gap-6 py-4">

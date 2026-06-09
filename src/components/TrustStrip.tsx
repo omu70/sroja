@@ -1,15 +1,15 @@
 // ------------------------------------------------------------------------
 // Trust Badges Row
 //
-// The reassurance row: free shipping, returns, certificate, payment methods.
+// The reassurance row: free shipping, returns, handmade, payment methods.
 // ------------------------------------------------------------------------
 
-import { IconCrate, IconCertificate, IconShield, IconArrow } from "./icons";
+import { IconCrate, IconHand, IconShield, IconArrow } from "./icons";
 
 const ITEMS = [
-  { Icon: IconCrate, label: "Free insured shipping ₹15,000+" },
+  { Icon: IconCrate, label: "Free shipping ₹15,000+" },
   { Icon: IconArrow, label: "30-day returns" },
-  { Icon: IconCertificate, label: "Certificate included" },
+  { Icon: IconHand, label: "Handmade in India" },
   { Icon: IconShield, label: "UPI · Cards · Netbanking" },
 ] as const;
 

@@ -10,12 +10,12 @@ import {
   IconLeaf,
   IconHand,
   IconEye,
-  IconCertificate,
+  IconHash,
   IconLotus,
 } from "./icons";
 import { TIMELINE } from "@/data/site";
 
-const ICONS = [IconPencil, IconLeaf, IconHand, IconEye, IconCertificate] as const;
+const ICONS = [IconPencil, IconLeaf, IconHand, IconEye, IconHash] as const;
 
 /**
  * The Process — five steps, always fully visible.

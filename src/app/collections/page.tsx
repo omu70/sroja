@@ -16,7 +16,7 @@ import { IconArrow } from "@/components/icons";
 export const metadata: Metadata = {
   title: "The Archive — Limited Edition Handcrafted Pieces",
   description:
-    "The SROJA archive — 28 limited-edition handcrafted pieces in five collections. Cushions, bed linens, quilts, dohars and curtains, each numbered and certified.",
+    "The SROJA archive — 28 limited-edition handcrafted pieces in five collections. Cushions, bed linens, quilts, dohars and curtains, each in a numbered edition.",
 };
 
 export default function CollectionsPage() {
@@ -36,7 +36,7 @@ export default function CollectionsPage() {
           <div className="mt-8 grid gap-6 border-t border-ivory-mute pt-8 md:grid-cols-12 md:items-center">
             <p className="lede text-lg leading-snug text-charcoal/80 md:col-span-7 md:text-2xl">
               Five collections, each an original design — block-printed in Rajasthan,
-              handwoven in Kutch and Tamil Nadu — numbered, certified, made to be kept.
+              handwoven in Kutch and Tamil Nadu — numbered, made to be kept.
             </p>
             <div className="flex flex-wrap gap-x-6 gap-y-2 md:col-span-5 md:justify-end">
               {COLLECTIONS.map((c, i) => (

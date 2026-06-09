@@ -91,7 +91,7 @@ export async function POST(req: Request) {
             ``,
             `Your payment is confirmed (ref ${data.razorpay_payment_id}).`,
             piece
-              ? `${piece.name} — edition ${piece.edition.number} of ${piece.edition.of} — will be prepared, certified and dispatched with insured delivery.`
+              ? `${piece.name} — edition ${piece.edition.number} of ${piece.edition.of} — will be prepared and dispatched with care.`
               : ``,
             `A design advisor will write to you with dispatch details shortly.`,
             ``,

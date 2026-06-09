@@ -94,9 +94,7 @@ export default function Footer() {
 
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <p className="text-xs leading-relaxed text-stone-dark">
-            Every design here is an original SROJA work, protected under
-            Intellectual Property Rights. Copying or commercial use without
-            permission is prohibited.
+            Every design is an original SROJA work, handcrafted in India.
           </p>
           <div className="shrink-0 text-right">
             <p className="eyebrow text-[0.52rem] text-stone-dark">

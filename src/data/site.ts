@@ -18,7 +18,7 @@ export const SITE = {
   tagline: "Designed To Be Collected.",
   subTagline: "Not manufactured. Crafted.",
   description:
-    "SROJA is a luxury design house from India. Every piece is a collectible work of textile art — drawn in our studio, handcrafted by master artisans, produced in deliberately small editions and protected as original intellectual property.",
+    "SROJA is a luxury design house from India. Every piece is a collectible work of textile art — drawn in our studio, handcrafted by master artisans, produced in deliberately small, numbered editions.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://sroja.in",
   founder: "Archit",
   founderTitle: "Founder & Creative Director",
@@ -31,7 +31,6 @@ export const NAV = [
   { label: "Shop", href: "/collections" },
   { label: "Our Story", href: "/maison" },
   { label: "The Craft", href: "/atelier" },
-  { label: "Authenticity", href: "/provenance" },
   { label: "Contact", href: "/consultation" },
 ] as const;
 
@@ -150,7 +149,7 @@ export const TIMELINE = [
   {
     phase: "05 — The Signature",
     title: "Finishing",
-    text: "Washed, sun-cured, pressed — numbered and certified before it leaves.",
+    text: "Washed, sun-cured, pressed — numbered before it leaves.",
     stat: "1 of few",
     statLabel: "numbered editions",
   },
@@ -241,12 +240,3 @@ export const MATERIALS_LIB = [
     image: img("1778664354453_6dqmk575fh7.webp"),
   },
 ] as const;
-
-export const IPR_STATEMENT = {
-  headline: "Original. Protected. Unrepeatable.",
-  lines: [
-    "Every SROJA design is an original work by SROJA, protected under Intellectual Property Rights.",
-    "No one else may make it — owning one means owning something unrepeatable.",
-    "Small editions. Numbered. Certified.",
-  ],
-};

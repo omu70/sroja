@@ -18,7 +18,7 @@ const REGIONS = [
 
 const PROMISES = [
   { Icon: IconCrate, label: "Archival packing" },
-  { Icon: IconShield, label: "Fully insured" },
+  { Icon: IconShield, label: "Secure payment" },
   { Icon: IconGlobe, label: "Worldwide delivery" },
 ] as const;
 
@@ -70,7 +70,7 @@ export default function GlobalSection() {
                 <p className="eyebrow text-brass">Shipped worldwide</p>
                 <p className="mt-3 text-sm leading-relaxed text-stone-dark">
                   Collected across {cities.slice(0, 6).join(", ")} and beyond — every
-                  piece travels fully insured, in archival packing, with its certificate.
+                  piece is carefully packed and shipped worldwide.
                 </p>
                 <div className="mt-6 grid grid-cols-3 gap-3">
                   {PROMISES.map(({ Icon, label }) => (

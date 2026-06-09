@@ -70,7 +70,7 @@ function EditionRegister({ piece }: { piece: Piece }) {
 
 /**
  * The Secure Checkout — a full-screen ritual, not a checkout.
- * Sign the certificate line, watch your name take the edition, then pay.
+ * Enter your details, watch your name take the edition, then pay.
  */
 export default function CheckoutOverlay({
   piece,
@@ -216,10 +216,10 @@ export default function CheckoutOverlay({
                     No. {String(piece.edition.number).padStart(2, "0")} is yours.
                   </p>
                   <p className="display mt-4 max-w-sm text-xl italic text-ivory/85">
-                    {piece.name}, certificate in the name of {form.name || "you"}.
+                    {piece.name}, in the name of {form.name || "you"}.
                   </p>
                   <p className="mt-6 max-w-xs text-sm leading-relaxed text-stone">
-                    Confirmation is on its way by email. The certificate travels with the piece.
+                    Confirmation is on its way by email.
                   </p>
                   {error && <p className="mt-4 text-xs text-brass-bright">{error}</p>}
                 </div>
@@ -235,12 +235,12 @@ export default function CheckoutOverlay({
                     <EditionRegister piece={piece} />
                   </div>
 
-                  {/* The certificate line — signs itself as you type */}
+                  {/* Your edition — fills in as you type */}
                   <div className="mt-9 border border-brass/30 bg-charcoal px-6 py-5">
-                    <p className="eyebrow text-stone">The certificate will read</p>
+                    <p className="eyebrow text-stone">Your edition</p>
                     <p className="display mt-2 text-lg leading-relaxed text-ivory/90 md:text-xl">
                       Edition No. {String(piece.edition.number).padStart(2, "0")} of{" "}
-                      {piece.edition.of}, held by{" "}
+                      {piece.edition.of}, for{" "}
                       <span className={signed ? "italic text-gold" : "text-stone-dark"}>
                         {signed ? form.name : "…………………"}
                       </span>
@@ -315,7 +315,7 @@ export default function CheckoutOverlay({
                         <IconShield size={13} className="text-gold" /> UPI · Cards · Netbanking — Razorpay
                       </span>
                       <span className="eyebrow flex items-center gap-2 text-[0.52rem] text-stone">
-                        <IconCrate size={13} className="text-gold" /> Insured worldwide · 30-day returns
+                        <IconCrate size={13} className="text-gold" /> Secure checkout · 30-day returns
                       </span>
                     </div>
                   </form>

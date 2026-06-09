@@ -76,7 +76,7 @@ const ORIGINS: Origin[] = [
     material: "Design Studio",
     place: "Gurugram",
     state: "Haryana",
-    fact: "Where every motif is drawn, numbered and certified before the looms begin.",
+    fact: "Where every motif is drawn, numbered before the looms begin.",
     x: 185,
     y: 198,
     image: img("1778767833856_4t842ktzits.png"),

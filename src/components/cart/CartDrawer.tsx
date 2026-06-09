@@ -159,7 +159,7 @@ export default function CartDrawer() {
                 <p className="display mt-6 text-3xl text-brass">Order confirmed.</p>
                 <p className="mt-3 text-sm leading-relaxed text-stone-dark">
                   Thank you. A confirmation email is on its way; your pieces will be
-                  prepared, certified and dispatched insured.
+                  prepared and dispatched with care.
                 </p>
                 <button onClick={closeCart} className="eyebrow mt-8 border border-brass px-8 py-4 text-brass transition-colors hover:bg-charcoal hover:text-gold">
                   Continue Browsing
@@ -182,9 +182,9 @@ export default function CartDrawer() {
                     <p className="eyebrow flex items-center gap-2 text-stone-dark">
                       <IconCrate size={14} className="text-brass" />
                       {toFree > 0 ? (
-                        <>Add {formatINR(toFree)} for free insured shipping</>
+                        <>Add {formatINR(toFree)} for free shipping</>
                       ) : (
-                        <span className="text-brass">You've unlocked free insured shipping ✦</span>
+                        <span className="text-brass">You've unlocked free shipping ✦</span>
                       )}
                     </p>
                     <div className="mt-2 h-1 w-full overflow-hidden rounded-full bg-ivory-mute">
@@ -266,7 +266,7 @@ export default function CartDrawer() {
                     <p className="display text-3xl text-charcoal">{formatINR(subtotal)}</p>
                   </div>
                   <p className="mt-1 text-xs text-stone-dark">
-                    {toFree > 0 ? "Shipping calculated at delivery" : "Free insured shipping included"}
+                    {toFree > 0 ? "Shipping calculated at delivery" : "Free shipping included"}
                   </p>
 
                   {stage !== "form" && error && <p className="mt-3 text-sm text-terracotta">{error}</p>}
@@ -288,7 +288,7 @@ export default function CartDrawer() {
                       <IconShield size={12} className="text-brass" /> Razorpay secure
                     </span>
                     <span className="eyebrow flex items-center gap-1.5 text-[0.5rem] text-stone-dark">
-                      <IconCrate size={12} className="text-brass" /> Insured · 30-day returns
+                      <IconCrate size={12} className="text-brass" /> Secure · 30-day returns
                     </span>
                   </div>
                 </div>

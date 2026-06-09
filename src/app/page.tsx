@@ -13,7 +13,6 @@ import VisionSection from "@/components/home/VisionSection";
 import CraftTimeline from "@/components/CraftTimeline";
 import MaterialLibrary from "@/components/MaterialLibrary";
 import GlobalSection from "@/components/home/GlobalSection";
-import ProvenanceSection from "@/components/home/ProvenanceSection";
 import CollectorNotes from "@/components/home/CollectorNotes";
 import AtelierStrip from "@/components/home/AtelierStrip";
 import PieceShowcase from "@/components/PieceShowcase";
@@ -158,7 +157,6 @@ export default function HomePage() {
       />
 
       {/* Social proof + trust */}
-      <ProvenanceSection />
       <CollectorNotes />
       <GlobalSection />
       <AtelierStrip />
@@ -172,7 +170,7 @@ export default function HomePage() {
         />
         <Reveal>
           <h2 className="display mx-auto max-w-4xl px-6 text-5xl leading-[1.02] text-charcoal md:text-8xl">
-            Own an <span className="italic text-brass">original.</span>
+            Begin your <span className="italic text-brass">collection.</span>
           </h2>
           <Link
             href="/collections"

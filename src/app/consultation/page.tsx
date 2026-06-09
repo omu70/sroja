@@ -26,7 +26,7 @@ const EXPECT = [
   },
   {
     step: "The delivery",
-    text: "Reserved, certified, delivered insured.",
+    text: "Reserved and delivered with care.",
   },
 ] as const;
 

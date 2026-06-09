@@ -12,7 +12,7 @@ import { formatINR } from "@/data/pieces";
 import CheckoutOverlay from "./CheckoutOverlay";
 import { useCart } from "./cart/CartProvider";
 import BrandLogo from "./BrandLogo";
-import { IconBag, IconCertificate, IconCrate, IconShield } from "./icons";
+import { IconBag, IconCrate, IconHand, IconShield } from "./icons";
 
 /**
  * The plaque — a museum label with a single intention.
@@ -68,8 +68,8 @@ export default function AcquisitionPanel({ piece }: { piece: Piece }) {
         <div className="mt-7 grid grid-cols-3 gap-2 border-t border-ivory-mute pt-6">
           {[
             { Icon: IconShield, t: "Razorpay secure" },
-            { Icon: IconCertificate, t: "Certificate" },
-            { Icon: IconCrate, t: "Insured delivery" },
+            { Icon: IconHand, t: "Handmade" },
+            { Icon: IconCrate, t: "Worldwide delivery" },
           ].map(({ Icon, t }) => (
             <span key={t} className="flex flex-col items-center gap-2 text-center">
               <Icon size={17} className="text-brass" />
