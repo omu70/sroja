@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Sitemap generator (sitemap.xml)
+//
+// Lists every page so search engines (Google) can find them.
+// ------------------------------------------------------------------------
+
 import type { MetadataRoute } from "next";
 import { SITE, COLLECTIONS } from "@/data/site";
 import { PIECES } from "@/data/pieces";

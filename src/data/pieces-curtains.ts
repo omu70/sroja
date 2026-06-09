@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Products: Curtains
+//
+// The curtain products and all their details.
+// ------------------------------------------------------------------------
+
 import type { Piece } from "./types";
 import { img } from "./site";
 import { blockProcess, chettinadProcess } from "./process";

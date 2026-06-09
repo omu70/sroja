@@ -1,3 +1,10 @@
+// ------------------------------------------------------------------------
+// Shop Gallery (the collection page grid)
+//
+// Lays out all products as a gallery, grouped into collection 'chapters'
+// with asymmetric, magazine-style image arrangement.
+// ------------------------------------------------------------------------
+
 "use client";
 
 import Image from "next/image";

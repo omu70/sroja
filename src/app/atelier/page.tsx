@@ -1,3 +1,10 @@
+// ------------------------------------------------------------------------
+// The Craft Page (/atelier)
+//
+// Educates the customer about the materials, the crafts, and the regions
+// they come from (includes the interactive India 'Origins' map).
+// ------------------------------------------------------------------------
+
 import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";

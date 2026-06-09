@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Featured Product Showcase
+//
+// A large editorial product feature (big image + short story) used on the home page.
+// ------------------------------------------------------------------------
+
 import Link from "next/link";
 import type { Piece } from "@/data/types";
 import { COLLECTIONS } from "@/data/site";

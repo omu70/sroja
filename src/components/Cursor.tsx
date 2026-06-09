@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Custom Cursor
+//
+// Replaces the mouse pointer with a small brass dot on desktop.
+// ------------------------------------------------------------------------
+
 "use client";
 
 import { useEffect, useRef } from "react";

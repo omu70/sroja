@@ -1,3 +1,10 @@
+// ------------------------------------------------------------------------
+// Cart Drawer (slide-in basket)
+//
+// The basket panel that slides in from the right: items, quantities,
+// free-shipping progress, 'complete the set' upsell, and checkout.
+// ------------------------------------------------------------------------
+
 "use client";
 
 import Image from "next/image";

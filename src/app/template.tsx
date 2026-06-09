@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Page Transition Wrapper
+//
+// Adds the soft fade-in animation when moving between pages.
+// ------------------------------------------------------------------------
+
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";

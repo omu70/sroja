@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Home: Manifesto
+//
+// The large fade-in brand statement lines on the home page.
+// ------------------------------------------------------------------------
+
 "use client";
 
 import { useRef } from "react";

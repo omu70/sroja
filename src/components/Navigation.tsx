@@ -1,3 +1,10 @@
+// ------------------------------------------------------------------------
+// Top Navigation Bar
+//
+// The fixed header on every page: centered logo on mobile, menu links,
+// search/contact icons, and the cart button with a live item count.
+// ------------------------------------------------------------------------
+
 "use client";
 
 import Link from "next/link";

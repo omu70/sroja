@@ -1,3 +1,10 @@
+// ------------------------------------------------------------------------
+// Site Content & Settings
+//
+// Central place for brand info, menu links, collection names, the world map
+// cities, materials and other reusable text/content.
+// ------------------------------------------------------------------------
+
 import type { CollectionMeta } from "./types";
 
 export const IMG_BASE =

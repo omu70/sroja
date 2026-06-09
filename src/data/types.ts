@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Data Shapes (TypeScript types)
+//
+// Defines the 'shape' of a product and a collection so the code stays safe.
+// ------------------------------------------------------------------------
+
 export type CollectionSlug =
   | "cushions"
   | "bed-linens"

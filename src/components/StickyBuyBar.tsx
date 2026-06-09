@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Sticky Buy Bar
+//
+// The small price + buy bar that follows you as you scroll a product page.
+// ------------------------------------------------------------------------
+
 "use client";
 
 import { useEffect, useState } from "react";

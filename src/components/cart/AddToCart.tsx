@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Add-to-Cart Button
+//
+// A reusable button that adds a piece to the cart and opens the drawer.
+// ------------------------------------------------------------------------
+
 "use client";
 
 import { useCart } from "./CartProvider";

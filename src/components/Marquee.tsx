@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Scrolling Word Strip
+//
+// The slow-scrolling band of craft words (e.g. 'Hand Block Printing').
+// ------------------------------------------------------------------------
+
 import { IconLotus } from "./icons";
 
 const WORDS = [

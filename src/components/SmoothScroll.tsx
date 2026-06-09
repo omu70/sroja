@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Smooth Scrolling
+//
+// Adds the smooth, weighted scrolling feel across the site.
+// ------------------------------------------------------------------------
+
 "use client";
 
 import { useEffect, type ReactNode } from "react";

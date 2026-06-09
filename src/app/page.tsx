@@ -1,3 +1,10 @@
+// ------------------------------------------------------------------------
+// Home Page
+//
+// The landing page: hero banner, trust badges, a row of products, the story
+// sections (craft, materials, map), reviews, and final call-to-action.
+// ------------------------------------------------------------------------
+
 import Link from "next/link";
 import HeroFilm from "@/components/HeroFilm";
 import Marquee from "@/components/Marquee";

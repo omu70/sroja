@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Home: Reviews
+//
+// Auto-rotating customer/collector quotes.
+// ------------------------------------------------------------------------
+
 "use client";
 
 import { useEffect, useState } from "react";

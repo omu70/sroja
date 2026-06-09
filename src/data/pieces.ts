@@ -1,3 +1,10 @@
+// ------------------------------------------------------------------------
+// Product List (combined) + helpers
+//
+// Joins all product files into one list and provides helpers (find, related,
+// price formatting).
+// ------------------------------------------------------------------------
+
 import type { CollectionSlug, Piece } from "./types";
 import { CUSHIONS } from "./pieces-cushions";
 import { BED_LINENS } from "./pieces-bed";

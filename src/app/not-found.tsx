@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// 404 'Page Not Found' screen
+//
+// Shown when a visitor lands on a URL that does not exist.
+// ------------------------------------------------------------------------
+
 import Link from "next/link";
 
 export default function NotFound() {

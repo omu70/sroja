@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Our Story Page (/maison)
+//
+// The brand story — the designer, the founding idea, and the house principles.
+// ------------------------------------------------------------------------
+
 import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";

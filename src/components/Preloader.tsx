@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Intro Loader
+//
+// The one-second logo splash shown once when the site first opens.
+// ------------------------------------------------------------------------
+
 "use client";
 
 import { useEffect, useState } from "react";

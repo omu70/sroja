@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Robots file generator (robots.txt)
+//
+// Tells search-engine crawlers which pages they may index.
+// ------------------------------------------------------------------------
+
 import type { MetadataRoute } from "next";
 import { SITE } from "@/data/site";
 

@@ -1,3 +1,10 @@
+// ------------------------------------------------------------------------
+// API: Verify Payment
+//
+// Server code that confirms a Razorpay payment is genuine (checks the
+// signature) and sends order-confirmation emails.
+// ------------------------------------------------------------------------
+
 import { NextResponse } from "next/server";
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { z } from "zod";

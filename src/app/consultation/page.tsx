@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Contact Page (/consultation)
+//
+// Contact form and details for questions, orders, and trade enquiries.
+// ------------------------------------------------------------------------
+
 import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 import InquiryForm from "@/components/InquiryForm";

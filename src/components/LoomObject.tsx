@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// 3D Thread Object
+//
+// A small spinning 3D brass shape (decorative).
+// ------------------------------------------------------------------------
+
 "use client";
 
 import { Suspense, useRef } from "react";

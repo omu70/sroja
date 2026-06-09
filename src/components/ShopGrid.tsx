@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Simple Shop Grid (legacy/alternate)
+//
+// An older simple filterable product grid. Kept for reference.
+// ------------------------------------------------------------------------
+
 "use client";
 
 import Image from "next/image";

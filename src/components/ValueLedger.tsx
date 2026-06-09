@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Stats Row
+//
+// The row of big numbers (artisan-hours, number of works, etc.).
+// ------------------------------------------------------------------------
+
 import CountUp from "./CountUp";
 import type { SVGProps } from "react";
 

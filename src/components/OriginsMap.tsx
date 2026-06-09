@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Interactive Origins Map (craft page)
+//
+// Hover a material and its home region lights up on the real India map.
+// ------------------------------------------------------------------------
+
 "use client";
 
 import Image from "next/image";

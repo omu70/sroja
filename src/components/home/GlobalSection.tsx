@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Home: Made in India
+//
+// The India map section listing the four craft regions + shipping promises.
+// ------------------------------------------------------------------------
+
 import Reveal from "@/components/Reveal";
 import IndiaMap from "@/components/IndiaMap";
 import { WORLD_CITIES } from "@/data/site";

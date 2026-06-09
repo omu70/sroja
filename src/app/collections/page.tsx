@@ -1,3 +1,10 @@
+// ------------------------------------------------------------------------
+// Shop / Archive Page (/collections)
+//
+// The main shop page. Shows all products grouped into editorial 'chapters'
+// (one per collection) using the ArchiveGallery component.
+// ------------------------------------------------------------------------
+
 import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 import ArchiveGallery from "@/components/ArchiveGallery";

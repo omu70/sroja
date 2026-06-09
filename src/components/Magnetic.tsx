@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Magnetic Hover Effect
+//
+// Makes a button gently lean toward the cursor on hover.
+// ------------------------------------------------------------------------
+
 "use client";
 
 import { useRef, type ReactNode } from "react";

@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Contact Form
+//
+// The reusable message form (name, email, message) used on the contact page.
+// ------------------------------------------------------------------------
+
 "use client";
 
 import { useState } from "react";

@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Home: Authenticity
+//
+// The 'original, protected, certified' section with a certificate card.
+// ------------------------------------------------------------------------
+
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import { SITE } from "@/data/site";

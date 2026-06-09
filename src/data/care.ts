@@ -1,3 +1,10 @@
+// ------------------------------------------------------------------------
+// Care & Pack Details
+//
+// Wash care, what's-in-the-box, and textile type for each product
+// (taken from the product sheet).
+// ------------------------------------------------------------------------
+
 // Care, package contents and textile notes — sourced from the SROJA product sheet.
 export interface CareDetail {
   care: string[];

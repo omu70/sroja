@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Brand Logo
+//
+// Shows the real SROJA logo image in the right colour (dark/ivory/gold).
+// ------------------------------------------------------------------------
+
 /* eslint-disable @next/next/no-img-element */
 
 /**

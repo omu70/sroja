@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Counting Number Animation
+//
+// Animates a number counting up when it scrolls into view.
+// ------------------------------------------------------------------------
+
 "use client";
 
 import { useEffect, useRef, useState } from "react";

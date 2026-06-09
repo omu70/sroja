@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Product Buy Box
+//
+// The price + 'Buy Now' + 'Add to Cart' panel on a product page.
+// ------------------------------------------------------------------------
+
 "use client";
 
 import { useEffect, useState } from "react";

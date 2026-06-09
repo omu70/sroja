@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Buy-Now Checkout Popup
+//
+// The full-screen popup for buying a single piece: details form + Razorpay.
+// ------------------------------------------------------------------------
+
 "use client";
 
 import Image from "next/image";

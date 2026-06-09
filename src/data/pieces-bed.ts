@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Products: Bed Linens
+//
+// The bedsheet products and all their details.
+// ------------------------------------------------------------------------
+
 import type { Piece } from "./types";
 import { img } from "./site";
 import { blockProcess, quiltProcess } from "./process";

@@ -1,3 +1,10 @@
+// ------------------------------------------------------------------------
+// Cart Brain (state)
+//
+// Holds the cart contents in memory + saves them in the browser so they
+// survive a refresh. Other components read/update the cart through this.
+// ------------------------------------------------------------------------
+
 "use client";
 
 import {

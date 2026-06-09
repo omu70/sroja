@@ -1,3 +1,10 @@
+// ------------------------------------------------------------------------
+// API: Create Payment Order
+//
+// Server code that creates a Razorpay order. Always prices the cart on the
+// server (never trusts the browser). Used by Buy Now and the cart.
+// ------------------------------------------------------------------------
+
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { getPiece } from "@/data/pieces";

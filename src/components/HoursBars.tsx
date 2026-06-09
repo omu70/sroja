@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// 'How It's Made' Hours Chart
+//
+// Bar chart showing how the making hours are split across each craft step.
+// ------------------------------------------------------------------------
+
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";

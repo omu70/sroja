@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Icon Set
+//
+// All the small line-drawn icons used across the site (bag, search, etc.).
+// ------------------------------------------------------------------------
+
 /**
  * The SROJA icon vocabulary — thin-stroke, jewellery-weight line icons.
  * All inherit currentColor; stroke 1.3 for an engraved, premium feel.

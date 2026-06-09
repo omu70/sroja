@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Fade-in-on-scroll Wrapper
+//
+// Wraps content so it gently fades up as you scroll to it.
+// ------------------------------------------------------------------------
+
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";

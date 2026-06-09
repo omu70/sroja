@@ -1,3 +1,10 @@
+// ------------------------------------------------------------------------
+// Material Education Content
+//
+// The teaching content for the craft page: what each material is, why it
+// costs more, how it feels, how to care for it, how to spot the real thing.
+// ------------------------------------------------------------------------
+
 import { img } from "./site";
 
 /**

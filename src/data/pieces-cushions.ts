@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Products: Cushions
+//
+// The cushion products and all their details.
+// ------------------------------------------------------------------------
+
 import type { Piece } from "./types";
 import { img } from "./site";
 import { blockProcess, bhujodiProcess, chettinadProcess } from "./process";

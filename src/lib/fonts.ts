@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Fonts
+//
+// Loads the website fonts (serif, sans, and the brand display font).
+// ------------------------------------------------------------------------
+
 import { Cormorant_Garamond, Cormorant_Unicase, Inter } from "next/font/google";
 
 export const serif = Cormorant_Garamond({

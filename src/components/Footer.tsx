@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Footer
+//
+// The dark footer at the bottom of every page: links, contact, payment info.
+// ------------------------------------------------------------------------
+
 import Link from "next/link";
 import { NAV, SITE, COLLECTIONS } from "@/data/site";
 import BrandLogo from "./BrandLogo";

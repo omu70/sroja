@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Making-Process Builder
+//
+// Builds the step-by-step making breakdown (with hours) for each craft type.
+// ------------------------------------------------------------------------
+
 import type { ProcessStep } from "./types";
 
 /**

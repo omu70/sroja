@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Home: Product Row
+//
+// A compact, shoppable grid of products (2 columns on mobile).
+// ------------------------------------------------------------------------
+
 "use client";
 
 import Image from "next/image";

@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Home Hero Banner
+//
+// The full-screen image slideshow with the headline at the top of the home page.
+// ------------------------------------------------------------------------
+
 "use client";
 
 import Image from "next/image";

@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// India Map (home)
+//
+// The real map of India on the home page, marking the craft regions.
+// ------------------------------------------------------------------------
+
 /* eslint-disable @next/next/no-img-element */
 /**
  * Real, accurate map of India (state boundaries) with the four homes of the

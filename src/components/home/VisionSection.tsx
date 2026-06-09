@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Home: Designer Intro
+//
+// The 'every piece begins with a drawing' designer section on the home page.
+// ------------------------------------------------------------------------
+
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import ParallaxImage from "@/components/ParallaxImage";

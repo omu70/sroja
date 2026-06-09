@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Trust Badges Row
+//
+// The reassurance row: free shipping, returns, certificate, payment methods.
+// ------------------------------------------------------------------------
+
 import { IconCrate, IconCertificate, IconShield, IconArrow } from "./icons";
 
 const ITEMS = [

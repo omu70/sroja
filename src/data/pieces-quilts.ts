@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Products: Quilts
+//
+// The quilt products and all their details.
+// ------------------------------------------------------------------------
+
 import type { Piece } from "./types";
 import { img } from "./site";
 import { quiltProcess, chettinadProcess } from "./process";

@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Material Library (home)
+//
+// Interactive list of materials with a large close-up photo on hover.
+// ------------------------------------------------------------------------
+
 "use client";
 
 import Image from "next/image";

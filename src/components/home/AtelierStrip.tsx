@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Home: The Workshop
+//
+// A photo strip + craft cards linking to the craft page.
+// ------------------------------------------------------------------------
+
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import ParallaxImage from "@/components/ParallaxImage";

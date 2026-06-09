@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Full-width Photo Band
+//
+// A big edge-to-edge photo with one line of text over it, used between sections.
+// ------------------------------------------------------------------------
+
 import ParallaxImage from "./ParallaxImage";
 import { IconLotus } from "./icons";
 

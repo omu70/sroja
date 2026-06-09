@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Authenticity Page (/provenance)
+//
+// Explains how each design is original, protected, numbered and certified.
+// ------------------------------------------------------------------------
+
 import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";

@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Parallax Image
+//
+// An image that drifts slightly as you scroll (depth effect).
+// ------------------------------------------------------------------------
+
 "use client";
 
 import Image from "next/image";

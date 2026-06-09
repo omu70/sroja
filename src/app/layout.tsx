@@ -1,3 +1,10 @@
+// ------------------------------------------------------------------------
+// Root Layout (the shell of every page)
+//
+// Wraps every page with the shared parts: fonts, the cart system, smooth
+// scrolling, the top navigation bar, the footer, and the slide-in cart drawer.
+// ------------------------------------------------------------------------
+
 import type { Metadata } from "next";
 import { serif, sans, brand } from "@/lib/fonts";
 import { SITE } from "@/data/site";

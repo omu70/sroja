@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Process Steps (home)
+//
+// The five-step 'how every piece is made' cards on the home page.
+// ------------------------------------------------------------------------
+
 import Reveal from "./Reveal";
 import {
   IconPencil,

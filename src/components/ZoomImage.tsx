@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Zoomable Image
+//
+// Click an image to open a full-screen zoom view.
+// ------------------------------------------------------------------------
+
 "use client";
 
 import Image from "next/image";

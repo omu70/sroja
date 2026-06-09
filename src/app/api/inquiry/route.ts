@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// API: Contact / Enquiry
+//
+// Server code that receives the contact form and emails it to the studio.
+// ------------------------------------------------------------------------
+
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { getPiece } from "@/data/pieces";

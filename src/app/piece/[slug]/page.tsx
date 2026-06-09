@@ -1,3 +1,10 @@
+// ------------------------------------------------------------------------
+// Product Page (/piece/<name>)
+//
+// The full product page for one piece: image gallery, price, Buy Now / Add to
+// Cart, specs, care info, the 'how it's made' hours, and related pieces.
+// ------------------------------------------------------------------------
+
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";

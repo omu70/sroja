@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Scroll Progress Bar
+//
+// The thin line at the very top showing how far down the page you are.
+// ------------------------------------------------------------------------
+
 "use client";
 
 import { motion, useScroll, useSpring } from "framer-motion";

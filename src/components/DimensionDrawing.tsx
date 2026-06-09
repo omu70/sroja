@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Size Diagram
+//
+// Draws a simple to-scale technical diagram of a piece's dimensions.
+// ------------------------------------------------------------------------
+
 /**
  * The dimensional drawing — every dossier carries its technical sheet,
  * drafted like a page from the atelier's drawing board.

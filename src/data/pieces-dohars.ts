@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Products: Dohars
+//
+// The dohar (light blanket) products and all their details.
+// ------------------------------------------------------------------------
+
 import type { Piece } from "./types";
 import { img } from "./site";
 import { chettinadProcess } from "./process";

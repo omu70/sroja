@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// Single Collection Page (/collections/<name>)
+//
+// Shows the products of one collection (e.g. quilts) with its intro text.
+// ------------------------------------------------------------------------
+
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";

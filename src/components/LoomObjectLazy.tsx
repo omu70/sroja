@@ -1,3 +1,9 @@
+// ------------------------------------------------------------------------
+// 3D Thread Loader
+//
+// Loads the 3D object only when it scrolls into view (keeps the site fast).
+// ------------------------------------------------------------------------
+
 "use client";
 
 import dynamic from "next/dynamic";
