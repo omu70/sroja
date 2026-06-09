@@ -17,15 +17,19 @@ export default function ShopPage() {
   const totalHours = PIECES.reduce((a, p) => a + p.hours, 0);
 
   return (
-    <section className="bg-ivory-bright pb-24 pt-40 md:pt-52">
+    <section className="bg-ivory-bright pb-20 pt-32 md:pb-24 md:pt-52">
       <div className="mx-auto max-w-[1700px] px-6 md:px-12">
         <Reveal>
           <p className="eyebrow text-brass">The Shop</p>
-          <h1 className="display mt-5 text-6xl leading-[0.98] text-charcoal md:text-8xl">
+          <h1 className="display mt-4 text-5xl leading-[0.98] text-charcoal md:text-8xl">
             All {PIECES.length} <span className="italic text-stone-dark">pieces.</span>
           </h1>
+          <p className="lede mt-3 text-lg text-stone-dark md:hidden">
+            Numbered, certified, handcrafted — every one an original.
+          </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-x-9 gap-y-3">
+          {/* Stats — desktop only, keeps the mobile header tight */}
+          <div className="mt-8 hidden flex-wrap items-center gap-x-9 gap-y-3 md:flex">
             {[
               { Icon: IconLayers, value: <CountUp to={PIECES.length} />, label: "numbered pieces" },
               { Icon: IconClock, value: <CountUp to={totalHours} />, label: "artisan-hours" },
@@ -42,12 +46,10 @@ export default function ShopPage() {
         </Reveal>
 
         <Reveal delay={0.1}>
-          <TrustStrip className="mt-9" />
+          <TrustStrip className="mt-7 md:mt-9" />
         </Reveal>
 
-        <div className="rule-live mt-9" />
-
-        <div className="mt-10">
+        <div className="mt-9">
           <ShopGrid pieces={PIECES} />
         </div>
       </div>

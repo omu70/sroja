@@ -68,9 +68,9 @@ export default function HomeProductGrid({ pieces }: { pieces: Piece[] }) {
             <button
               onClick={() => add(piece.slug, 1)}
               aria-label={`Add ${piece.name} to cart`}
-              className="eyebrow mt-2.5 flex w-full items-center justify-center gap-2 border border-brass/50 py-2.5 text-[0.55rem] text-brass transition-all duration-500 hover:border-charcoal hover:bg-charcoal hover:text-gold active:scale-[0.98]"
+              className="eyebrow mt-3 flex w-full items-center justify-center gap-2 border border-brass bg-charcoal py-3 text-[0.55rem] text-gold transition-all duration-500 hover:bg-charcoal-deep active:scale-[0.98]"
             >
-              <IconBag size={12} /> Add to Cart
+              <IconBag size={13} /> Add to Cart
             </button>
           </motion.div>
         );

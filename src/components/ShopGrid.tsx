@@ -3,114 +3,81 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import type { CollectionSlug, Piece } from "@/data/types";
 import { COLLECTIONS } from "@/data/site";
 import { formatINR } from "@/data/pieces";
 import { useCart } from "./cart/CartProvider";
-import { IconBag, IconClock, IconLotus } from "./icons";
+import { IconBag } from "./icons";
 
 type Filter = "all" | CollectionSlug;
 
-/* Editorial rhythm — aspect ratios cycle so the wall never feels like a grid of boxes. */
-const RATIOS = ["aspect-[3/4]", "aspect-square", "aspect-[4/5]", "aspect-[3/4]"] as const;
-
 function Card({ piece, index }: { piece: Piece; index: number }) {
   const { add } = useCart();
-  const feature = index % 9 === 0;
-  const ratio = feature ? "aspect-[16/10]" : RATIOS[index % RATIOS.length];
   const remaining = Math.max(piece.edition.of - piece.edition.number, 0);
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 18 }}
+      initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: Math.min((index % 12) * 0.04, 0.4), ease: [0.22, 1, 0.36, 1] }}
-      className={feature ? "col-span-2" : ""}
+      transition={{ duration: 0.45, delay: Math.min((index % 8) * 0.04, 0.3), ease: [0.22, 1, 0.36, 1] }}
+      className="group flex flex-col"
     >
-      <div className="group">
-        <Link href={`/piece/${piece.slug}`} className="block">
-          <div className={`relative w-full overflow-hidden bg-ivory-soft ${ratio}`}>
+      <Link href={`/piece/${piece.slug}`} className="block">
+        <div className="relative aspect-[3/4] w-full overflow-hidden bg-ivory-soft">
+          <Image
+            src={piece.images[0]}
+            alt={piece.name}
+            fill
+            sizes="(max-width: 768px) 50vw, 25vw"
+            className={`img-luxe object-cover transition-all duration-700 ${
+              piece.images[1] ? "group-hover:opacity-0" : "group-hover:scale-[1.04]"
+            }`}
+          />
+          {piece.images[1] && (
             <Image
-              src={piece.images[0]}
-              alt={piece.name}
+              src={piece.images[1]}
+              alt={`${piece.name} — detail`}
               fill
-              sizes={feature ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 50vw, 25vw"}
-              className={`img-luxe object-cover transition-all duration-700 ${
-                piece.images[1] ? "group-hover:opacity-0" : "group-hover:scale-[1.04]"
-              }`}
+              sizes="(max-width: 768px) 50vw, 25vw"
+              className="img-luxe object-cover opacity-0 transition-opacity duration-700 group-hover:opacity-100"
             />
-            {piece.images[1] && (
-              <Image
-                src={piece.images[1]}
-                alt={`${piece.name} — detail`}
-                fill
-                sizes={feature ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 50vw, 25vw"}
-                className="img-luxe object-cover opacity-0 transition-opacity duration-700 group-hover:opacity-100"
-              />
-            )}
-
-            {/* Hover dossier strip */}
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-2 bg-gradient-to-t from-charcoal-deep/85 to-transparent p-4 pt-12 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-              <p className="eyebrow text-[0.5rem] text-gold">{piece.craft}</p>
-              <div className="mt-2 flex items-center gap-1.5">
-                {piece.palette.map((hex) => (
-                  <span
-                    key={hex}
-                    className="h-3.5 w-3.5 rounded-full border border-ivory/30"
-                    style={{ backgroundColor: hex }}
-                  />
-                ))}
-              </div>
-            </div>
-
-            <span className="eyebrow absolute left-3 top-3 bg-ivory-bright/90 px-2.5 py-1.5 text-[0.5rem] text-charcoal backdrop-blur-sm">
-              No. {String(piece.edition.number).padStart(2, "0")}/{piece.edition.of}
-            </span>
-            {remaining <= 5 && remaining > 0 && (
-              <span className="eyebrow absolute right-3 top-3 bg-charcoal/85 px-2.5 py-1.5 text-[0.5rem] text-gold backdrop-blur-sm">
-                {remaining} left
-              </span>
-            )}
-          </div>
-        </Link>
-
-        <div className="mt-3.5">
-          <div className="flex items-baseline justify-between gap-3">
-            <Link
-              href={`/piece/${piece.slug}`}
-              className={`display truncate text-charcoal transition-colors duration-500 hover:text-brass ${
-                feature ? "text-2xl md:text-3xl" : "text-lg md:text-xl"
-              }`}
-            >
-              {piece.name}
-            </Link>
-            <span className="display shrink-0 text-lg text-brass md:text-xl">
-              {formatINR(piece.price)}
-            </span>
-          </div>
-          {feature && (
-            <p className="lede mt-1 line-clamp-1 text-base text-stone-dark">{piece.description}</p>
           )}
-          <div className="mt-2.5 flex items-center justify-between gap-2">
-            <span className="eyebrow flex items-center gap-1.5 text-[0.52rem] text-stone-dark">
-              <IconClock size={11} className="text-brass" /> {piece.hours} hrs
+          <span className="eyebrow absolute left-2.5 top-2.5 bg-ivory-bright/90 px-2.5 py-1.5 text-[0.5rem] text-charcoal backdrop-blur-sm">
+            No. {String(piece.edition.number).padStart(2, "0")}/{piece.edition.of}
+          </span>
+          {remaining <= 5 && remaining > 0 && (
+            <span className="eyebrow absolute right-2.5 top-2.5 bg-terracotta/90 px-2.5 py-1.5 text-[0.5rem] text-ivory-bright backdrop-blur-sm">
+              {remaining} left
             </span>
-            <button
-              onClick={() => add(piece.slug, 1)}
-              aria-label={`Add ${piece.name} to cart`}
-              className="eyebrow flex items-center gap-1.5 border border-brass/50 px-4 py-2.5 text-[0.52rem] text-brass transition-all duration-500 hover:border-charcoal hover:bg-charcoal hover:text-gold active:scale-95"
-            >
-              <IconBag size={12} /> Add
-            </button>
-          </div>
+          )}
         </div>
+      </Link>
+
+      <div className="mt-3 flex items-baseline justify-between gap-2">
+        <Link
+          href={`/piece/${piece.slug}`}
+          className="display truncate text-lg text-charcoal transition-colors duration-500 hover:text-brass md:text-xl"
+        >
+          {piece.name}
+        </Link>
+        <span className="display shrink-0 text-base text-brass md:text-lg">{formatINR(piece.price)}</span>
       </div>
+      <p className="eyebrow mt-1 text-[0.5rem] text-stone-dark">{piece.craft}</p>
+
+      {/* Always-visible Add to Cart */}
+      <button
+        onClick={() => add(piece.slug, 1)}
+        aria-label={`Add ${piece.name} to cart`}
+        className="eyebrow mt-3 flex w-full items-center justify-center gap-2 border border-brass bg-charcoal py-3 text-[0.55rem] text-gold transition-all duration-500 hover:bg-charcoal-deep active:scale-[0.98]"
+      >
+        <IconBag size={13} /> Add to Cart
+      </button>
     </motion.div>
   );
 }
 
-/** The Shop wall — every piece at once, hung with editorial rhythm. */
+/** The Shop wall — clean, uniform, shoppable. */
 export default function ShopGrid({ pieces }: { pieces: Piece[] }) {
   const [filter, setFilter] = useState<Filter>("all");
 
@@ -119,10 +86,8 @@ export default function ShopGrid({ pieces }: { pieces: Piece[] }) {
     [filter, pieces]
   );
 
-  const active = COLLECTIONS.find((c) => c.slug === filter);
-
   const tabs: { key: Filter; label: string; count: number }[] = [
-    { key: "all", label: "All Pieces", count: pieces.length },
+    { key: "all", label: "All", count: pieces.length },
     ...COLLECTIONS.map((c) => ({
       key: c.slug as Filter,
       label: c.title.replace("The ", "").replace(" Collection", "s").replace("Linens", "Linen"),
@@ -132,62 +97,27 @@ export default function ShopGrid({ pieces }: { pieces: Piece[] }) {
 
   return (
     <div>
-      {/* Serif tabs with a travelling underline */}
-      <div className="flex flex-wrap gap-x-9 gap-y-3 border-b border-ivory-mute">
+      {/* Filter pills — horizontal scroll on mobile */}
+      <div className="-mx-6 flex gap-2.5 overflow-x-auto px-6 pb-1 md:mx-0 md:flex-wrap md:px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {tabs.map((t) => (
           <button
             key={t.key}
             onClick={() => setFilter(t.key)}
-            className="group relative pb-4 text-left"
+            className={`eyebrow shrink-0 whitespace-nowrap border px-5 py-3 transition-all duration-500 ${
+              filter === t.key
+                ? "border-charcoal bg-charcoal text-gold"
+                : "border-ivory-mute bg-ivory-bright text-stone-dark hover:border-brass hover:text-brass"
+            }`}
           >
-            <span
-              className={`display text-2xl transition-colors duration-500 md:text-3xl ${
-                filter === t.key ? "text-charcoal" : "text-stone hover:text-stone-dark"
-              }`}
-            >
-              {t.label}
-            </span>
-            <sup
-              className={`eyebrow ml-1.5 text-[0.5rem] ${
-                filter === t.key ? "text-brass" : "text-stone"
-              }`}
-            >
-              {t.count}
-            </sup>
-            {filter === t.key && (
-              <motion.span
-                layoutId="shop-tab"
-                className="absolute -bottom-px left-0 right-0 h-[2px] bg-gradient-to-r from-brass to-gold"
-                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              />
-            )}
+            {t.label} <span className="opacity-60">({t.count})</span>
           </button>
         ))}
       </div>
 
-      {/* One line of the active room's voice */}
-      <div className="mt-6 flex min-h-[2rem] items-center gap-3">
-        <IconLotus size={14} className="shrink-0 text-brass animate-pulse-soft" />
-        <AnimatePresence mode="wait">
-          <motion.p
-            key={filter}
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
-            transition={{ duration: 0.4 }}
-            className="lede text-lg text-stone-dark md:text-xl"
-          >
-            {active
-              ? `${active.subtitle} — ${active.manifesto[1] ?? active.manifesto[0]}`
-              : "Every piece an original SROJA design — numbered, certified, handcrafted."}
-          </motion.p>
-        </AnimatePresence>
-      </div>
-
-      {/* The wall — remounts per filter so each room enters fresh */}
+      {/* The grid — uniform, 2 cols on mobile */}
       <div
         key={filter}
-        className="mt-10 grid grid-cols-2 items-start gap-x-5 gap-y-10 md:grid-cols-3 xl:grid-cols-4"
+        className="mt-8 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 md:gap-x-6 xl:grid-cols-4"
       >
         {shown.map((piece, i) => (
           <Card key={piece.slug} piece={piece} index={i} />

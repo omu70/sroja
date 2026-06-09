@@ -40,7 +40,7 @@ const HERO_FRAMES = [
 export default function HomePage() {
   const featured = getFeatured();
   const featuredSlugs = new Set(featured.map((p) => p.slug));
-  const gridPieces = PIECES.filter((p) => !featuredSlugs.has(p.slug)).slice(0, 8);
+  const gridPieces = PIECES.filter((p) => !featuredSlugs.has(p.slug)).slice(0, 12);
   const totalHours = PIECES.reduce((a, p) => a + p.hours, 0);
 
   return (
@@ -68,15 +68,15 @@ export default function HomePage() {
       </section>
 
       {/* Products first — the funnel starts immediately */}
-      <section className="relative border-t border-ivory-mute bg-ivory-bright pt-20 md:pt-28">
+      <section className="relative border-t border-ivory-mute bg-ivory-bright pt-14 md:pt-24">
         <div className="mx-auto max-w-[1700px] px-6 md:px-12">
           <Reveal>
-            <div className="flex flex-wrap items-end justify-between gap-6">
+            <div className="flex flex-wrap items-end justify-between gap-4">
               <div>
-                <p className="eyebrow text-brass">Signature Pieces</p>
-                <h2 className="display mt-4 max-w-4xl text-5xl text-charcoal md:text-7xl">
-                  From the
-                  <span className="italic text-stone-dark"> current editions.</span>
+                <p className="eyebrow text-brass">Shop the Collection</p>
+                <h2 className="display mt-3 max-w-4xl text-4xl text-charcoal md:text-7xl">
+                  Buy an
+                  <span className="italic text-stone-dark"> original.</span>
                 </h2>
               </div>
               <Link
@@ -87,58 +87,55 @@ export default function HomePage() {
               </Link>
             </div>
           </Reveal>
+
+          {/* Shoppable grid — primary, works great on mobile (2 cols) */}
+          <div className="mt-10">
+            <HomeProductGrid pieces={gridPieces} />
+          </div>
+
+          <div className="py-12 text-center md:py-14">
+            <Link
+              href="/collections"
+              className="eyebrow group inline-flex items-center gap-4 border border-brass bg-charcoal px-10 py-5 text-gold transition-all duration-700 hover:bg-charcoal-deep"
+            >
+              Shop All {PIECES.length} Pieces
+              <IconArrow size={16} className="transition-transform duration-700 group-hover:translate-x-2" />
+            </Link>
+          </div>
         </div>
-        <div className="mt-6">
+
+        {/* Editorial showcases — desktop only (too long for mobile) */}
+        <div className="hidden border-t border-ivory-mute md:block">
           {featured.map((piece, i) => (
             <PieceShowcase key={piece.slug} piece={piece} index={i} />
           ))}
         </div>
-
-        {/* Two-column shoppable grid — more pieces, compact */}
-        <div className="mx-auto max-w-[1700px] border-t border-ivory-mute px-6 pt-16 md:px-12 md:pt-24">
-          <Reveal>
-            <p className="eyebrow text-brass">More to explore</p>
-            <h3 className="display mt-3 text-4xl text-charcoal md:text-5xl">
-              The full shelf.
-            </h3>
-          </Reveal>
-          <div className="mt-10">
-            <HomeProductGrid pieces={gridPieces} />
-          </div>
-        </div>
-
-        <div className="border-t border-ivory-mute py-14 text-center mt-16">
-          <Link
-            href="/collections"
-            className="eyebrow group inline-flex items-center gap-4 border border-brass bg-charcoal px-12 py-6 text-gold transition-all duration-700 hover:bg-charcoal-deep"
-          >
-            Shop All {PIECES.length} Pieces
-            <IconArrow size={16} className="transition-transform duration-700 group-hover:translate-x-2" />
-          </Link>
-        </div>
       </section>
 
-      <CraftTimeline />
+      {/* Heavy storytelling — desktop only, keeps mobile short & conversion-focused */}
+      <div className="hidden md:block">
+        <CraftTimeline />
+        <ImageBand
+          src={img("1778664354807_msia342n03.webp")}
+          alt="The printed field — Neel Gul Bagh under north light"
+          line="A machine repeats. A hand remembers."
+        />
+        <VisionSection />
+        <MaterialLibrary />
+        <ImageBand
+          src={img("1778737274664_pn4aiafoyzm.webp")}
+          alt="The quilting frame — Genda Baagh in progress"
+          line="Twenty-eight pieces. Every one numbered."
+        />
+      </div>
 
-      <ImageBand
-        src={img("1778664354807_msia342n03.webp")}
-        alt="The printed field — Neel Gul Bagh under north light"
-        line="A machine repeats. A hand remembers."
-      />
-
-      <VisionSection />
-      <MaterialLibrary />
-
-      <ImageBand
-        src={img("1778737274664_pn4aiafoyzm.webp")}
-        alt="The quilting frame — Genda Baagh in progress"
-        line="Twenty-eight pieces. Every one numbered."
-      />
-
+      {/* Social proof + trust — shown on every device */}
       <ProvenanceSection />
       <CollectorNotes />
       <GlobalSection />
-      <AtelierStrip />
+      <div className="hidden md:block">
+        <AtelierStrip />
+      </div>
 
       {/* Final CTA — straight to the shop */}
       <section className="relative overflow-hidden border-t border-ivory-mute bg-ivory py-24 text-center md:py-36">
