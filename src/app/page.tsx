@@ -40,7 +40,9 @@ const HERO_FRAMES = [
 export default function HomePage() {
   const featured = getFeatured();
   const featuredSlugs = new Set(featured.map((p) => p.slug));
-  const gridPieces = PIECES.filter((p) => !featuredSlugs.has(p.slug)).slice(0, 12);
+  const gridPieces = PIECES.filter((p) => !featuredSlugs.has(p.slug));
+  const topRow = gridPieces.slice(0, 4); // one row up top
+  const secondRow = gridPieces.slice(4, 12); // shown deeper, after the story sections
   const totalHours = PIECES.reduce((a, p) => a + p.hours, 0);
 
   return (
@@ -88,9 +90,9 @@ export default function HomePage() {
             </div>
           </Reveal>
 
-          {/* Shoppable grid — primary, works great on mobile (2 cols) */}
+          {/* Shoppable grid — one row up top */}
           <div className="mt-10">
-            <HomeProductGrid pieces={gridPieces} />
+            <HomeProductGrid pieces={topRow} />
           </div>
 
           <div className="py-12 text-center md:py-14">
@@ -112,7 +114,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Heavy storytelling — desktop only, keeps mobile short & conversion-focused */}
+      {/* Four storytelling sections — desktop only, keeps mobile short & conversion-focused */}
       <div className="hidden md:block">
         <CraftTimeline />
         <ImageBand
@@ -122,6 +124,29 @@ export default function HomePage() {
         />
         <VisionSection />
         <MaterialLibrary />
+      </div>
+
+      {/* Second product row — after the four sections, shown everywhere */}
+      <section className="border-t border-ivory-mute bg-ivory-bright py-16 md:py-24">
+        <div className="mx-auto max-w-[1700px] px-6 md:px-12">
+          <Reveal>
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <p className="eyebrow text-brass">More to explore</p>
+                <h3 className="display mt-3 text-4xl text-charcoal md:text-5xl">The full shelf.</h3>
+              </div>
+              <Link href="/collections" className="link-line eyebrow inline-flex items-center gap-3 text-brass">
+                Shop All {PIECES.length} <IconArrow size={14} />
+              </Link>
+            </div>
+          </Reveal>
+          <div className="mt-10">
+            <HomeProductGrid pieces={secondRow} />
+          </div>
+        </div>
+      </section>
+
+      <div className="hidden md:block">
         <ImageBand
           src={img("1778737274664_pn4aiafoyzm.webp")}
           alt="The quilting frame — Genda Baagh in progress"
